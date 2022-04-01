@@ -26,6 +26,30 @@
             return $Data;
         }
 
+        public function Insert_ProjectInfoByIdProject( $Data ){
+            $Query = "INSERT INTO FichaTecnicaProyecto(ID_ProgramaProyecto, NombreProyecto, ClaveProyecto, DependenciaDelProyecto, SiglasDependenciaProyecto, UnidadResponsable, SiglasUnidadResponsable, NombreResponsable) VALUES(".$Data["ID_Project"].", '".$Data["NombreProyecto"]."', '".$Data["ClaveProyecto"]."', '".$Data["DependenciaDelProyecto"]."', '".$Data["SiglasDependenciaProyecto"]."', '".$Data["UnidadResponsable"]."', '".$Data["SiglasUnidadResponsable"]."', '".$Data["NombreResponsable"]."');";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet )
+                $Data["Status"] = "Correct";
+            else
+                $Data["Status"] = "Error";
+
+            return $Data;
+        }
+
+        public function Update_ProjectInfoByIdProject( $Data ){
+            $Query = "UPDATE FichaTecnicaProyecto SET NombreProyecto = '".$Data["NombreProyecto"]."', ClaveProyecto = '".$Data["ClaveProyecto"]."', DependenciaDelProyecto = '".$Data["DependenciaDelProyecto"]."', SiglasDependenciaProyecto = '".$Data["SiglasDependenciaProyecto"]."', UnidadResponsable = '".$Data["UnidadResponsable"]."', SiglasUnidadResponsable = '".$Data["SiglasUnidadResponsable"]."', NombreResponsable = '".$Data["NombreResponsable"]."' WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet )
+                $Data["Status"] = "Correct";
+            else
+                $Data["Status"] = "Error";
+
+            return $Data;
+        }
+
     }
 
 ?>

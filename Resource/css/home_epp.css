@@ -147,6 +147,214 @@ nav .brand-logo {
 	background-color: rgb(230, 230, 230) !important;
 }
 
+/* Modals styles */
+#ModalAddModifyTechnicalProjectInfo{
+	top: 5% !important;
+	max-height: 95% !important;
+	height: 83% !important;
+}
+
+#ModalAddModifyTechnicalEvaluationInfo{
+	top: 8% !important;
+	max-height: 55% !important;
+	height: 75% !important;
+	width: 55% !important;
+}
+
+#ModalAddModifyOpinionGeneral{
+	top: 5% !important;
+	max-height: 80% !important;
+	height: 80% !important;
+	width: 70% !important;
+}
+
+#ModalAddModifyPlanMejora{
+	top: 4% !important;
+	max-height: 85% !important;
+	height: 85% !important;
+	width: 70% !important;
+}
+
+/* Tabla ASM y Recomendaciones*/
+
+
+.table-Id_Recomendacion{
+	width: 50px !important;
+	text-align: center;
+}
+
+.table-ASM{
+	width: 250px !important;
+	text-align: center;
+}
+
+.table-ActoresSolucion{
+	width: 200px !important;
+	text-align: center;
+}
+
+.table-Prioridad{
+	width: 80px !important;
+	text-align: center;
+}
+
+.table-AccionMejora{
+	width: 150px !important;
+	text-align: center;
+}
+
+.table-AreaResponsable{
+	width: 150px !important;
+	text-align: center;
+}
+
+.table-Fecha{
+	width: 150px !important;
+	text-align: center;
+}
+
+.table-Resultados{
+	width: 150px !important;
+	text-align: center;
+}
+
+.table-Evidencias {
+	width: 150px !important;
+	text-align: center;
+}
+
+.table-body-content-mejoras tr td{
+    padding-left: 5px;
+    overflow-y: clip;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 5px;
+	padding: 10px 5px !important;
+}
+
+.table-body-content-mejoras tr td:hover{
+	cursor: pointer;
+}
+
+.asm-status-style-complete, .asm-status-style-incomplete,
+.asm-status-style-in-process{
+	margin-left: 15px;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+}
+
+.asm-status-style-incomplete{
+	background-color: rgba(200, 0, 0, 0.8);
+}
+
+.asm-status-style-complete{
+	background-color: rgba(0, 200, 0, 0.8);
+}
+
+.asm-status-style-in-process{
+	background-color: orange;
+}
+
+.delete-recomendation-container{
+	display: none;
+	position: absolute;
+	z-index: 100;
+
+	right: 20px;
+	margin-top: -33px;
+	padding: 5px 20px 5px 35px;
+
+	width: 80px;
+	background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.7) 30%, rgba(255, 255, 255, 1) 100%);
+}
+
+/* -  - - - - - - - - - - - - - - - -- - - - - - - - - */
+
+.no-data-recomendaciones, .with-data-recomendaciones{
+	margin: 12px 40px 20px 20px !important;
+}
+
+.modal.modal-fixed-footer .modal-content {
+    height: calc(100% - 45px);
+    max-height: 90%;
+}
+
+.row-m-b-0{
+	margin-bottom: -10px !important;
+}
+
+.card-title-comments{
+	margin-bottom: 20px !important;
+}
+
+.title-general-comments, .title-specific-comments{
+	margin-top: 0 !important;
+}
+
+.card-content-new-recomendation{
+	padding: 5px 150px 15px 125px !important;
+}
+
+.card{
+	border-radius: 15px !important;
+}
+
+.card-recomendation:hover{
+	cursor: pointer;
+}
+
+.button-options-recomendation-container{
+	display: none;
+	position: absolute;
+	width: 60px;
+	height: 100px;
+	margin-right: 8px;
+	margin-top: 8px;
+	top: 1px;
+	right: 1px;
+	background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 1) 100%);
+	border-top-right-radius: 15px;
+}
+
+#txtASM{
+	height: 165px !important;
+}
+
+.txt-fecha-style{
+	margin-bottom: 0 !important;
+}
+
+.btn-edit-recomendation, .btn-delete-recomendation{
+	margin-top: 8px;
+	margin-right: 8px;
+}
+
+.modal-overlay{
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	backdrop-filter: blur(5px) !important;
+	opacity: 1 !important;
+}
+
+.modal-footer-options{
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+}
+
+.title-modal-add-project-info, .modal-add-evaluation-info{
+	margin-top: 5px;
+	margin-bottom: 30px;
+}
+
+.modal .modal-content {
+    padding: 24px 24px 0 24px !important;
+}
+
+.m-b0{
+	margin-bottom: 0 !important;
+}
+
 /* Collections styles */
 
 .collection-step-menu > .collection-item:hover{

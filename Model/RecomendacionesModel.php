@@ -1,3 +1,4 @@
+
 <?php
     
     include("ConnectionDB.php");
@@ -32,6 +33,38 @@
                 $Data["Status"] = "Error en la consulta";
 
             return $Data;
+        }
+
+        public function Insert_RecomendacionByIdProject( $Rec ){
+            $Query = "INSERT INTO Recomendaciones(ID_ProgramaProyecto, IdentificadorRecomendacion, AspectoSusceptibleDeMejora, TipoActoresInvolucradosEnSolucion, NivelDePrioridad, AccionDeMejora, AreaResponsable, FechaCompromisoDeCumplimiento, ResultadosEsperados, EvidenciasSolicitadas, BanderaRecomendacionCompletada) VALUES(".$Rec["ID_Project"].", ".$Rec["IdentificadorRecomendacion"].", '".$Rec["AspectoSusceptibleDeMejora"]."', '".$Rec["TipoActoresInvolucradosEnSolucion"]."', '".$Rec["NivelDePrioridad"]."', '".$Rec["AccionDeMejora"]."', '".$Rec["AreaResponsable"]."', '".$Rec["FechaCompromisoDeCumplimiento"]."', '".$Rec["ResultadosEsperados"]."', '".$Rec["EvidenciasSolicitadas"]."', false);";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet )
+                $Data["Status"] = "Correct";
+            else
+                $Data["Status"] = "Error";
+
+            return $Data;            
+        }
+
+        public function Update_RecomendationByIdRecomendacion( $Data ){
+            try{
+                // BanderaRecomendacionCompletada = ".$Data["BanderaRecomendacionCompletada"]."
+                $Query = "UPDATE Recomendaciones SET IdentificadorRecomendacion = ".$Data["IdentificadorRecomendacion"].", AspectoSusceptibleDeMejora = '".$Data["AspectoSusceptibleDeMejora"]."', TipoActoresInvolucradosEnSolucion = '".$Data["TipoActoresInvolucradosEnSolucion"]."', NivelDePrioridad = '".$Data["NivelDePrioridad"]."', AccionDeMejora = '".$Data["AccionDeMejora"]."', AreaResponsable = '".$Data["AreaResponsable"]."', FechaCompromisoDeCumplimiento = '".$Data["FechaCompromisoDeCumplimiento"]."', ResultadosEsperados = '".$Data["ResultadosEsperados"]."', EvidenciasSolicitadas = '".$Data["EvidenciasSolicitadas"]."'  WHERE IdentificadorRecomendacion = ".$Data["IdentificadorRecomendacion"].";";
+                $ResultSet = $this->ConnectionDB->query($Query);
+    
+                if( $ResultSet )
+                    $Data["Status"] = "Correct";
+                else
+                    $Data["Status"] = "Error";
+    
+                return $Data;
+            }catch(Exception $e){
+                $ResultErr["Status"] = "Error";
+                $ResultErr["ServerMessages"] = $e->getMessage();
+
+                return json_encode( $ResultErr );
+            }
         }
 
     }

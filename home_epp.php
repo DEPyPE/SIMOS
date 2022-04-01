@@ -37,9 +37,9 @@
                 <div class="col l1"></div>
                 <div class="col l10">
                     <ul class="tabs tabs-transparent">
-                        <li class="tab"><a class="active" href="#general_information">Información general</a></li>
+                        <li class="tab"><a href="#general_information">Información general</a></li>
                         <li class="tab"><a href="#opinion_general">Opinión general</a></li>
-                        <li class="tab"><a href="#plan_de_mejora">Plan de mejora</a></li>
+                        <li class="tab"><a class="active" href="#plan_de_mejora">Plan de mejora</a></li>
                         <li class="tab"><a href="#documents">Documentos y Recomendaciones</a></li>
                     </ul>
                 </div>
@@ -47,14 +47,6 @@
             </div>
         </div>
       </nav>
-    
-    <!--    
-      <ul class="sidenav" id="mobile-demo">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
-      </ul>
-    -->
 
 <!--    SECCIÓN PARA LA INFORMACIÓN GENERAL DEL PROGRAMA SOCIAL -->
         <div id="general_information">
@@ -69,7 +61,8 @@
                             <span class="card-title card-title-ficha-tecnica">
                                 <h5>
                                   <strong>Ficha técnica del programa</strong>
-                                  <a class="btn-floating btn-small btn-add-project-information waves-effect blue darken-2 tooltipped right" data-position="bottom" data-tooltip="Agregar información"><i class="material-icons">add</i></a>
+                                  <a class="btn-floating btn-small btn-add-project-information  waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar información del proyecto" href="#ModalAddModifyTechnicalProjectInfo"><i class="material-icons">add</i></a>
+                                  <a class="btn-floating btn-small btn-edit-project-information waves-effect yellow darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Modificar información del proyecto" href="#ModalAddModifyTechnicalProjectInfo"><i class="material-icons">edit</i></a>
                                 </h5>
                             </span>
                             
@@ -106,6 +99,8 @@
 
                                 </tbody>
                             </table>
+
+                            <h6 class="NoFTProjectInformation">Sin información registrada</h6>
                         </div>
                     </div>
                 </div>
@@ -114,7 +109,13 @@
                     <div class="card card-evaluation">
                         <div class="card-content card-content-evaluation">
                             <span class="card-title card-title-ficha-tecnica">
-                                <h5><strong>Ficha técnica de la evaluación</strong></h5>
+                                <h5>
+                                  <strong>
+                                    Ficha técnica de la evaluación
+                                    <a class="btn-floating btn-small btn-add-evaluation-information waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar información de la evaluación" href="#ModalAddModifyTechnicalEvaluationInfo"><i class="material-icons">add</i></a>
+                                    <a class="btn-floating btn-small btn-edit-evaluation-information waves-effect yellow darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Modificar información de la evaluación" href="#ModalAddModifyTechnicalEvaluationInfo"><i class="material-icons">edit</i></a>
+                                  </strong>
+                                </h5>
                             </span>
                             
                             <table class="striped table-evaluation">
@@ -145,7 +146,9 @@
                                   </tr>
 
                                 </tbody>
-                              </table>
+                            </table>
+
+                            <h6 class="NoFTEvaluationInformation">Sin información registrada</h6>
                         </div>
                     </div>
                 </div>
@@ -155,40 +158,257 @@
 
         </div>
 
+        <!-- MODAL PARA AGREGAR INFORMACIÓN SOBRE EL PROYECTO -->
+        <div id="ModalAddModifyTechnicalProjectInfo" class="modal modal-add-project-info modal-fixed-footer">
+          <div class="modal-content">
+            
+              <h5 class="title-modal-add-project-info">Información del programa ó proyecto</h5>
+              
+              <div class="row m-b0">                
+                  <div class="col l8 m8 s12">
+                      <h6><strong>Nombre del programa/proyecto social:</strong></h6>
 
-        
+                      <div class="input-field">
+                          <input placeholder="Programa social" id="txtNombreProyecto" type="text" class="validate">
+                      </div>
+                  </div>
+
+                  <div class="col l4 m4 s12">
+                      <h6><strong>Clave del proyecto:</strong></h6>
+                      <div class="input-field">
+                      <input placeholder="Clave del proyecto" id="txtClaveProyecto" type="text" class="validate">
+                  </div>
+                  </div>
+              </div>
+
+              <div class="row m-b0">
+                  <div class="col l8 m8 s12">
+                      <h6><strong>Dependencia o entidad responsable del programa:</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Dependencia responsable" id="txtDepen" type="text" class="validate">
+                      </div>
+                  </div>
+
+                  <div class="col l4 m4 s12">
+                      <h6><strong>Siglas de la dependencia</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Siglas de la dependencia" id="txtSiglasDependencia" type="text" class="validate">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row m-b0">
+                  <div class="col l8 m8 s12">
+                      <h6><strong>Unidad Responsable (UR):</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Unidad responsable" id="txtUR" type="text" class="validate">
+                      </div>
+                  </div>
+
+                  <div class="col l4 m4 s12">
+                      <h6><strong>Siglas de la UR:</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Siglas de la UR" id="txtSiglasUR" type="text" class="validate">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row m-b0">
+                  <div class="col l8 m8 s6">
+                      <h6><strong>Reponsable del proyecto</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Reponsable del proyecto" id="txtResponsable" type="text" class="validate">
+                      </div>
+                  </div>
+
+
+              </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <a class="btn-small waves-effect blue darken-2 btn-save-project-information">Guardar información</a>
+            <a class="btn-small waves-effect yellow darken-3 btn-update-project-information">Actualizar información</a>
+            <a class="btn-small waves-effect grey lighten-1 modal-close">Cancelar</a>
+          </div>
+        </div>
+
+        <!-- MODAL PARA AGREGAR INFORMACIÓN SOBRE LA EVALUACIÓN -->
+        <div id="ModalAddModifyTechnicalEvaluationInfo" class="modal modal-add-evaluation-info modal-fixed-footer">
+          <div class="modal-content">
+            
+              <h5 class="title-modal-add-project-info">Información de la evaluación</h5>
+              
+              <div class="row m-b0">                
+                  <div class="col l5 m5 s12">
+                      <h6><strong>Nombre de la instancia evaluadora:</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Instancia evaluadora" id="txtInstanciaEvaluadora" type="text" class="validate">
+                      </div>
+                  </div>
+
+                  <div class="col l4 m4 s12">
+                      <h6><strong>Nombre de la evaluación:</strong></h6>
+                      <div class="input-field">
+                          <input placeholder="Nombre de la evaluación" id="txtNombreEvaluacion" type="text" class="validate">
+                      </div>
+                  </div>
+
+                  <div class="col l3 m3 s12">
+                      <h6><strong>Año de la evaluación:</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Año evaluación" id="txtYearEvaluation" class="center-align" type="text" class="validate">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row m-b0">
+                  <div class="col l4 m4 s12">
+                      <h6><strong>Tipo de evaluación:</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Tipo de evaluación" id="txtTipoEvaluacion" type="text" class="validate">
+                      </div>
+                  </div>
+
+                  <div class="col l4 m4 s12">
+                      <h6><strong>Nombre del informe:</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Informe" id="txtNombreInforme" type="text" class="validate">
+                      </div>
+                  </div>
+
+                  <div class="col l4 m4 s12">
+                      <h6><strong>Costo de la evaluación:</strong></h6>
+
+                      <div class="input-field">
+                          <input placeholder="Costo de la evaluación" id="txtCostoEvaluacion" class="center-align" type="text" class="validate">
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <a class="btn-small waves-effect blue darken-2   btn-insert-evaluation-information">Agregar información</a>
+            <a class="btn-small waves-effect yellow darken-3 btn-update-evaluation-information">Actualizar información</a>
+            <a class="btn-small waves-effect grey lighten-1 modal-close">Cancelar</a>
+          </div>
+        </div>
+
 <!--    SECCIÓN PARA LA OPINIÓN GENERAL POR PARTE DEL ENCARGADO DEL PROGRAMA -->
         <div id="opinion_general">
             <div class="row">
 
-              <div class="col s1 m1 l1"></div>
-              <div class="col s10 m10 l10">
+              <div class="col m2 l2"></div>
+              <div class="col s12 m8 l8">
 
-                  <div class="container">
-                    <div class="card">
-                      <div class="card-content card-content-comments">
+                  <div class="card">
 
-                      <span class="card-title card-title-comments"><strong>Comentarios y observaciones generales</strong></span>
-                        <!-- <a class="btn-floating btn-small right orange"><i class="material-icons">edit</i></a>-->
-                        <p class="ComentariosObservacionesGenerales"></p>
-                      </div>
+                    <div class="card-content card-content-comments">
+                      <span class="card-title card-title-comments">
+                        <strong>
+                          <h4 class="title-general-comments">
+                            Comentarios y observaciones generales
+                            <a class="btn-floating btn-small btn-add-opinion-general waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar comentarios y observaciones <br> generales y específicos por tema" href="#ModalAddOpinionGeneral"><i class="material-icons">add</i></a>
+                            <a class="btn-floating btn-small btn-edit-general-comments waves-effect yellow darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Modificar los comentarios <br> y observaciones generales" href="#ModalModifyGeneralSpecificComments"><i class="material-icons">edit</i></a>
+                          </h4>
+                        </strong>
+                      </span>
+                      <!-- <a class="btn-floating btn-small right orange"><i class="material-icons">edit</i></a>-->
+                      <textarea disabled id="ComentariosObservacionesGenerales" class="materialize-textarea"></textarea>
+                      <h6 class="OG_SinInfo">Sin información registrada</h6>
                     </div>
 
-                    <div class="card">
-                      <div class="card-content card-content-comments">
+                  </div>
 
-                        <span class="card-title card-title-comments"><strong>Comentarios y observaciones específicos por tema</strong></span>
+                  <div class="card">
+                    <div class="card-content card-content-comments">
+                        <span class="card-title card-title-comments">
+                          <strong>
+                            <h4 class="title-specific-comments">
+                                Comentarios y observaciones específicos por tema
+                                <a class="btn-floating btn-small btn-edit-specific-comments waves-effect yellow darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Modificar los comentarios y <br> observaciones específicos por tema" href="#ModalModifyGeneralSpecificComments"><i class="material-icons">edit</i></a>
+                            </h4>
+                          </strong>
+                        </span>
                         <!--<a class="btn-floating btn-small right orange"><i class="material-icons">edit</i></a>--> </h5>
-                        <p class="ComentariosObservacionesPorTema"></p>
-
-                      </div>
+                        <textarea disabled id="ComentariosObservacionesPorTema" class="materialize-textarea"></textarea>
+                        <h6 class="OG_SinInfo">Sin información registrada</h6>
                     </div>
                   </div>
 
               </div>
-              <div class="col s1 m1 l1"></div>
+              <div class="col m2 l2"></div>
 
             </div>
+        </div>
+
+        <!-- MODAL PARA AGREGAR INFORMACIÓN SOBRE LA EVALUACIÓN -->
+        <div id="ModalAddOpinionGeneral" class="modal modal-add-opinion-general modal-fixed-footer">
+          <div class="modal-content">
+            
+              <!--<h5 class="title-modal-add-project-info">Información de la opinión general </h5>-->
+              
+              <div class="row m-b0">                
+                  <div class="col l12 m12 s12">
+                      <h4><strong>Comentarios y observaciones generales:</strong></h4>
+
+                      <div class="input-field">
+                          <textarea id="txtObservacionesGenerales" class="materialize-textarea" placeholder="Comentarios y observaciones generales"></textarea>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row m-b0">                
+                  <div class="col l12 m12 s12">
+                      <h6><strong>Comentarios y observaciones específicos por tema:</strong></h6>
+
+                      <div class="input-field">
+                          <textarea placeholder="Comentarios y observaciones específicos por tema" id="txtPorTema" class="materialize-textarea"></textarea>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <a href="#!" class="btn-small waves-effect blue darken-2 btn-insert-opinion-general">Agregar información</a>
+            <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar</a>
+          </div>
+        </div>
+
+        <!-- MODAL PARA MODIFICAR LA INFORMACIÓN SOBRE LOS COMENTARIOS GENERALES Y ESPECÍFICOS -->
+        <div id="ModalModifyGeneralSpecificComments" class="modal modal-add-opinion-general modal-fixed-footer">
+          <div class="modal-content">
+            
+              <!--<h5 class="title-modal-add-project-info">Información de la opinión general </h5>-->
+              
+              <div class="row m-b0">                
+                  <div class="col l12 m12 s12">
+                      <h4><strong>Comentarios y observaciones generales:</strong></h4>
+
+                      <div class="input-field">
+                          <textarea id="txtComentarios" class="materialize-textarea" placeholder="Comentarios y observaciones generales"></textarea>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <a href="#!" class="btn-small waves-effect yellow darken-2 btn-modify-general-comments">Modificar información</a>
+            <a href="#!" class="btn-small waves-effect yellow darken-2 btn-modify-specific-comments">Modificar información</a>
+            <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar</a>
+          </div>
         </div>
 
 <!--    SECCIÓN PARA EL PLAN DE MEJORA POR PARTE DEL ENCARGADO DEL PROGRAMA -->
@@ -197,12 +417,49 @@
                 <div class="col l1"></div>
                 <div class="col l10">
 
-                    <div class="card-content-mejoras">
+                    <div class="card card-content-mejoras">
+                        <div class="card-content">
 
+                          <span class="card-title">
+                                <h5 class="no-data-recomendaciones">
+                                    Sin información registrada
+                                    <a class="btn-floating btn-small btn-add-plan-mejora waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar recomendación" href="#ModalAddModifyPlanMejora"><i class="material-icons">add</i></a>
+                                </h5>
+                                <h5 class="with-data-recomendaciones">
+                                    Agregar nueva recomendación
+                                    <a class="btn-floating btn-small btn-add-plan-mejora waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar recomendación" href="#ModalAddModifyPlanMejora"><i class="material-icons">add</i></a>
+                                </h5>
+                            </span>
+
+                            <table class="highlight">
+                              <thead>
+                                <tr>
+                                    <th class="table-status">Estado</th>
+                                    <th class="table-Id_Recomendacion">   No.</th>
+                                    <th class="table-ASM">                Aspectos Susceptibles de Mejora/Recomendaciones</th>
+                                    <th class="table-ActoresSolucion">    Actores involucrados en la solución</th>
+                                    <th class="table-Prioridad">          Nivel de prioridad</th>
+                                    <th class="table-AccionMejora">       Acción de mejora</th>
+                                    <th class="table-AreaResponsable">    Área responsable</th>
+                                    <th class="table-Fecha">              Fecha compromiso de cumplimiento</th>
+                                    <th class="table-Resultados">         Resultados esperados</th>
+                                    <th class="table-Evidencias">         Evidencias</th>
+                                </tr>
+                              </thead>
+
+                              <tbody class="table-body-content-mejoras"></tbody>
+                            </table>
+
+                        </div>
                     </div>
 
+                    <!--
                     <div class="card card-plan-de-mejora">
                       <div class="card-content">
+                          <span class="card-title">
+                              
+                          </span>
+
                           <table id="tabla-plan-de-mejora" class="striped">
                             <thead>
                               <tr>
@@ -223,114 +480,132 @@
                           </table>
                       </div>
                     </div>
+                    -->
       
                 </div>
                 <div class="col l1"></div>
             </div>
         </div>
 
-<!--
-                              <li class="collection-item avatar">
-                                <img src="Resource/images/word.svg" alt="" class="format-svg-avatar">
-                                
-                                <div class="title-document-container">
-                                    <span class="title title-document">Formato de posicionamiento_2019.docx</span>
-                                    <span class="document-status document-aprobed"><i class="material-icons left icon-size">assignment_turned_in</i>Aprobado</span>
-                                </div>
+        <!-- MODAL PARA AGREGAR NUEVA RECOMENDACION AL PROYECTO -->
+        <div id="ModalAddModifyPlanMejora" class="modal modal-add-opinion-general modal-fixed-footer">
+          <div class="modal-content">
+            
+              <h5 class="title-modal-add-project-info">Aspectos Susceptibles de mejora y recomendaciones del proyecto </h5>
+              
+              <div class="row m-b0">
+                  <div class="col l1 m1 s1">
+                      <h6><strong>No.</strong></h6>
 
-                                <div class="action-buttons">
-                                    <a class="btn-floating btn-small btn-AddRecomendation waves-effect green darken-4 tooltipped" data-position="bottom" data-tooltip="Agregar un ASM"><i class="material-icons left">assignment</i></a>
-                                    <a class="btn-floating btn-small btn-modify waves-effect orange tooltipped" data-position="bottom" data-tooltip="Editar"><i class="material-icons">edit</i></a>
-                                    <a class="btn-floating btn-small btn-delete waves-effect red tooltipped" data-position="bottom" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                                </div>
-                              </li>
+                      <div class="input-field">
+                          <input placeholder="No" id="txtNumRecomendation" type="text" class="validate center-align">
+                      </div>
+                  </div>
 
-                              <li class="collection-item avatar">
-                                <img src="Resource/images/pdf.svg" alt="" class="format-svg-avatar">
-                                <div class="title-document-container">
-                                  <span class="title title-document">Formato de posicionamiento_ 2019.pdf</span>
-                                  <span class="document-status document-send"><i class="material-icons left icon-size">near_me</i>Enviado para revisión</span>
-                                </div>
+                  <div class="col l5 m5 s5">
+                      <h6><strong>Aspecto Susceptible de Mejora/Recomendación</strong></h6>
 
-                                <div class="action-buttons">
-                                    <a class="btn-floating btn-small btn-AddRecomendation green darken-4 tooltipped" data-position="bottom" data-tooltip="Agregar un ASM"><i class="material-icons left">assignment</i></a>
-                                    <a class="btn-floating btn-small btn-modify waves-effect orange tooltipped" data-position="bottom" data-tooltip="Editar"><i class="material-icons">edit</i></a>
-                                    <a class="btn-floating btn-small btn-delete waves-effect red tooltipped" data-position="bottom" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                                </div>
-                              </li>
+                      <div class="input-field">
+                          <textarea id="txtASM" class="materialize-textarea" placeholder="Aspecto Susceptible de Mejora/Recomendación"></textarea>
+                      </div>
+                  </div>
 
-                              <li class="collection-item avatar">
-                                <img src="Resource/images/excel.svg" alt="" class="format-svg-avatar">
-                                <div class="title-document-container">
-                                  <span class="title title-document">tabla_de_requerimientos.xlsx</span>
-                                  <span class="document-status document-observations"><i class="material-icons left icon-size">assignment</i>Documento con recomendaciones</span>
-                                </div>
+                  <div class="col l6 m6 s6">
+                      <div class="row">
+                        <div class="col l12">
+                            <h6><strong>Actores involucrados en la solución:</strong></h6>
 
-                                <div class="action-buttons">
-                                    <a class="btn-floating btn-small btn-AddRecomendation green darken-4 tooltipped" data-position="bottom" data-tooltip="Agregar un ASM"><i class="material-icons left">assignment</i></a>
-                                    <a class="btn-floating btn-small btn-modify waves-effect orange tooltipped" data-position="bottom" data-tooltip="Editar"><i class="material-icons">edit</i></a>
-                                    <a class="btn-floating btn-small btn-delete waves-effect red tooltipped" data-position="bottom" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                                </div>
-                              </li>
+                            <div class="input-field">
+                                <textarea placeholder="Solución" id="txtActoresInvolucrados" class="materialize-textarea" type="text" class="validate"></textarea>
+                            </div>
+                        </div>
 
-                              <li class="collection-item avatar">
-                                <img src="Resource/images/powerpoint.svg" alt="" class="format-svg-avatar">
-                                <div class="title-document-container">
-                                  <span class="title title-document">presentacion_proyecto_final.pptx</span>
-                                  <span class="document-status document-aprobed"><i class="material-icons left icon-size">assignment_turned_in</i>Enviado para revisión</span>
-                                </div>
+                        <div class="col l4 m4 s4">
+                            <h6><strong>Nivel de prioridad:</strong></h6>
+                            <select id="select-nivel-prioridad" class="browser-default">
+                              <option value="" disabled selected>Prioridad</option>
+                              <option value="1">Baja</option>
+                              <option value="2">Media</option>
+                              <option value="3">Alta</option>
+                            </select>
+                        </div>
 
-                                <div class="action-buttons">
-                                    <a class="btn-floating btn-small btn-AddRecomendation green darken-4 tooltipped" data-position="bottom" data-tooltip="Agregar un ASM"><i class="material-icons left">assignment</i></a>
-                                    <a class="btn-floating btn-small btn-modify waves-effect orange tooltipped" data-position="bottom" data-tooltip="Editar"><i class="material-icons">edit</i></a>
-                                    <a class="btn-floating btn-small btn-delete waves-effect red tooltipped" data-position="bottom" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                                </div>
-                              </li>
--->
+                        <div class="col l4 m4 s4">
+                            <h6><strong>Estatus:</strong></h6>
+                            <select id="select-estatus" class="browser-default">
+                              <option value="" disabled selected>Estado actual</option>
+                              <option value="1">Corregido</option>
+                              <option value="2">En proceso</option>
+                              <option value="3">Sin antender</option>
+                            </select>
+                        </div>
 
-<!--                          
-                          <li class="collection-item collection-item-recomendations">
-                            <a href="#modal-recomendation-description" class="modal-trigger">
-                              <div class="btn-recomendation truncate">
-                                  <i class="id_recomendation">ID: 0000</i>
-                                  <i class="recomendation_preview"> - 1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet corrupti hic, excepturi similique consequuntur cumque. </i>
+                        <div class="col l4 m4 s4">
+                              <h6><strong>Fecha:</strong></h6>
+
+                              <div class="input-field txt-fecha-style">
+                                  <input placeholder="Fecha de cumplimiento" id="txtFecha" type="text" class="validate center-align">
                               </div>
+                        </div>
+                        
+                      </div>
 
-                              <div class="action-buttons-recomendations">
-                                  <a class="btn-floating btn-small btn-modify waves-effect orange"><i class="material-icons">edit</i></a>
-                                  <a class="btn-floating btn-small btn-delete waves-effect red"><i class="material-icons">delete</i></a>
-                              </div>
-                            </a>
-                          </li>
+                  </div>
+              </div>
 
-                          <li class="collection-item collection-item-recomendations">
-                            <a href="#modal-recomendation-description" class="modal-trigger">
-                              <div class="btn-recomendation truncate">
-                                  <i class="id_recomendation">ID: 0000</i>
-                                  <i class="recomendation_preview"> - 1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet corrupti hic, excepturi similique consequuntur cumque. </i>
-                              </div>
+              <div class="row row-m-b-0">
+                  <div class="col l1 m1"></div>
+                  <div class="col 5 m5 s5">
+                      <div class="row">
+                          <div class="col l12 m12 s12">
+                              <h6><strong>Acción de mejora:</strong></h6>
 
-                              <div class="action-buttons-recomendations">
-                                  <a class="btn-floating btn-small btn-modify waves-effect orange"><i class="material-icons">edit</i></a>
-                                  <a class="btn-floating btn-small btn-delete waves-effect red"><i class="material-icons">delete</i></a>
+                              <div class="input-field">
+                                  <textarea id="txtAccionMejora" class="materialize-textarea" placeholder="Acción de mejora"></textarea>
                               </div>
-                            </a>
-                          </li>
+                          </div>
 
-                          <li class="collection-item collection-item-recomendations">
-                            <a href="#modal-recomendation-description" class="modal-trigger">
-                              <div class="btn-recomendation truncate">
-                                  <i class="id_recomendation">ID: 0000</i>
-                                  <i class="recomendation_preview"> - 1. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet corrupti hic, excepturi similique consequuntur cumque. </i>
-                              </div>
+                          <div class="col l12 m12 s12">
+                              <h6><strong>Área responsable:</strong></h6>
 
-                              <div class="action-buttons-recomendations">
-                                  <a class="btn-floating btn-small btn-modify waves-effect orange"><i class="material-icons">edit</i></a>
-                                  <a class="btn-floating btn-small btn-delete waves-effect red"><i class="material-icons">delete</i></a>
+                              <div class="input-field">
+                                  <textarea id="txtAreaResponsable" class="materialize-textarea" placeholder="Área resposable"></textarea>
                               </div>
-                            </a>
-                          </li>
--->
+                          </div>
+
+
+                      </div>
+                  </div>
+
+                  <div class="col l6 m6 s6">
+                      <div class="row">
+                          <div class="col l12 m12 s12">
+                              <h6><strong>Resultados esperados:</strong></h6>
+
+                              <div class="input-field">
+                                  <textarea placeholder="Área resposable" id="txtResultadosEsperados" class="materialize-textarea"></textarea>
+                              </div>
+                          </div>
+
+                          <div class="col l12 m12 s12">
+                              <h6><strong>Evidencias solicitadas:</strong></h6>
+
+                              <div class="input-field">
+                                  <textarea placeholder="Evidencias" id="txtEvidenciasSolicitadas" class="materialize-textarea"></textarea>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <a href="#!" class="btn-small waves-effect blue darken-2 btn-insert-recomendacion">Agregar información</a>
+            <a href="#!" class="btn-small waves-effect yellow darken-3 btn-update-recomendacion">Guardar información</a>
+            <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar</a>
+          </div>
+        </div>
 
 <!--    SECCIÓN PARA LOS DOCUMENTOS CREADOS POR PARTE DEL ENCARGADO DEL PROGRAMA -->
         <div id="documents">
@@ -487,9 +762,9 @@
           </div>
         </div>
 
-        <!-- Moment JS library -->
+        <!-- Moment JS library 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>-->
         
         <!-- JQuery library -->
         <script src="Resource/jQuery/jquery-3.2.1.min.js"></script>

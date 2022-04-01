@@ -33,8 +33,7 @@
         case "OpinionGeneral":
             include("../Model/OpinionGeneralModel.php");
             $OpinionGeneral = new OpinionGeneralClass();
-            $Data = $OpinionGeneral->Get_OpinionGeneralByIdProject($ID);
-//            $Data["ComentariosObservacionesGenerales"] = str_replace($Data["ComentariosObservacionesGenerales"], "\n", " HELLOWORLDS!!!!! ")
+            $Data = $OpinionGeneral->Read_OpinionGeneralByIdProject($ID);
 
             echo json_encode($Data);
             

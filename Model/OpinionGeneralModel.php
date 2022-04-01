@@ -11,7 +11,7 @@
             $this->ConnectionDB = $DBConnClass->OpenConnection();
         }
 
-        public function Get_OpinionGeneralByIdProject( $IdProject ){
+        public function Read_OpinionGeneralByIdProject( $IdProject ){
             $Query = "SELECT * FROM OpinionGeneral WHERE OpinionGeneral.ID_ProgramaProyecto='".$IdProject."';";
             $ResultDB = $this->ConnectionDB->query($Query);
 
@@ -25,6 +25,58 @@
 
             return $Data;
         }
+
+        public function Insert_OpinionGeneralByIdProject($Data){
+            $Query = "INSERT INTO OpinionGeneral(ID_ProgramaProyecto, ComentariosObservacionesGenerales, ComentariosObservacionesPorTema) VALUES(".$Data["ID_Project"].", '".$Data["ComentariosObservacionesGenerales"]."', '".$Data["ComentariosObservacionesPorTema"]."');";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet )
+                $Data["Status"] = "Correct";
+            else
+                $Data["Status"] = "Error";
+
+            return $Data;
+        }
+
+        public function Update_GeneralCommentsByIdProject( $Data ){
+            try{
+                $Query = "UPDATE OpinionGeneral SET ComentariosObservacionesGenerales = '".$Data["ComentariosObservacionesGenerales"]."' WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
+                $ResultSet = $this->ConnectionDB->query($Query);
+    
+                if( $ResultSet )
+                    $Data["Status"] = "Correct";
+                else
+                    $Data["Status"] = "Error";
+    
+                return $Data;
+            }catch(Exception $e){
+                $ResultErr["Status"] = "Error";
+                $ResultErr["ServerMessages"] = $e->getMessage();
+
+                return json_encode( $ResultErr );
+            }
+        }
+
+        public function Update_SpecificCommentsByIdProject( $Data ){
+            try{
+                $Query = "UPDATE OpinionGeneral SET ComentariosObservacionesPorTema = '".$Data["ComentariosObservacionesPorTema"]."' WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
+                $ResultSet = $this->ConnectionDB->query($Query);
+    
+                if( $ResultSet )
+                    $Data["Status"] = "Correct";
+                else
+                    $Data["Status"] = "Error";
+    
+                return $Data;
+            }catch(Exception $e){
+                $ResultErr["Status"] = "Error";
+                $ResultErr["ServerMessages"] = $e->getMessage();
+
+                return json_encode( $ResultErr );
+            }
+        }
+
+
 
     }
 
