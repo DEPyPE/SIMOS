@@ -38,8 +38,8 @@
                 <div class="col l10">
                     <ul class="tabs tabs-transparent">
                         <li class="tab"><a href="#general_information">Información general</a></li>
-                        <li class="tab"><a href="#opinion_general">Opinión general</a></li>
-                        <li class="tab"><a class="active" href="#plan_de_mejora">Plan de mejora</a></li>
+                        <li class="tab"><a class="active" href="#opinion_general">Opinión general</a></li>
+                        <li class="tab"><a href="#plan_de_mejora">Plan de mejora</a></li>
                         <li class="tab"><a href="#documents">Documentos y Recomendaciones</a></li>
                     </ul>
                 </div>
@@ -308,7 +308,7 @@
         <div id="opinion_general">
             <div class="row">
 
-              <div class="col m2 l2"></div>
+              <div class="col m1 l1"></div>
               <div class="col s12 m8 l8">
 
                   <div class="card">
@@ -330,6 +330,29 @@
 
                   </div>
 
+              </div>
+              <div class="col s12 m2 l2">
+
+                <div class="card card-messages-general-comments">
+                  <div class="card-content">
+
+                      <span class="card-title">Mensajes</span>
+                      <div class="collection collection-messages-general-comments">
+                      </div>
+
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col m1 l1"></div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col m1 l1"></div>
+              <div class="col s12 m8 l8">
+
                   <div class="card">
                     <div class="card-content card-content-comments">
                         <span class="card-title card-title-comments">
@@ -347,9 +370,38 @@
                   </div>
 
               </div>
-              <div class="col m2 l2"></div>
+              <div class="col s12 m2 l2">
 
-            </div>
+                <div class="card card-messages-specific-comments">
+                  <div class="card-content">
+
+                      <span class="card-title">Mensajes</span>
+                      <div class="collection collection-messages-specific-comments">
+                          <a class="collection-item truncate">Revisar la redacción de acuerdo a la temática</a>
+                      </div>
+                      
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col m1 l1"></div>
+
+              </div>
+        </div>
+
+        <!-- MODAL PARA AGREGAR INFORMACIÓN SOBRE LA EVALUACIÓN -->
+        <div id="ModalRecomendacionComentariosGenerales" class="modal modal-view-recomendacion-comentarios-generales modal-fixed-footer">
+          <div class="modal-content">
+            
+              <h4>Recomendación:</h4>
+              
+
+          </div>
+
+          <div class="modal-footer">
+            <a href="#!" class="btn-small waves-effect blue darken-2 btn-rec-comm-generales">Agregar información</a>
+            <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar</a>
+          </div>
         </div>
 
         <!-- MODAL PARA AGREGAR INFORMACIÓN SOBRE LA EVALUACIÓN -->
@@ -413,13 +465,14 @@
 
 <!--    SECCIÓN PARA EL PLAN DE MEJORA POR PARTE DEL ENCARGADO DEL PROGRAMA -->
         <div id="plan_de_mejora">
+
             <div class="row">
                 <div class="col l1"></div>
                 <div class="col l10">
 
-                    <div class="card card-content-mejoras">
-                        <div class="card-content">
-
+                    <div class="card">
+                        <div class="card-content card-content-mejoras">
+                        
                           <span class="card-title">
                                 <h5 class="no-data-recomendaciones">
                                     Sin información registrada
@@ -431,7 +484,7 @@
                                 </h5>
                             </span>
 
-                            <table class="highlight">
+                            <table class="highlight table-plan-de-mejora">
                               <thead>
                                 <tr>
                                     <th class="table-status">Estado</th>
@@ -452,39 +505,11 @@
 
                         </div>
                     </div>
-
-                    <!--
-                    <div class="card card-plan-de-mejora">
-                      <div class="card-content">
-                          <span class="card-title">
-                              
-                          </span>
-
-                          <table id="tabla-plan-de-mejora" class="striped">
-                            <thead>
-                              <tr>
-                                <th>No.</th>
-                                <th>Aspecto Susceptible de Mejora/Recomendación</th>
-                                <th>Respecto al tipo de actores involucrados en solución</th>
-                                <th>Nivel de prioridad</th>
-                                <th>Acción de mejora</th>
-                                <th>Área de responsable</th>
-                                <th>Fecha compromismo de cumplimiento</th>
-                                <th>Resultados Esperados</th>
-                                <th>Evidencias</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                          </table>
-                      </div>
-                    </div>
-                    -->
       
                 </div>
                 <div class="col l1"></div>
             </div>
+
         </div>
 
         <!-- MODAL PARA AGREGAR NUEVA RECOMENDACION AL PROYECTO -->
@@ -607,8 +632,43 @@
           </div>
         </div>
 
-<!--    SECCIÓN PARA LOS DOCUMENTOS CREADOS POR PARTE DEL ENCARGADO DEL PROGRAMA -->
+        <!-- MODAL PARA AGREGAR NUEVA RECOMENDACION AL PROYECTO -->
+        <div id="ModalDeleteRecomendation" class="modal modal-delete-recomendation modal-fixed-footer">
+          <div class="modal-content">
+
+              <h4>¿Eliminar esta recomendación?</h4><br>
+              
+              <table class="highlight table-plan-de-mejora-delete">
+                <thead>
+                  <tr>
+                      <th class="table-delete-status">Estado</th>
+                      <th class="table-delete-Id_Recomendacion">   No.</th>
+                      <th class="table-delete-ASM">                Aspectos Susceptibles de Mejora/Recomendaciones</th>
+                      <th class="table-delete-ActoresSolucion">    Actores involucrados en la solución</th>
+                      <th class="table-delete-Prioridad">          Nivel de prioridad</th>
+                      <th class="table-delete-AccionMejora">       Acción de mejora</th>
+                      <th>...</th>
+                  </tr>
+                </thead>
+
+                <tbody class="table-body-content-mejoras-delete"></tbody>
+              </table>
+
+              <h5 class="title-modal-add-project-info"> </h5>
+            
+              <h6 class="info-recomendation-delete"></h6>              
+
+          </div>
+
+          <div class="modal-footer">
+            <a href="#!" class="btn-small waves-effect red darken-3 btn-delete-recomendation">Borrar recomendación</a>
+            <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar</a>
+          </div>
+        </div>
+
+<!-- ####    SECCIÓN PARA LOS DOCUMENTOS CREADOS POR PARTE DEL ENCARGADO DEL PROGRAMA ##### -->
         <div id="documents">
+
             <div class="row">
               <div class="col l1"></div>
               <div class="col l10 m12 s12">
@@ -618,21 +678,21 @@
 
                       <div class="row">
                         <div class="col l5 m5 s12">
+                            <span class="card-title">
+                              <strong class="card-title-documents">Docs</strong>
+                            </span>
                             
-                            <span class="card-title"> <strong class="card-title-documents">Docs</strong> </span><br>
+                            <div class="show-docs-option">
 
-                            <ul class="collection collection-documents">
+                            </div> <br>
+                            
 
-                            </ul>
+                            <ul class="collection collection-documents"></ul>
                         </div>
 
                         <div class="col l7 m7 s12">
-                        <a class="waves-effect blue darken-2 btn btn-small btn-upload-documents btn-rounded right modal-trigger" href="#modal-upload-documenttt"><i class="material-icons left">cloud_upload</i>Subir nuevo documento</a>
-
-                        <ul class="collection collection-document-recomendations">
-
-                        </ul>
-                        
+                            <a class="waves-effect blue darken-2 btn btn-small btn-upload-documents btn-rounded right modal-trigger" href="#modal-upload-document"><i class="material-icons left">cloud_upload</i>Subir nuevo documento</a>
+                            <ul class="collection collection-document-recomendations"></ul>
                         </div>
                       </div>
 
@@ -705,60 +765,197 @@
         </div>
 
         <!-- Modal subir documento-->
-        <div id="modal-upload-document" class="modal">
+        <div id="modal-upload-document" class="modal modal-fixed-footer">
           <div class="modal-content">
 
-            <div class="content-image-modal">
-              <img class="img-upload" src="Resource/files/images/upload.png">
-            </div>
-            
-            <h5 class="center-align">Subir documentos</h5>
+            <h5 class="">Seleccione un documento</h5><br><br>
 
-            <form action="#">
-              <div class="file-field input-field field-upload-document">
-                <div class="btn blue">
-                  <span>Seleccionar<i class="material-icons left">cloud_upload</i></span>
-                  <input type="file">
+            <div class="row">
+                <div class="col l2 m2 s2">
+                  
+                  <div class="file-field input-field field-upload-document">
+                      <div class="btn btn-rounded blue darken-3" data-position="bottom" data-tooltip="Seleccionar documento">
+                        <span><i class="material-icons">cloud_upload</i></span>
+                        <input type="file" class="form-control-update-file" name="doc" id="fileDoc"> 
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate file-path-input-hide" type="text">
+                      </div>
+                  </div>
+
                 </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text">
+                
+                <div class="input-field col l7 m7 s7">
+                  <input disabled placeholder="Nombre" id="txtNameFile" type="text" class="validate">
+                  <label class="lblNameFile" for="txtNameFile">Nombre del archivo</label>
                 </div>
-              </div>
-            </form>
+
+                <div class="input-field col l3 m3 s3">
+                  <input disabled placeholder="Extensión" id="txtExtension" type="text" class="validate center-align">
+                  <label for="first_name">Extensión</label>
+                </div>
+            </div>
 
           </div>
           <div class="modal-footer">
-            <a class="modal-close waves-effect blue btn btn-confirm-delete btn-rounded">Subir documento</a>
+            <a class="waves-effect blue darken-2 btn btn-load-doc-server btn-rounded">Subir documento</a>
+            <a class="modal-close waves-effect grey btn btn-rounded">Cancelar</a>
+          </div>
+        </div>
+
+        <!-- modal-new-recomendation-document -->
+        <div id="modal-new-asm-document" class="modal modal-fixed-footer">
+          <div class="modal-content">
+
+            <h5 class="">Nueva recomendación al documento</h5><br><br>
+
+            <div class="row">
+                <div class="col input-field l2 m2 s2">
+                    <input placeholder="#" id="txt-NumDocRecomendation" type="text" class="validate center-align">
+                    <label class="lblNumDocRec" for="txt-NewNumDocRecomendation">No.</label>
+                    <label id="iddoc_modal-newasm"></label>
+                </div>
+                
+                <div class="input-field col l10 m10 s10">
+                  <textarea id="txt-doc-ASM" class="materialize-textarea" placeholder="Aspecto Susceptible de Mejora"></textarea>
+                  <label class="lblDocASM" for="txt-NewDocASM">Aspecto Susceptible de Mejora</label>
+                </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <a class="waves-effect blue darken-2 btn btn-create-document-recomendation btn-rounded">Guardar recomendación</a>
+            <a class="modal-close waves-effect grey btn btn-rounded">Cancelar</a>
+          </div>
+        </div>
+
+        <!-- Modal confirmación eliminar documento-->
+        <div id="modal-confirm-delete-document-recomendation" class="modal modal-fixed-footer">
+
+          <div class="modal-content">
+            <div class="content-image-modal">
+              <img class="img-alert center-align" src="Resource/files/images/alert.png">
+            </div>
+            <h5 class="text-confirm-delete">¿Está seguro de eliminar esta recomendación?</h5>
+            <p class="idDocumentProject"></p> 
+            <p class="idRecomendationDocumentProject"></p>
+          </div>
+
+          <div class="modal-footer">
+            <a class="modal-close waves-effect red darken-3 btn btn-confirm-delete-doc-recomendation">Aceptar</a>
+            <a class="modal-close waves-effect blue darken-2 btn">Cancelar</a>
+          </div>
+        </div>
+
+        <!-- modal-edit-recomendation-document -->
+        <div id="modal-edit-asm-document" class="modal modal-fixed-footer">
+          <div class="modal-content">
+
+            <h5 class="">Recomendación seleccionada</h5><br><br>
+
+            <div class="row">
+                <p class="idDocumentProject_Modify"></p>
+                <p class="idRecomendationDocumentProject_Modify"></p>
+                
+                <div class="col l4 m4 s4">
+                    <div class="row">
+
+                      <div class="col input-field l12 m12 s12">
+                          <input disabled placeholder=" " id="txt-NumDocRecomendation_modify" type="text" class="validate center-align">
+                          <label>No.</label>
+                      </div>
+
+                      <div class="col l12 m12 s12">
+                        <label>Recomendación atendida</label> <br><br>
+                        <div class="switch">
+                          <label>
+                            No
+                            <input id="CBoxRecomendacionAtendida" type="checkbox">
+                            <span class="lever"></span>
+                            Si
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+                </div>
+                
+                <div class="input-field col l8 m8 s8">
+                  <textarea id="txt-doc-ASM_modify" class="materialize-textarea" placeholder="Aspecto Susceptible de Mejora"></textarea>
+                  <label class="lblDocASM">Aspecto Susceptible de Mejora</label>
+                </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <a class="waves-effect yellow darken-3 btn btn-modify-document-recomendation btn-rounded">Guardar recomendación</a>
             <a class="modal-close waves-effect grey btn btn-rounded">Cancelar</a>
           </div>
         </div>
 
         <!-- Modal modificar documento-->
-        <div id="modal-edit-document" class="modal">
+        <div id="modal-edit-document" class="modal modal-fixed-footer">
           <div class="modal-content">
 
-            <div class="content-image-modal">
-              <img class="img-edit-document" src="Resource/files/images/edit_file.png">
+            <h5 class="">Edite el documento seleccionado</h5><br><br>
+
+            <div class="row">
+              <!--
+                <div class="col l2 m2 s2">
+                  <div class="file-field input-field field-upload-document">
+                      <div class="btn btn-rounded yellow darken-3 tooltipped" data-position="bottom" data-tooltip="Cambiar documento">
+                        <span><i class="material-icons">cloud_upload</i></span>
+                        <input type="file" class="form-control-file" name="doc" id="fileUpdateDoc"> 
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate file-path-input-hide" type="text">
+                      </div>
+                  </div>
+                </div>
+                -->
+
+                <div class="input-field col l6 m6 s6">
+                  <input placeholder="Nombre" id="txt-EditNameFile" type="text" class="validate">
+                  <label id="iddoc_modify_modal"></label>
+                  <label class="lblNameFile" for="txt-EditNameFile">Nombre del archivo</label>
+                </div>
+
+                <div class="input-field col l2 m2 s2">
+                  <input disabled placeholder="Extensión" id="txt-EditExtension" type="text" class="validate center-align">
+                  <label for="first_name">Extensión</label>
+                </div>
+
+                <div class="col l4 m4 s4">
+                    <label>Estado del documento</label>
+                    <select id="select-estatus-document" class="browser-default">
+                      <option value="" disabled selected>Selecciona una opción</option>
+                      <option value="1">Nuevo</option>
+                      <option value="2">Aprobado</option>
+                      <option value="3">En revisión</option>
+                      <option value="4">Con recomendaciones</option>
+                    </select>
+                </div>
+
             </div>
-
-            <h5 class="center-align">Modificar documento</h5>
-
-            <form action="#">
-              <div class="file-field input-field field-upload-document">
-                <div class="btn orange lighten-2">
-                  <span>Cambiar<i class="material-icons left">edit</i></span>
-                  <input type="file">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text">
-                </div>
-              </div>
-            </form>
 
           </div>
           <div class="modal-footer">
-            <a class="modal-close waves-effect orange lighten-2 btn btn-confirm-delete">Subir documento</a>
-            <a class="modal-close waves-effect grey btn">Cancelar</a>
+            <a class="waves-effect yellow darken-2 btn btn-modify-document btn-rounded">Actualizar documento</a>
+            <a class="modal-close waves-effect grey btn btn-rounded">Cancelar</a>
+          </div>
+        </div>
+
+        <!-- Modal eliminar documento-->
+        <div id="modal-delete-document" class="modal modal-fixed-footer">
+          <div class="modal-content">
+
+            <span id="iddoc_modal"></span>
+            <h5 class="">¿Está seguro de borrar el documento <span class="name-delete-file"></span> de su proyecto? </h5><br><br>
+
+          </div>
+          <div class="modal-footer">
+            <a class="waves-effect red darken-2 btn btn-delete-project-document btn-rounded">Borrar documento</a>
+            <a class="modal-close waves-effect grey btn btn-rounded">Cancelar</a>
           </div>
         </div>
 

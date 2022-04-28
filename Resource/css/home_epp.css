@@ -103,9 +103,8 @@ nav .brand-logo {
 	padding: 30px 35px 35px 35px !important;
 }
 
-.card-title-ficha-tecnica{
-	margin-top: -5px !important;
-	margin-bottom: 25px !important;
+.card-content-mejoras{
+	padding: 20px 35px 40px 35px !important;
 }
 
 .table-evaluation{
@@ -170,9 +169,13 @@ nav .brand-logo {
 
 #ModalAddModifyPlanMejora{
 	top: 4% !important;
-	max-height: 85% !important;
-	height: 85% !important;
+	max-height: 87% !important;
+	height: 87% !important;
 	width: 70% !important;
+}
+
+#ModalDeleteRecomendation{
+	max-height: 63% !important;
 }
 
 /* Tabla ASM y Recomendaciones*/
@@ -256,17 +259,18 @@ nav .brand-logo {
 	background-color: orange;
 }
 
-.delete-recomendation-container{
+.options-recomendation-container{
 	display: none;
-	position: absolute;
-	z-index: 100;
+	position: relative;
+	z-index: 80;
 
-	right: 20px;
-	margin-top: -33px;
+	right: 30px;
+	margin-top: -43px;
+	top: 10px;
 	padding: 5px 20px 5px 35px;
 
-	width: 80px;
-	background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.7) 30%, rgba(255, 255, 255, 1) 100%);
+	width: 150px;
+	background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 1) 100%);
 }
 
 /* -  - - - - - - - - - - - - - - - -- - - - - - - - - */
@@ -297,7 +301,7 @@ nav .brand-logo {
 }
 
 .card{
-	border-radius: 15px !important;
+	border-radius: 25px !important;
 }
 
 .card-recomendation:hover{
@@ -325,10 +329,27 @@ nav .brand-logo {
 	margin-bottom: 0 !important;
 }
 
-.btn-edit-recomendation, .btn-delete-recomendation{
-	margin-top: 8px;
+.btn-edit-recomendation,
+.btn-delete-recomendation{
 	margin-right: 8px;
 }
+
+/* DELETE RECOMENDATION */
+
+.collection .c-item-delete-reco{
+	border-radius: 0 !important;
+	border-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.collection .c-item-delete-reco:first-child{
+	border-top: 1px solid #e0e0e0 !important;
+}
+
+.collection.with-header .collection-header {
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+/* - - - - - --  - - - - - - - - - - - */
 
 .modal-overlay{
 	background-color: rgba(0, 0, 0, 0.3) !important;
@@ -349,6 +370,14 @@ nav .brand-logo {
 
 .modal .modal-content {
     padding: 24px 24px 0 24px !important;
+}
+
+.modal{
+	border-radius: 24px !important;
+}
+
+.modal.modal-fixed-footer .modal-footer{
+	padding-right: 15px !important;
 }
 
 .m-b0{
@@ -466,14 +495,47 @@ nav .brand-logo {
 	text-align: center;
 }
 
-#modal-confirm-delete-document, #modal-upload-document{
+#modal-confirm-delete-document{
 	width: 30% !important;
-	height: 45% !important;
+	height: 35%;
+}
+
+#modal-confirm-delete-document-recomendation{
+	width: 30% !important;
+	height: 45%;
+}
+
+#modal-upload-document{
+	width: 35% !important;
+	height: 40% !important;
+}
+
+#modal-new-asm-document{
+	width: 40% !important;
+	height: 50% !important;
+}
+
+#modal-edit-asm-document{
+	width: 40% !important;
+	height: 55% !important;
+}
+
+.file-path-input-hide{
+	display: none !important;
 }
 
 #modal-edit-document{
-	width: 30% !important;
-	height: 52% !important;
+	width: 50% !important;
+	height: 40% !important;
+}
+
+#modal-delete-document{
+	width: 40% !important;
+	height: 35% !important;
+}
+
+#iddoc_modal, #iddoc_modify_modal{
+	display: none !important;
 }
 
 .field-upload-document{
@@ -484,18 +546,19 @@ nav .brand-logo {
 	box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%) !important;
 }
 
+/* Icono del documento dentro del collection-item tipo avatar */
 .collection .collection-item.avatar:not(.circle-clipper)>.format-svg-avatar, .collection .collection-item.avatar :not(.circle-clipper)>.format-svg-avatar {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 45px;
     overflow: hidden;;
-    left: 15px;
     display: inline-block;
     vertical-align: middle;
-    top: 28px;
+	left: 10px;
+    top: 15px;
 }
 
-.action-buttons{
+.action-buttons-docs{
 	position: absolute;
 	overflow: hidden;
 	display: inline-block;
@@ -516,7 +579,7 @@ nav .brand-logo {
 	border-bottom-right-radius: 15px;
 }
 
-.btn-modify, .btn-delete{
+.btn-modify-document, .btn-delete-document, .btn-add-doc-recomendation{
 	margin: 5px 2px 5px 5px !important;
 }
 
@@ -525,14 +588,20 @@ nav .brand-logo {
 }
 
 .title-document{
-	font-size: 18px !important;
+	font-size: 19px !important;
 	font-weight: 400;
-	margin-bottom: 0px !important;
+	padding-bottom: 4px !important;
 }
 
 .document-status{
 	font-size: 14px !important;
-	padding-top: 2px !important;
+    padding: 1px 12px 2px 12px;
+    background-color: rgba(240, 240, 240, 0.8);
+	color: rgb(40, 40, 40, 0.9) !important;
+	border: 1px solid rgba(80, 80, 80, 0.2);
+    border-radius: 15px;
+	width: fit-content;
+    margin: 7px 5px 0 0 !important;
 }
 /*
 .document-aprobed{
@@ -558,40 +627,85 @@ nav .brand-logo {
 .icon-status-document{
 	margin: 3px 5px 0 0 !important;
 	font-size: 18px !important;
-	color: rgba(0, 0, 0, 0.2);
+	color: rgb(120, 120, 120, 0.9) !important;
 	font-weight: lighter;
 }
 
-.collection .collection-item.avatar {
-	padding: 15px 100px 0px 65px !important;
+.collection .collection-item-document.avatar {
+	padding: 12px 100px 15px 75px !important;
 }
 
 .collection .collection-item {
-    padding: 18px 20px;
+    padding: 10px 20px !important;
 }
 
-.collection{
+.collection-documents, .collection-document-recomendations{
 	border: 0 !important;
 }
 
-.collection-item{
+.collection-item-document, .collection-item-recomendations{
 	border: 1px solid rgba(210, 210, 210, 0.8) !important;
 	border-radius: 15px !important;
+	margin-bottom: 10px !important;
+}
+
+.card-messages-general-comments{
+	max-height: 100% !important;
+}
+
+.collection-messages-general-comments{
+	border-radius: 15px !important;
+	cursor: pointer;
+}
+
+.collection-item-recomendations-complete{
+	border: 1px solid #1b5e20 !important;
+}
+
+.collection-item-recomendations-incomplete{
+	border: 1px solid rgba(210, 210, 210, 0.8) !important;
+}
+
+.collection-item-document, .collection-item-recomendations{
 	margin-bottom: 5px !important;
 }
 
-.collection-item:hover{
+.collection-item-document:hover, .collection-item-recomendations:hover{
 	background-color: rgba(248, 248, 248, 1);
 	cursor: pointer;
 }
 
 .collection-document-recomendations .collection-item{
-	padding: 10px 20px 10px 20px;
+	padding: 10px 20px 10px 20px !important;
 	width: 100% !important;
 }
 
 .collection-document-recomendations{
 	margin-top: 66px !important;
+}
+
+.action-buttons-docs-recomendations{
+	position: absolute;
+	overflow: hidden;
+	display: none;
+	margin-top: -32px;
+	right: 2px !important;
+	height: 40px !important;
+
+	background: linear-gradient(90deg,rgba(0, 0, 0, 0) 0%, rgba(248, 248, 248, 1) 30%, rgba(248, 248, 248, 1) 100% );
+	padding: 5px 25px 0 55px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+.id_doc_proyecto, .id_doc_recomendation, .idDocumentProject, .idRecomendationDocumentProject,
+.idDocumentProject_Modify, .idRecomendationDocumentProject_Modify,
+.bandera_recomendacion_completada{
+	display: none !important;
+}
+
+.btn-delete-document-recomendation{
+	margin-left: 8px;
 }
 
 .title-document-container{

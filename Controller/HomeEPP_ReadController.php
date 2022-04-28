@@ -59,6 +59,12 @@
 
             echo json_encode( $Data );
             break;
+        case "ReadRecomendationGeneralComments":
+            include("../Model/RecomendacionesComentariosGeneralesModel.php");
+            $RecOG = new RecomendacionesComentariosGeneralesClass();
+
+            $Data = $RecOG->Get_RecomendationsByGeneralCommentsID( $_POST["ID_GeneralOpinion"] );
+            break;
     }
 
 ?>

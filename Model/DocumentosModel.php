@@ -34,6 +34,54 @@
             return $Data;
         }
 
+        public function Insert_DocumentByIdProject( $Data ){
+            $Query = "INSERT INTO DocumentoProyecto(ID_ProgramaProyecto, NombreDocumento, FormatoDocumento, URL_Documento, EstadoRevision) VALUES(".$Data["ID_ProgramaProyecto"].", '".$Data["NombreDocumento"]."', '".$Data["FormatoDocumento"]."', '".$Data["URL_Documento"]."', '".$Data["EstadoRevision"]."');";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet )
+                $DataOut["Status"] = "Correct";
+            else
+                $DataOut["Status"] = "Error";
+
+            return $DataOut;
+        }
+
+        public function Delete_DocumentById($Data){
+            $Query = "DELETE FROM DocumentoProyecto WHERE ID_DocumentoProyecto = ".$Data["ID_DocumentoProyecto"].";";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet ){
+                $Data["Status"] = "Correct";
+                $NameFile = $Data["NombreDocumento"].".".$Data["FormatoDocumento"];
+                $DirFile  = "../DocsUpload/".$NameFile;
+
+                unlink($DirFile );
+            }else
+                $Data["Status"] = "Error";
+
+            return $Data;
+        }
+
+        public function Update_DocumentoById($Data){
+            $Query = "UPDATE DocumentoProyecto SET NombreDocumento = '".$Data["NuevoNombreDocumento"]."', EstadoRevision = '".$Data["EstadoRevision"]."' WHERE ID_DocumentoProyecto = ".$Data["ID_DocumentoProyecto"].";";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet ){
+                $OldName = $Data     ["NombreDocumento"].".".$Data["FormatoDocumento"];
+                $NewName = $Data["NuevoNombreDocumento"].".".$Data["FormatoDocumento"];
+
+                $DirOldName = "../DocsUpload/".$OldName;
+                $DirNewName = "../DocsUpload/".$NewName;
+                
+                rename($DirOldName, $DirNewName);
+
+                $DataOut["Status"] = "Correct";
+            }else
+                $DataOut["Status"] = "Error";
+
+            return $DataOut;
+        }
+
     }
 
 ?>

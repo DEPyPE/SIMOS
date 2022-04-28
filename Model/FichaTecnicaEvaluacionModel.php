@@ -32,11 +32,11 @@
             $ResultSet = $this->ConnectionDB->query($Query);
 
             if( $ResultSet )
-                $Data["Status"] = "Correct";
+                $DataOut["Status"] = "Correct";
             else
-                $Data["Status"] = "Error";
+                $DataOut["Status"] = "Error";
 
-            return $Data;
+            return $DataOut;
         }
 
         public function Update_EvaluationInfoByIdProject( $Data ){
@@ -45,11 +45,11 @@
                 $ResultSet = $this->ConnectionDB->query($Query);
     
                 if( $ResultSet )
-                    $Data["Status"] = "Correct";
+                    $DataOut["Status"] = "Correct";
                 else
-                    $Data["Status"] = "Error";
+                    $DataOut["Status"] = "Error";
     
-                return $Data;
+                return $DataOut;
             }catch(Exception $e){
                 $ResultErr["Status"] = "Error";
                 $ResultErr["ServerMessages"] = $e->getMessage();

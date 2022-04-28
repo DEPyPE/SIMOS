@@ -34,6 +34,42 @@
             return $Data;
         }
 
+        public function Insert_RecomendationByIdDocument($Data){
+            $Query = "INSERT INTO RecomendacionDocumento(ID_DocumentoProyecto, IdentificadorRecomendacion, AspectoSusceptibleDeMejora, BanderaRecomendacionCompletada) VALUES(".$Data["ID_DocumentoProyecto"].", '".$Data["IdentificadorRecomendacion"]."', '".$Data["AspectoSusceptibleDeMejora"]."', ".$Data["BanderaRecomendacionCompletada"].");";
+            $ResultSet = $this->ConnectionDB->query($Query);
+            
+            if( $ResultSet )
+                $DataOut["Status"] = "Correct";
+            else
+                $DataOut["Status"] = "Error";
+
+            return $DataOut;
+        }
+
+        public function Delete_DocRecomendationById( $IdDocRec ){
+            $Query = "DELETE FROM RecomendacionDocumento WHERE ID_RecomendacionDocumento = ".$IdDocRec.";";
+            $ResultSet = $this->ConnectionDB->query($Query);
+            
+            if( $ResultSet )
+                $DataOut["Status"] = "Correct";
+            else
+                $DataOut["Status"] = "Error";
+
+            return $DataOut;
+        }
+
+        public function Update_DocRecomendacionById( $Data ){
+            $Query = "UPDATE RecomendacionDocumento SET AspectoSusceptibleDeMejora = '".$Data["AspectoSusceptibleDeMejora"]."', BanderaRecomendacionCompletada = ".$Data["BanderaRecomendacionCompletada"]." WHERE ID_RecomendacionDocumento = ".$Data["ID_RecomendacionDocumento"].";";
+            $ResultSet = $this->ConnectionDB->query($Query);
+            
+            if( $ResultSet )
+                $DataOut["Status"] = "Correct";
+            else
+                $DataOut["Status"] = "Error";
+
+            return $DataOut;
+        }
+
     }
 
 ?>

@@ -2,110 +2,13 @@
 var UserData    = JSON.parse( localStorage.getItem("UserData") );
 var ProjectInfo = JSON.parse( localStorage.getItem("ProjectInfo") );
 
-//  DOCUMENTOS DEL PROYECTO
-function HTML_DocumentFormat(frmt, filename, filestatus, idoc){
-    var typefile = '';
-
-    if(frmt == "docx")
-        typefile = 'word';
-    else if(frmt == "xlsx")
-        typefile = 'excel';
-    else if(frmt == "pptx")
-        typefile = 'powerpoint';
-    else
-        typefile = 'pdf';
-
-    var styledocs = '';
-    if( filestatus == 'Aprobado' ){
-        styledocs = 'aprobed';
-        iconstatus = 'assignment_turned_in';
-    }else if( filestatus == 'En revisión' ){
-        styledocs = 'send';
-        iconstatus = 'find_in_page';
-    }else if( filestatus == 'Con recomendaciones' ){
-        styledocs = 'observations';
-        iconstatus = 'assignment';
-    }
-    
-    var DocumentFormat = '<li class="collection-item avatar"><img src="Resource/images/'+typefile+'.svg" alt="" class="format-svg-avatar">' +
-                         '<div class="title-document-container"><span class="title title-document truncate"><span class="idoc" style="display: none;">'+idoc+'</span>'+filename+'.'+frmt+'</span><span class="document-status document-'+styledocs+'"><i class="material-icons left icon-status-document">'+iconstatus+'</i>'+filestatus+'</span></div>' +
-                         '<div class="action-buttons"> <a class="btn-floating btn-small btn-AddRecomendation waves-effect green darken-4 tooltipped" data-position="bottom" data-tooltip="Agregar un ASM"><i class="material-icons left">assignment</i></a><a class="btn-floating btn-small btn-modify waves-effect orange tooltipped" data-position="bottom" data-tooltip="Editar"><i class="material-icons">edit</i></a><a class="btn-floating btn-small btn-delete waves-effect red tooltipped" data-position="bottom" data-tooltip="Eliminar"><i class="material-icons">delete</i></a></div></li>';
-
-    return DocumentFormat;
-}
-
-function Get_ProjectDocuments(){
-    var TypDat = "DocumentosDelProyecto";
-    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
-
-    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataDocs ){
-        DocumentosProyecto = JSON.parse( DataDocs );
-        localStorage.setItem("DataDocuments", JSON.stringify(DocumentosProyecto) );
-
-        //console.log( "Documentos => ", DataDocuments );
-        ShowUpdate_DocumentosProyecto(DocumentosProyecto);
-    });
-}
-
-function ShowUpdate_DocumentosProyecto(DocumentosProyecto){
-        //  DOCUMENTOS Y ASM POR DOCUMENTO
-        if( DocumentosProyecto.Status === "Correct" ){
-            $('.card-title-documents').text('Documentos');
-    
-            var doc_html = "";
-    
-            for( var doc_i = 0; doc_i < DocumentosProyecto.Length; doc_i++ ){
-                Documento_i = DocumentosProyecto[doc_i];
-                doc_html = doc_html + HTML_DocumentFormat( Documento_i.FormatoDocumento, Documento_i.NombreDocumento, Documento_i.EstadoRevision, Documento_i.ID_DocumentoProyecto );
-            }
-        
-            $('.collection-documents').prepend( doc_html );
-            $('.collection-documents').children()[0].click();
-        }else if( DocumentosProyecto.Status === "Sin resultados" ){
-            $('.card-title-documents').text('Sin documentos');
-        }else{
-            M.toast({html: 'Error al mostrar los documentos del proyecto. Err. 0001', classes: 'red rounded'});
-        }
-}
-
-//  RECOMENDACIONES DE LOS DOCUMENTOS DEL PROYECTO
-function HTML_RecomendationFormat(RecDoc){
-    var FormatRec = "";
-
-    if( RecDoc.Length > 0 ){
-        for(var reci = 0; reci<RecDoc.Length; reci++){
-            FormatRec = FormatRec + '<li class="collection-item collection-item-recomendations"> <a href="#modal-recomendation-description" class="modal-trigger"> <div class="btn-recomendation truncate"><i class="id_recomendation">000'+RecDoc[reci].ID_RecomendacionDocumento+'</i><i class="recomendation_preview"> - '+RecDoc[reci].AspectoSusceptibleDeMejora+'</i></div><div class="action-buttons-recomendations"> <a class="btn-floating btn-small btn-modify waves-effect orange"><i class="material-icons">edit</i></a> <a class="btn-floating btn-small btn-delete waves-effect red"><i class="material-icons">delete</i></a> </div> </a> </li>';
-        }
-    }else{
-        FormatRec = '<h6>Sin recomendaciones registradas</h6>';
-    }    
-
-    return FormatRec;
-}
-
-function Get_DocumentsRecomendations(ID_Documento){
-    var TypDat = "RecomendacionesPorDocumento";
-
-    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Documento, TypeData: TypDat}, function( DataDocsRec ){
-        DataRecomendDocuments = JSON.parse( DataDocsRec );
-        localStorage.setItem("DataDocumentsRecomendations", JSON.stringify(DataRecomendDocuments) );
-
-        FormatRec = HTML_RecomendationFormat(DataRecomendDocuments);
-        
-        $('.collection-document-recomendations').empty();
-        $('.collection-document-recomendations').html( FormatRec );
-
-        //console.log( "Recomendaciones => ", DataRecomendDocuments );
-    });
-}
-
 function ShowInformationProject(){
 
-    Get_FTProject();
-    Get_FTEvaluation();
-    Get_OpinionGeneral();
-    Get_Recomendaciones();
-    Get_ProjectDocuments();
+    Read_ProjectData();
+    Read_FTEvaluation();
+    Read_OpinionGeneral();
+    Read_Recomendaciones();
+    Read_ProjectDocuments();
 
     var FichaTecnicaProyecto    = JSON.parse( localStorage.getItem("FichaTecnicaProyecto"   ));
     var FichaTecnicaEvaluacion  = JSON.parse( localStorage.getItem("FichaTecnicaEvaluacion" ));
@@ -125,134 +28,28 @@ $(function(){
     $('.tooltipped').tooltip();
     $('.datepicker').datepicker();
     $('select').formSelect();
+  
+/*
+    //$('#modal-upload-document').modal('open');
+    $('body .btn-document-viewer').addClass('tooltipped');
+    $('body .btn-document-viewer').attr('data-position', 'bottom');
+    $('body .btn-document-viewer').attr('data-tooltip', 'Ver documento');
+*/
 
-    //$('#ModalAddModifyPlanMejora').modal('open');
-
-    Get_FTProject();
-    Get_FTEvaluation();
-    Get_OpinionGeneral();
-    Get_Recomendaciones();
-    Get_ProjectDocuments();
+    Read_ProjectData();
+    Read_FTEvaluation();
+    Read_OpinionGeneral();
+    Read_Recomendaciones();
+    Read_ProjectDocuments();
     
     console.log( 'Ready!' );
 });
 
-$('.btn-upload-documents').on('click', function(){
-    var doc = HTML_DocumentFormat('pdf', 'cuadro_diagnóstico', 'Aprobado');
-    $('.collection-documents').prepend( doc );
-});
-
-$('.collection-step-menu .collection-item').on('click', function(){
-    $(this).siblings().removeClass('collection-active');
-    $(this).addClass('collection-active');
-
-    var type_document = $(this).text().split("  ")[1];
-
-    if( type_document == "Posicionamiento" ){
-        $('.collapsible-posicionamiento-asm').slideDown(200);
-        $('.collapsible-plan-de-trabajo-asm').slideUp(50);
-    }else if( type_document == "Plan de trabajo" ){
-        $('.collapsible-posicionamiento-asm').slideUp(50);
-        $('.collapsible-plan-de-trabajo-asm').slideDown(200);
-    }
-});
-
-$('.collapsible .collapsible-header').on('click', function(){
-    $(this).addClass('collapsible-active');
-    $(this).parent().siblings().children().removeClass('collapsible-active');
-});
-
-$('.btn-recomendation-complete').on('click', function(){
-    M.toast({html: 'Recomendación atendida', classes: 'rounded'});
-    $(this).addClass('disabled');
-});
-
-$('.btn-delete-document').on('click', function(){
-    
-});
-
-$('.btn-confirm-delete').on('click', function(){
-    M.toast({html: 'Documento eliminado', classes: 'rounded'});    
-});
-
-//  Eventos para mostrar y ocultar las opciones para los documentos
-$('.collection-documents').on('mouseenter', '.collection-item', function(){
-    $(this).children('.action-buttons').css('display', 'block');
-});
-
-$('.collection-documents').on('mouseleave', '.collection-item', function(){
-    $(this).children('.action-buttons').css('display', 'none');
-});
-
-$('.collection-documents').on('click', '.collection-item', function(){
-    var idoc = $(this).children('.title-document-container').children().find('.idoc').text();
-    Get_DocumentsRecomendations(idoc);
-    
-    $(this).addClass('document-selected');
-    $(this).siblings().removeClass('document-selected');
-
-    $(this).siblings().find('.title-document').css('font-weight', '400');
-    $(this).siblings().find('.icon-status-document').css('color', 'rgba(0, 0, 0, 0.2)');
-    $(this).siblings().find('.document-status').css('font-weight', '400');
-    
-    $(this).find('.title-document').css('font-weight', '600');
-    $(this).find('.icon-status-document').css('color', 'rgba(0, 0, 0, 0.4)');
-    $(this).find('.document-status').css('font-weight', '500');
-
-    //.document-aprobed, .document-send, .document-observations{
-    //.title-document font-weight: 400;
-});
-
-//  Botones para las recomendaciones
-$('.collection-document-recomendations').on('mouseenter', '.collection-item-recomendations', function(){
-    $(this).children('.action-buttons-recomendations').css('display', 'block');
-});
-
-$('.collection-document-recomendations').on('mouseleave', '.collection-item-recomendations', function(){
-    $(this).children('.action-buttons-recomendations').css('display', 'none');
-});
-
-/* ---------------------------------       READ FROM FORMS FUNCTIONS         --------------------------------- */
-function ReadForm_ProjectData(){
-    var ProjectData = { 
-        ID_Project: ProjectInfo.ID_ProgramaProyecto,
-        NombreProyecto: $('#txtNombreProyecto').val(),
-        ClaveProyecto: $('#txtClaveProyecto').val(),
-        DependenciaDelProyecto: $('#txtDepen').val(),
-        SiglasDependenciaProyecto: $('#txtSiglasDependencia').val(),
-        UnidadResponsable: $('#txtUR').val(),
-        SiglasUnidadResponsable: $('#txtSiglasUR').val(),
-        NombreResponsable: $('#txtResponsable').val()
-    }
-
-    return ProjectData;
-}
-
-function ReadForm_EvaluationData(){
-    var EvaluationData = {
-        ID_Project: ProjectInfo.ID_ProgramaProyecto,
-        InstanciaEvaluadora: $("#txtInstanciaEvaluadora").val(),
-        NombreDeEvaluacion: $("#txtNombreEvaluacion").val(),
-        TipoEvaluacion: $("#txtTipoEvaluacion").val(),
-        AñoDeEvaluacion: $("#txtYearEvaluation").val(),
-        NombreDelInforme: $("#txtNombreInforme").val(),
-        CostoEvaluacion: $("#txtCostoEvaluacion").val()
-    }
-
-    return EvaluationData;
-}
-
-function ReadForm_OpinionGeneral(){
-    var OpinionGeneral = {
-        ID_Project: ProjectInfo.ID_ProgramaProyecto,
-        ComentariosObservacionesGenerales: $('#txtObservacionesGenerales').val(),
-        ComentariosObservacionesPorTema: $('#txtPorTema').val()
-    }
-
-    return OpinionGeneral;
-}
-
-/* ---------------------------------            SHOW DATA FUNCTIONS          --------------------------------- */
+// *****   FICHA TÉCNICA DEL PROYECTO   ******
+// * * * * Funciones CRUD y eventos
+// * * (C) Create
+// * * (R) Read
+// * * (U) Update
 
 function UpdateView_FTProject(FichaTecnicaProyecto){
     //console.log( "Ficha técnica del proyecto => ",  FichaTecnicaProyecto );
@@ -289,6 +86,102 @@ function UpdateView_FTProject(FichaTecnicaProyecto){
     }
 }
 
+function Create_ProjectData(ProjectData){    
+    var TypeQry = "InsertProjectInfo";
+
+    $.post('Controller/HomeEPP_CreateController.php', {ProjectInfo: ProjectData, TypeData: TypeQry}, function(DataRcv){
+        var Data = JSON.parse( DataRcv );
+
+        if( Data.Status == "Correct" ){
+            localStorage.setItem('FichaTecnicaProyecto', JSON.stringify(ProjectData));
+            $('#ModalAddModifyTechnicalProjectInfo').modal('close');
+            ProjectData.Status = "Correct";
+
+            M.toast({html: 'Datos guardados correctamente', classes: 'green darken-2 rounded'});
+            UpdateView_FTProject(ProjectData);
+        }
+    });
+}
+
+function Read_ProjectData(){
+    var TypDat = "TechnicalInformationProject";
+    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
+
+    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataTechProject ){
+        FichaTecnicaProyecto = JSON.parse( DataTechProject );
+        localStorage.setItem("FichaTecnicaProyecto", JSON.stringify(FichaTecnicaProyecto) );
+
+        UpdateView_FTProject(FichaTecnicaProyecto);
+    });
+}
+
+function Update_ProjectData( ProjectData ){
+    var TypeQry = "UpdateProjectInfo";
+
+    $.post('Controller/HomeEPP_UpdateController.php', {Data: ProjectData, TypeData: TypeQry}, function(DataRcv){
+        
+        var Data = JSON.parse( DataRcv );
+
+        if( Data.Status == "Correct" ){
+            localStorage.setItem('FichaTecnicaProyecto', JSON.stringify(ProjectData));
+            $('#ModalAddModifyTechnicalProjectInfo').modal('close');
+            ProjectData.Status = "Correct";
+
+            M.toast({html: 'Datos actualizados correctamente', classes: 'green darken-2 rounded'});
+            UpdateView_FTProject(ProjectData);
+        }else if( Data.Status == "Error" ){
+            M.toast({html: 'Error en el servidor.', classes: 'red darken-2 rounded'});
+        }else{
+            M.toast({html: 'Error. Agregue los datos correctamente <br> en su respectivo campo.', classes: 'green darken-2 rounded'});
+        }
+
+    });
+}
+
+function ReadForm_ProjectData(){
+    var ProjectData = { 
+        ID_Project: ProjectInfo.ID_ProgramaProyecto,
+        NombreProyecto: $('#txtNombreProyecto').val(),
+        ClaveProyecto: $('#txtClaveProyecto').val(),
+        DependenciaDelProyecto: $('#txtDepen').val(),
+        SiglasDependenciaProyecto: $('#txtSiglasDependencia').val(),
+        UnidadResponsable: $('#txtUR').val(),
+        SiglasUnidadResponsable: $('#txtSiglasUR').val(),
+        NombreResponsable: $('#txtResponsable').val()
+    }
+
+    return ProjectData;
+}
+
+$('.btn-save-project-information').on('click', function(){
+    var ProjectData = ReadForm_ProjectData();
+    Create_ProjectData( ProjectData );
+});
+
+$('.btn-update-project-information').on('click', function(){
+    var ProjectData = ReadForm_ProjectData();
+    Update_ProjectData( ProjectData );
+});
+
+$('.btn-edit-project-information').on('click', function(){
+    var FT_Project = JSON.parse( localStorage.getItem("FichaTecnicaProyecto"));
+
+    $('#txtNombreProyecto').val( FT_Project.NombreProyecto ),
+    $('#txtClaveProyecto').val( FT_Project.ClaveProyecto ),
+    $('#txtDepen').val( FT_Project.DependenciaDelProyecto ),
+    $('#txtSiglasDependencia').val( FT_Project.SiglasDependenciaProyecto ),
+    $('#txtUR').val( FT_Project.UnidadResponsable ),
+    $('#txtSiglasUR').val( FT_Project.SiglasUnidadResponsable ),
+    $('#txtResponsable').val( FT_Project.NombreResponsable )
+});
+
+
+// *****   FICHA TÉCNICA DE LA INSTANCIA EVALUADORA   ******
+// * * * * Funciones CRUD y eventos
+// * * (C) Create
+// * * (R) Read
+// * * (U) Update
+
 function UpdateView_FTEvaluation(FichaTecnicaEvaluacion){
     //console.log( "Ficha técnica de la evaluacion => ", FichaTecnicaEvaluacion );
 
@@ -320,6 +213,101 @@ function UpdateView_FTEvaluation(FichaTecnicaEvaluacion){
     }
 }
 
+function Create_EvaluationData(EvaluationData){
+    var TypeQry = "InsertEvaluationInfo";
+
+    $.post('Controller/HomeEPP_CreateController.php', {EvalData: EvaluationData, TypeData: TypeQry}, function(DataRcv){
+        var Data = JSON.parse( DataRcv );
+
+        if( Data.Status == "Correct" ){
+            localStorage.setItem('FichaTecnicaEvaluacion', JSON.stringify(EvaluationData) );
+            $('#ModalAddModifyTechnicalEvaluationInfo').modal('close');
+            EvaluationData.Status = "Correct";
+
+            M.toast({html: 'Datos guardados correctamente', classes: 'green darken-2 rounded'});
+            UpdateView_FTEvaluation(EvaluationData);
+        }else{
+            M.toast({html: 'Error al guardar los datos', classes: 'red rounded'});
+        }
+    });
+}
+
+function Read_FTEvaluation(){
+    var TypDat = "TechnicalInformationEvaluation";
+    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
+
+    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataTechEvaluator ){
+        FichaTecnicaEvaluacion = JSON.parse( DataTechEvaluator );
+        localStorage.setItem("FichaTecnicaEvaluacion", JSON.stringify(FichaTecnicaEvaluacion) );
+
+        UpdateView_FTEvaluation(FichaTecnicaEvaluacion);
+    });
+}
+
+function Update_EvaluationData( EvaluationData ){
+    var TypeQry = "UpdateEvaluationInfo";
+
+    $.post('Controller/HomeEPP_UpdateController.php', {Data: EvaluationData, TypeData: TypeQry}, function(DataRcv){
+        var Data = JSON.parse( DataRcv );
+
+        if( Data.Status == "Correct" ){
+            localStorage.setItem('FichaTecnicaEvaluacion', JSON.stringify(EvaluationData));
+            $('#ModalAddModifyTechnicalEvaluationInfo').modal('close');
+            EvaluationData.Status = "Correct";
+
+            M.toast({html: 'Datos actualizados correctamente', classes: 'green darken-2 rounded'});
+            UpdateView_FTEvaluation(EvaluationData);
+        }else if( Data.Status == "Error" ){
+            M.toast({html: 'Error en el servidor.', classes: 'red darken-2 rounded'});
+        }else{
+            M.toast({html: 'Error. Agregue los datos correctamente <br> en su respectivo campo.', classes: 'green darken-2 rounded'});
+        }
+
+    });    
+}
+
+function ReadForm_EvaluationData(){
+    var EvaluationData = {
+        ID_Project: ProjectInfo.ID_ProgramaProyecto,
+        InstanciaEvaluadora: $("#txtInstanciaEvaluadora").val(),
+        NombreDeEvaluacion: $("#txtNombreEvaluacion").val(),
+        TipoEvaluacion: $("#txtTipoEvaluacion").val(),
+        AñoDeEvaluacion: $("#txtYearEvaluation").val(),
+        NombreDelInforme: $("#txtNombreInforme").val(),
+        CostoEvaluacion: $("#txtCostoEvaluacion").val()
+    }
+
+    return EvaluationData;
+}
+
+$('.btn-insert-evaluation-information').on('click', function(){
+    var EvaluationData = ReadForm_EvaluationData();
+    Create_EvaluationData( EvaluationData );
+});
+
+$('.btn-update-evaluation-information').on('click', function(){
+    var EvaluationData = ReadForm_EvaluationData();
+    Update_EvaluationData( EvaluationData );
+});
+
+$('.btn-edit-evaluation-information').on('click', function(){
+    var FT_Evaluation = JSON.parse( localStorage.getItem("FichaTecnicaEvaluacion") );
+
+    $("#txtInstanciaEvaluadora").val( FT_Evaluation.InstanciaEvaluadora );
+    $("#txtNombreEvaluacion").val( FT_Evaluation.NombreDeEvaluacion );
+    $("#txtTipoEvaluacion").val( FT_Evaluation.TipoEvaluacion );
+    $("#txtYearEvaluation").val( FT_Evaluation.AñoDeEvaluacion );
+    $("#txtNombreInforme").val( FT_Evaluation.NombreDelInforme );
+    $("#txtCostoEvaluacion").val( FT_Evaluation.CostoEvaluacion );
+});
+
+
+// *****   OPINIÓN GENERAL   ******
+// * * * * Funciones CRUD y eventos
+// * * (C) Create
+// * * (R) Read
+// * * (U) Update
+
 function UpdateView_OpinionGeneral(OpinionGeneral){
     if( OpinionGeneral.Status == "Correct" ){
         $('#ComentariosObservacionesGenerales').show();
@@ -345,87 +333,43 @@ function UpdateView_OpinionGeneral(OpinionGeneral){
 
         $('.btn-add-opinion-general').show();
         $('.btn-edit-general-comments').hide();
-        $('.btn-edit-specific-comments').show();
+        $('.btn-edit-specific-comments').hide();
         $('.btn-insert-opinion-general').show();
     }else{
         M.toast({html: 'Error al mostrar la opinión general. Err. 0001', classes: 'red rounded'});
     }
 }
 
-function UpdateView_Recomendaciones(RecomendacionForm){
-
-    var table_recomendaciones = "";
-    var asm_complete_flag;
-    console.log( RecomendacionForm );
-
-    if( RecomendacionForm.Status == "Correct" ){
-        for(var i=0; i<RecomendacionForm.Length; i++){
-
-            if( RecomendacionForm[i].BanderaRecomendacionCompletada == "Corregido" )
-                asm_complete_flag = "complete";
-            else if( RecomendacionForm[i].BanderaRecomendacionCompletada == "En proceso" )
-                asm_complete_flag = "in-process";
-            else
-                asm_complete_flag = "incomplete";
-
-            table_recomendaciones = table_recomendaciones +
-                "<tr>"+ 
-                    "<td class='center-align'> <div class='asm-status-style-"+asm_complete_flag+"'></div></td>"+
-                    "<td class='NumASM center-align'>"+ RecomendacionForm[i].IdentificadorRecomendacion +"</td>"+
-                    "<td>"+ RecomendacionForm[i].AspectoSusceptibleDeMejora +"</td>"+
-                    "<td>"+ RecomendacionForm[i].TipoActoresInvolucradosEnSolucion +"</td>"+
-                    "<td class='center-align'>"+ RecomendacionForm[i].NivelDePrioridad +"</td>"+
-                    "<td>"+ RecomendacionForm[i].AccionDeMejora +"</td>"+
-                    "<td>"+ RecomendacionForm[i].AreaResponsable +"</td>"+
-                    "<td class='center-align'>"+ RecomendacionForm[i].FechaCompromisoDeCumplimiento +"</td>"+
-                    "<td>"+ RecomendacionForm[i].ResultadosEsperados +"</td>"+
-                    "<td>"+ RecomendacionForm[i].EvidenciasSolicitadas +"<div class='delete-recomendation-container'><a class='btn-floating btn-small btn-delete-recomendacion waves-effect red darken-2 modal-trigger right' href='#ModalDeleteRecomendation'><i class='material-icons'>delete</i></a></div></td>"+
-                "</tr>";
-        }
-
-        $('.no-data-recomendaciones').css('display', 'none');
-        $('.with-data-recomendaciones').css('display', 'block');
-
-        $('.table-body-content-mejoras').empty();
-        $('.table-body-content-mejoras').append( table_recomendaciones );
-    }else if( RecomendacionForm.Status == "Sin resultados" ){
-        $('.no-data-recomendaciones').css('display', 'block');
-        $('.with-data-recomendaciones').css('display', 'none');
-        $('.card-plan-de-mejora').css('display', 'none');
-    }else{
-        M.toast({html: 'Error al mostrar el plan de mejora. Err. 0001', classes: 'red rounded'});
+function ReadForm_OpinionGeneral(){
+    var OpinionGeneral = {
+        ID_Project: ProjectInfo.ID_ProgramaProyecto,
+        ComentariosObservacionesGenerales: $('#txtObservacionesGenerales').val(),
+        ComentariosObservacionesPorTema: $('#txtPorTema').val()
     }
 
+    return OpinionGeneral;
 }
 
-//  FICHA TÉCNICA DEL PROYECTO
-function Get_FTProject(){
-    var TypDat = "TechnicalInformationProject";
-    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
+function Create_OpinionGeneral(OpinionForm){
+    var TypeQry = "InsertOpinionGeneral";
 
-    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataTechProject ){
-        FichaTecnicaProyecto = JSON.parse( DataTechProject );
-        localStorage.setItem("FichaTecnicaProyecto", JSON.stringify(FichaTecnicaProyecto) );
+    $.post('Controller/HomeEPP_CreateController.php', {OpinionData: OpinionForm, TypeData: TypeQry}, function(DataRcv){
+        var Data = JSON.parse( DataRcv );
 
-        UpdateView_FTProject(FichaTecnicaProyecto);
+        if( Data.Status == "Correct" ){
+            localStorage.setItem('OpinionGeneral', JSON.stringify(OpinionForm) );
+            $('#ModalAddOpinionGeneral').modal('close');
+            OpinionForm.Status = "Correct";
+
+            M.toast({html: 'Datos guardados correctamente', classes: 'green darken-2 rounded'});
+            UpdateView_OpinionGeneral(OpinionForm);
+        }else{
+            M.toast({html: 'Error al guardar los datos', classes: 'red rounded'});
+        }
     });
 }
 
-//  FICHA TECNICA DE LA INSTANCIA EVALUADORA
-function Get_FTEvaluation(){
-    var TypDat = "TechnicalInformationEvaluation";
-    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
-
-    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataTechEvaluator ){
-        FichaTecnicaEvaluacion = JSON.parse( DataTechEvaluator );
-        localStorage.setItem("FichaTecnicaEvaluacion", JSON.stringify(FichaTecnicaEvaluacion) );
-
-        UpdateView_FTEvaluation(FichaTecnicaEvaluacion);
-    });
-}
-
-//   OPINION GENERAL
-function Get_OpinionGeneral(){
+function Read_OpinionGeneral(){
     var TypDat = "OpinionGeneral";
     var ID_Project = ProjectInfo.ID_ProgramaProyecto;
 
@@ -438,157 +382,8 @@ function Get_OpinionGeneral(){
 
         //console.log( "Opinión general => ", DataOG );
         UpdateView_OpinionGeneral(OpinionGeneral);
+        UpdateView_GeneralCommentsRecomendation();
     });
-}
-
-//  RECOMENDACIONES - PLAN DE MEJORA
-function Get_Recomendaciones(){
-    var TypDat = "Recomendaciones";
-    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
-
-    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataRecomendaciones ){
-        Recomendaciones = JSON.parse( DataRecomendaciones );
-        localStorage.setItem("Recomendaciones", JSON.stringify(Recomendaciones) );
-
-        console.log( "Recomendaciones => ", Recomendaciones );
-        UpdateView_Recomendaciones(Recomendaciones);
-    });
-}
-
-/* ---------------------------------            INSERT DATA FUNCTIONS       --------------------------------- */
-
-function Insert_ProjectData(ProjectData){    
-    var TypeQry = "InsertProjectInfo";
-
-    $.post('Controller/HomeEPP_CreateController.php', {ProjectInfo: ProjectData, TypeData: TypeQry}, function(DataRcv){
-        var Data = JSON.parse( DataRcv );
-
-        if( Data.Status == "Correct" ){
-            localStorage.setItem('FichaTecnicaProyecto', JSON.stringify(ProjectData));
-            $('#ModalAddModifyTechnicalProjectInfo').modal('close');
-            ProjectData.Status = "Correct";
-
-            M.toast({html: 'Datos guardados correctamente', classes: 'green darken-2 rounded'});
-            UpdateView_FTProject(ProjectData);
-        }
-    });
-}
-
-function Insert_EvaluationData(EvaluationData){
-    var TypeQry = "InsertEvaluationInfo";
-
-    $.post('Controller/HomeEPP_CreateController.php', {EvalData: EvaluationData, TypeData: TypeQry}, function(DataRcv){
-        var Data = JSON.parse( DataRcv );
-
-        if( Data.Status == "Correct" ){
-            localStorage.setItem('FichaTecnicaEvaluacion', JSON.stringify(EvaluationData) );
-            $('#ModalAddModifyTechnicalEvaluationInfo').modal('close');
-            EvaluationData.Status = "Correct";
-
-            M.toast({html: 'Datos guardados correctamente', classes: 'green darken-2 rounded'});
-            UpdateView_FTEvaluation(EvaluationData);
-        }else{
-            M.toast({html: 'Error al guardar los datos', classes: 'red rounded'});
-        }
-    });
-}
-
-function Insert_OpinionGeneral(OpinionForm){
-    var TypeQry = "InsertOpinionGeneral";
-
-    $.post('Controller/HomeEPP_CreateController.php', {OpinionData: OpinionForm, TypeData: TypeQry}, function(DataRcv){
-        var Data = JSON.parse( DataRcv );
-
-        if( Data.Status == "Correct" ){
-            localStorage.setItem('OpinionGeneral', OpinionForm);
-            $('#ModalAddOpinionGeneral').modal('close');
-            OpinionForm.Status = "Correct";
-
-            M.toast({html: 'Datos guardados correctamente', classes: 'green darken-2 rounded'});
-            UpdateView_OpinionGeneral(OpinionForm);
-        }else{
-            M.toast({html: 'Error al guardar los datos', classes: 'red rounded'});
-        }
-    });
-}
-
-function Insert_Recomendacion(RecomendacionForm){
-    var TypeQry = "InsertRecomendacion";
-
-    $.post('Controller/HomeEPP_CreateController.php', {Recomendacion: RecomendacionForm, TypeData: TypeQry}, function(DataRcv){
-        var Data = JSON.parse( DataRcv );
-
-        if( Data.Status == "Correct" ){
-            // AGREGAR LA RECOMENDACIÓN AL VECTOR DE OBJETOS CON LAS RECOMENDACIONES
-            //localStorage.setItem('Recomendaciones', RecomendacionForm);
-            var RecomendacionVector = [RecomendacionForm];
-
-            var RecomendacionesObject = JSON.parse( localStorage.getItem("Recomendaciones") );
-
-            console.log( "\n\n Old object => ", RecomendacionesObject );
-            RecomendacionesObject[ RecomendacionesObject.Length ] = RecomendacionForm;
-            RecomendacionesObject.Length = RecomendacionesObject.Length + 1;
-            localStorage.setItem('Recomendaciones', JSON.stringify(RecomendacionesObject) ) ;
-            console.log( "\n\n New object => ", RecomendacionesObject );
-
-            $('#ModalAddModifyPlanMejora').modal('close');
-            RecomendacionVector.Status = "Correct";
-            RecomendacionVector.Length = 1;
-
-            M.toast({html: 'Datos guardados correctamente', classes: 'green darken-2 rounded'});
-            
-            UpdateView_Recomendaciones( RecomendacionVector );
-        }else{
-            M.toast({html: 'Error al guardar los datos', classes: 'red rounded'});
-        }
-    });
-}
-
-/* ---------------------------------            UPDATE DATA FUNCTIONS       --------------------------------- */
-
-function Update_ProjectData( ProjectData ){
-    var TypeQry = "UpdateProjectInfo";
-
-    $.post('Controller/HomeEPP_UpdateController.php', {Data: ProjectData, TypeData: TypeQry}, function(DataRcv){
-        
-        var Data = JSON.parse( DataRcv );
-
-        if( Data.Status == "Correct" ){
-            localStorage.setItem('FichaTecnicaProyecto', JSON.stringify(ProjectData));
-            $('#ModalAddModifyTechnicalProjectInfo').modal('close');
-            ProjectData.Status = "Correct";
-
-            M.toast({html: 'Datos actualizados correctamente', classes: 'green darken-2 rounded'});
-            UpdateView_FTProject(ProjectData);
-        }else if( Data.Status == "Error" ){
-            M.toast({html: 'Error en el servidor.', classes: 'red darken-2 rounded'});
-        }else{
-            M.toast({html: 'Error. Agregue los datos correctamente <br> en su respectivo campo.', classes: 'green darken-2 rounded'});
-        }
-
-    });
-}
-
-function Update_EvaluationData( EvaluationData ){
-    var TypeQry = "UpdateEvaluationInfo";
-
-    $.post('Controller/HomeEPP_UpdateController.php', {Data: EvaluationData, TypeData: TypeQry}, function(DataRcv){
-        var Data = JSON.parse( DataRcv );
-
-        if( Data.Status == "Correct" ){
-            localStorage.setItem('FichaTecnicaEvaluacion', JSON.stringify(EvaluationData));
-            $('#ModalAddModifyTechnicalEvaluationInfo').modal('close');
-            EvaluationData.Status = "Correct";
-
-            M.toast({html: 'Datos actualizados correctamente', classes: 'green darken-2 rounded'});
-            UpdateView_FTEvaluation(EvaluationData);
-        }else if( Data.Status == "Error" ){
-            M.toast({html: 'Error en el servidor.', classes: 'red darken-2 rounded'});
-        }else{
-            M.toast({html: 'Error. Agregue los datos correctamente <br> en su respectivo campo.', classes: 'green darken-2 rounded'});
-        }
-
-    });    
 }
 
 function Update_GeneralComments( GeneralComments ){
@@ -635,60 +430,9 @@ function Update_SpecificComments( SpecificComments ){
     });
 }
 
-function Update_Recomendation( RecomendationForm ){
-    var TypeQry = "UpdateRecomendaciones";
-    
-    $.post('Controller/HomeEPP_UpdateController.php', {Data: RecomendationForm, TypeData: TypeQry}, function(DataRcv){
-        var Data = JSON.parse( DataRcv );
-
-        if( Data.Status == "Correct" ){
-            var DataRecomendaciones = JSON.parse( localStorage.getItem( 'Recomendaciones') );
-
-            for(var i=0; i<DataRecomendaciones.Length; i++)
-                if( DataRecomendaciones[i].IdentificadorRecomendacion == RecomendationForm.IdentificadorRecomendacion  )
-                    DataRecomendaciones[i] = RecomendationForm;
-
-            localStorage.setItem('Recomendaciones', JSON.stringify(DataRecomendaciones));            
-            DataRecomendaciones.Status = "Correct";           
-            UpdateView_Recomendaciones(DataRecomendaciones);
-
-            $('#ModalAddModifyPlanMejora').modal('close');
-            M.toast({html: 'Datos actualizados correctamente', classes: 'green darken-2 rounded'});
-        }else if( Data.Status == "Error" ){
-            M.toast({html: 'Error en el servidor.', classes: 'red darken-2 rounded'});
-        }else{
-            M.toast({html: 'Error. Agregue los datos correctamente <br> en su respectivo campo.', classes: 'green darken-2 rounded'});
-        }
-
-    });
-
-}
-
-/* ----------------------------------       CLICK EVENTS FOR INSERT OR UPDATE DATA    ---------------------- */
-
-$('.btn-save-project-information').on('click', function(){
-    var ProjectData = ReadForm_ProjectData();
-    Insert_ProjectData( ProjectData );
-});
-
-$('.btn-update-project-information').on('click', function(){
-    var ProjectData = ReadForm_ProjectData();
-    Update_ProjectData( ProjectData );
-});
-
-$('.btn-insert-evaluation-information').on('click', function(){
-    var EvaluationData = ReadForm_EvaluationData();
-    Insert_EvaluationData( EvaluationData );
-});
-
-$('.btn-update-evaluation-information').on('click', function(){
-    var EvaluationData = ReadForm_EvaluationData();
-    Update_EvaluationData( EvaluationData );
-});
-
 $('.btn-insert-opinion-general').on('click', function(){
     var OpinionGeneral = ReadForm_OpinionGeneral();
-    Insert_OpinionGeneral( OpinionGeneral );
+    Create_OpinionGeneral( OpinionGeneral );
 });
 
 $('.btn-modify-general-comments').on('click', function(){
@@ -711,11 +455,253 @@ $('.btn-modify-specific-comments').on('click', function(){
     Update_GeneralComments(GeneralComments);
 });
 
+$('.btn-edit-opinion-general').on('click', function(){
+
+    $('#txtPorTema').val( OpinionGeneral.ComentariosObservacionesPorTema ) ;
+    M.textareaAutoResize($('#txtPorTema'));
+});
+
+$('.btn-edit-general-comments').on('click', function(){
+    var OpinionGeneral = JSON.parse( localStorage.getItem("OpinionGeneral") );
+
+    $('#txtComentarios').val( OpinionGeneral.ComentariosObservacionesGenerales );
+    M.textareaAutoResize($('#txtComentarios'));
+
+    $('.btn-modify-specific-comments').hide();
+    $('.btn-modify-general-comments').show();
+});
+
+$('.btn-edit-specific-comments').on('click', function(){
+    var OpinionGeneral = JSON.parse( localStorage.getItem("OpinionGeneral") );
+
+    $('#txtComentarios').val( OpinionGeneral.ComentariosObservacionesPorTema );
+    M.textareaAutoResize($('#txtComentarios'));
+
+    $('.btn-modify-specific-comments').show();
+    $('.btn-modify-general-comments').hide();
+});
+
+// *****   COMENTARIOS A LA OPINIÓN GENERAL   ******
+// * * * * Funciones CRUD y eventos
+// * * (C) Create
+// * * (R) Read
+// * * (U) Update
+// * * (D) Delete
+
+function UpdateView_GeneralCommentsRecomendation(){
+
+function Create_GeneralCommentRecomendation(){ /* In construction */ }
+function Read_GeneralCommentRecomendation  (){
+    var ID = 1;
+    $.post('Controller/HomeEPP_ReadController.php', {ID_GeneralOpinion: ID, TypeData: "ReadRecomendationGeneralComments"}, function(ResponseServer){
+        var Server = JSON.parse( ResponseServer );
+
+        console.log( Server );
+    });
+}
+function Update_GeneralCommentRecomendation(){ /* In construction */ }
+function Delete_GeneralCommentRecomendation(){ /* In construction */ }
+
+
+/*
+    $('.collection-messages-general-comments')
+    <a href="#ModalRecomendacionComentariosGenerales" class="collection-item truncate modal-trigger">Corregir ortografía de esta sección</a>
+*/
+}
+
+// *****   PLAN DE MEJORA   ******
+// * * * * Funciones CRUD y eventos
+// * * (C) Create
+// * * (R) Read
+// * * (U) Update
+// * * (D) Delete
+
+function UpdateView_Recomendaciones(RecomendacionForm){
+
+    var table_recomendaciones = "";
+    var asm_complete_flag;
+
+    if( RecomendacionForm.Status == "Correct" ){
+        $('.table-plan-de-mejora').show();
+
+        for(var i=0; i<RecomendacionForm.Length; i++){
+
+            if( RecomendacionForm[i].BanderaRecomendacionCompletada == "Corregido" )
+                asm_complete_flag = "complete";
+            else if( RecomendacionForm[i].BanderaRecomendacionCompletada == "En proceso" )
+                asm_complete_flag = "in-process";
+            else
+                asm_complete_flag = "incomplete";
+
+            table_recomendaciones = table_recomendaciones +
+                "<tr>"+ 
+                    "<td class='center-align'> <div class='asm-status-style-"+asm_complete_flag+"'></div></td>"+
+                    "<td class='NumASM center-align'>"+ RecomendacionForm[i].IdentificadorRecomendacion +"</td>"+
+                    "<td>"+ RecomendacionForm[i].AspectoSusceptibleDeMejora +"</td>"+
+                    "<td>"+ RecomendacionForm[i].TipoActoresInvolucradosEnSolucion +"</td>"+
+                    "<td class='center-align'>"+ RecomendacionForm[i].NivelDePrioridad +"</td>"+
+                    "<td>"+ RecomendacionForm[i].AccionDeMejora +"</td>"+
+                    "<td>"+ RecomendacionForm[i].AreaResponsable +"</td>"+
+                    "<td class='center-align'>"+ RecomendacionForm[i].FechaCompromisoDeCumplimiento +"</td>"+
+                    "<td>"+ RecomendacionForm[i].ResultadosEsperados +"</td>"+
+                    "<td>"+ RecomendacionForm[i].EvidenciasSolicitadas +
+                        "<div class='options-recomendation-container'>"+
+                            "<a class='btn-floating btn-small btn-delete-recomendation  modal-trigger waves-effect red darken-2 right' href='#ModalDeleteRecomendation'><i class='material-icons'>delete</i></a>"+
+                            "<a class='btn-floating btn-small btn-edit-recomendation    modal-trigger waves-effect yellow darken-2 right' href='#ModalAddModifyPlanMejora'><i class='material-icons'>edit</i></a>"+
+                        "</div>"+
+                    "</td>"+
+                "</tr>";
+        }
+
+        $('.no-data-recomendaciones').css('display', 'none');
+        $('.with-data-recomendaciones').css('display', 'block');
+
+        $('.table-body-content-mejoras').empty();
+        $('.table-body-content-mejoras').append( table_recomendaciones );
+    }else if( RecomendacionForm.Status == "Sin resultados" ){
+        $('.no-data-recomendaciones').css('display', 'block');
+        $('.with-data-recomendaciones').css('display', 'none');
+        $('.card-plan-de-mejora').css('display', 'none');
+        $('.table-plan-de-mejora').hide();
+    }else{
+        M.toast({html: 'Error al mostrar el plan de mejora. Err. 0001', classes: 'red rounded'});
+    }
+
+}
+
+function UpdateView_DeleteRecomendacion(DeleteRecomendacionData){
+    var table_recomendaciones = "";
+    var asm_complete_flag;
+
+    if( DeleteRecomendacionData.BanderaRecomendacionCompletada == "Corregido" )
+    asm_complete_flag = "complete";
+    else if( DeleteRecomendacionData.BanderaRecomendacionCompletada == "En proceso" )
+        asm_complete_flag = "in-process";
+    else
+        asm_complete_flag = "incomplete";
+
+    table_recomendaciones = table_recomendaciones +
+        "<tr>"+ 
+            "<td class='center-align'> <div class='asm-status-style-"+asm_complete_flag+"'></div></td>"+
+            "<td class='NumASM-delete center-align'>"+ DeleteRecomendacionData.IdentificadorRecomendacion +"</td>"+
+            "<td>"+ DeleteRecomendacionData.AspectoSusceptibleDeMejora +"</td>"+
+            "<td>"+ DeleteRecomendacionData.TipoActoresInvolucradosEnSolucion +"</td>"+
+            "<td class='center-align'>"+ DeleteRecomendacionData.NivelDePrioridad +"</td>"+
+            "<td>"+ DeleteRecomendacionData.AccionDeMejora +"</td>"+
+            "<td> ... </td>"+
+        "</tr>";
+
+    $('.table-body-content-mejoras-delete').empty();
+    $('.table-body-content-mejoras-delete').append( table_recomendaciones );
+
+}
+
+function Create_Recomendacion(RecomendacionForm){
+    var TypeQry = "InsertRecomendacion";
+
+    $.post('Controller/HomeEPP_CreateController.php', {Recomendacion: RecomendacionForm, TypeData: TypeQry}, function(DataRcv){
+        var Data = JSON.parse( DataRcv );
+
+        if( Data.Status == "Correct" ){
+            var RecomendacionesObject = JSON.parse( localStorage.getItem("Recomendaciones") );
+            var new_object_recomendation = {};
+            var new_length;
+
+            if( RecomendacionesObject.Status == "Sin resultados" ){
+                new_length = 1;
+            }else{
+                new_length = RecomendacionesObject.Length + 1;
+            }
+
+            // Modificaciones al array principal
+            new_object_recomendation.Status = "Correct";
+            new_object_recomendation.Length = new_length;
+
+            for(var i = 0; i < RecomendacionesObject.Length; i++)
+                new_object_recomendation[i] = RecomendacionesObject[i];
+            
+            new_object_recomendation[new_length-1] = RecomendacionForm;
+
+            localStorage.setItem('Recomendaciones', JSON.stringify(new_object_recomendation) ) ;            
+            var TryObject = JSON.parse( localStorage.getItem("Recomendaciones") );
+            
+            $('#ModalAddModifyPlanMejora').modal('close');
+            UpdateView_Recomendaciones( new_object_recomendation );
+
+            M.toast({html: 'Datos guardados correctamente', classes: 'green darken-2 rounded'});
+        }else{
+            M.toast({html: 'Error al guardar los datos', classes: 'red rounded'});
+        }
+    });
+}
+
+function Read_Recomendaciones(){
+    var TypDat = "Recomendaciones";
+    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
+
+    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataRecomendaciones ){
+        Recomendaciones = JSON.parse( DataRecomendaciones );
+        localStorage.setItem("Recomendaciones", JSON.stringify(Recomendaciones) );
+
+        UpdateView_Recomendaciones(Recomendaciones);
+    });
+}
+
+function Update_Recomendation( RecomendationForm ){
+    var TypeQry = "UpdateRecomendaciones";
+    
+    $.post('Controller/HomeEPP_UpdateController.php', {Data: RecomendationForm, TypeData: TypeQry}, function(DataRcv){
+        var Data = JSON.parse( DataRcv );
+
+        if( Data.Status == "Correct" ){
+            var DataRecomendaciones = JSON.parse( localStorage.getItem('Recomendaciones') );
+
+            for(var i=0; i<DataRecomendaciones.Length; i++)
+                if( DataRecomendaciones[i].IdentificadorRecomendacion == RecomendationForm.IdentificadorRecomendacion  )
+                    DataRecomendaciones[i] = RecomendationForm;
+            
+            localStorage.setItem('Recomendaciones', JSON.stringify(DataRecomendaciones));            
+            DataRecomendaciones.Status = "Correct";           
+            UpdateView_Recomendaciones(DataRecomendaciones);
+
+            $('#ModalAddModifyPlanMejora').modal('close');
+            M.toast({html: 'Datos actualizados correctamente', classes: 'green darken-2 rounded'});
+        }else if( Data.Status == "Error" ){
+            M.toast({html: 'Error en el servidor.', classes: 'red darken-2 rounded'});
+        }else{
+            M.toast({html: 'Error. Agregue los datos correctamente <br> en su respectivo campo.', classes: 'green darken-2 rounded'});
+        }
+
+    });
+
+}
+
+function Delete_Recomendacion( idRecomendation ){
+    TypeFun = 'DelRec';
+
+    $.post('Controller/HomeEPP_DeleteController.php', {TypeData: TypeFun, idRec: idRecomendation}, function(DataRcv){
+        ResponseController = JSON.parse( DataRcv );
+
+        if( ResponseController.Status == "Correct" ){
+            Read_Recomendaciones()
+            $('#ModalDeleteRecomendation').modal('close');
+        }
+        
+    });
+}
+
+$('.btn-delete-recomendation').on('click', function(){
+    ID_Recomendation = $('.NumASM-delete').text();
+    
+    Delete_Recomendacion( ID_Recomendation );
+});
+
 $('.btn-add-plan-mejora').on('click', function(){
         $('#txtNumRecomendation').val("");
         $('#txtASM').val("");
         $('#txtActoresInvolucrados').val("");
         $('#select-nivel-prioridad').val("");
+        $('#select-estatus').val("");
         $('#txtAccionMejora').val("");
         $('#txtResultadosEsperados').val("");
         $('#txtFecha').val("");
@@ -759,7 +745,7 @@ $('.btn-insert-recomendacion').on('click', function(){
         BanderaRecomendacionCompletada: Estatus
     }
 
-    Insert_Recomendacion( RecomendacionForm );
+    Create_Recomendacion( RecomendacionForm );
 });
 
 $('.btn-update-recomendacion').on('click', function(){
@@ -797,69 +783,10 @@ $('.btn-update-recomendacion').on('click', function(){
     Update_Recomendation( RecomendacionForm );
 });
 
-/* ----------------------------------           CLICK EVENTS TO MODIFY    --------------------------------- */
-
-$('.btn-edit-project-information').on('click', function(){
-    var FT_Project = JSON.parse( localStorage.getItem("FichaTecnicaProyecto"));
-
-    $('#txtNombreProyecto').val( FT_Project.NombreProyecto ),
-    $('#txtClaveProyecto').val( FT_Project.ClaveProyecto ),
-    $('#txtDepen').val( FT_Project.DependenciaDelProyecto ),
-    $('#txtSiglasDependencia').val( FT_Project.SiglasDependenciaProyecto ),
-    $('#txtUR').val( FT_Project.UnidadResponsable ),
-    $('#txtSiglasUR').val( FT_Project.SiglasUnidadResponsable ),
-    $('#txtResponsable').val( FT_Project.NombreResponsable )
-});
-
-$('.btn-edit-evaluation-information').on('click', function(){
-    var FT_Evaluation = JSON.parse( localStorage.getItem("FichaTecnicaEvaluacion") );
-
-    $("#txtInstanciaEvaluadora").val( FT_Evaluation.InstanciaEvaluadora );
-    $("#txtNombreEvaluacion").val( FT_Evaluation.NombreDeEvaluacion );
-    $("#txtTipoEvaluacion").val( FT_Evaluation.TipoEvaluacion );
-    $("#txtYearEvaluation").val( FT_Evaluation.AñoDeEvaluacion );
-    $("#txtNombreInforme").val( FT_Evaluation.NombreDelInforme );
-    $("#txtCostoEvaluacion").val( FT_Evaluation.CostoEvaluacion );
-});
-
-$('.btn-edit-opinion-general').on('click', function(){
-
-    $('#txtPorTema').val( OpinionGeneral.ComentariosObservacionesPorTema ) ;
-    M.textareaAutoResize($('#txtPorTema'));
-});
-
-$('.btn-edit-general-comments').on('click', function(){
-    var OpinionGeneral = JSON.parse( localStorage.getItem("OpinionGeneral") );
-
-    $('#txtComentarios').val( OpinionGeneral.ComentariosObservacionesGenerales );
-    M.textareaAutoResize($('#txtComentarios'));
-
-    $('.btn-modify-specific-comments').hide();
-    $('.btn-modify-general-comments').show();
-});
-
-$('.btn-edit-specific-comments').on('click', function(){
-    var OpinionGeneral = JSON.parse( localStorage.getItem("OpinionGeneral") );
-
-    $('#txtComentarios').val( OpinionGeneral.ComentariosObservacionesPorTema );
-    M.textareaAutoResize($('#txtComentarios'));
-
-    $('.btn-modify-specific-comments').show();
-    $('.btn-modify-general-comments').hide();
-});
-
-/*
-$('.table-body-content-mejoras').on('mouseover', 'tr', 'td', function(){
-    $(this).find('.delete-recomendation-container').show();
-    $(this).siblings().find('.delete-recomendation-container').hide();
-});
-*/
-
-$('.table-body-content-mejoras').on('click', 'tr', 'td', function(){
+$('.table-body-content-mejoras').on('click', '.btn-edit-recomendation', function(){
     var RecomendacionesFind = JSON.parse( localStorage.getItem("Recomendaciones") );
-    console.log( RecomendacionesFind );
-    var NumRecomendation = $(this).find('.NumASM').text();
-
+    var NumContainer = $(this).parent().parent().siblings()[1];
+    var NumRecomendation = NumContainer.innerText;
     var DataUpdate;
     var Estatus;
     var val_select = 0;
@@ -871,7 +798,6 @@ $('.table-body-content-mejoras').on('click', 'tr', 'td', function(){
             DataUpdate = RecomendacionesFind[i];
     }
 
-    console.log( DataUpdate.NivelDePrioridad );
     if( DataUpdate.NivelDePrioridad == "Bajo" ){
         val_select = '1';
     }else if( DataUpdate.NivelDePrioridad == "Medio" ){
@@ -880,7 +806,6 @@ $('.table-body-content-mejoras').on('click', 'tr', 'td', function(){
         val_select = '3';
     }
 
-    console.log( DataUpdate.BanderaRecomendacionCompletada );
     if( DataUpdate.BanderaRecomendacionCompletada == "Corregido" )
         Estatus = '1';
     else if( DataUpdate.BanderaRecomendacionCompletada == "En proceso" )
@@ -924,6 +849,513 @@ $('.table-body-content-mejoras').on('click', 'tr', 'td', function(){
     $('#ModalAddModifyPlanMejora').modal('open');
 });
 
+$('.table-body-content-mejoras').on('click', '.btn-delete-recomendation', function(){
+    var RecomendacionesFind = JSON.parse( localStorage.getItem("Recomendaciones") );
+    var NumContainer = $(this).parent().parent().siblings()[1];
+    var NumRecomendation = NumContainer.innerText;
+    var RecDelete;
+
+    for(var i = 0; i<RecomendacionesFind.Length; i++){
+        
+        if( RecomendacionesFind[i].IdentificadorRecomendacion == NumRecomendation )
+            RecDelete = RecomendacionesFind[i];
+    }
+
+    UpdateView_DeleteRecomendacion( RecDelete ) 
+});
+
+$('.table-body-content-mejoras').on('mouseover', 'tr', 'td', function(){
+    // $('.options-recomendation-container')
+    $('.options-recomendation-container').css('display', 'flow-root');
+    $(this).children().find('.options-recomendation-container').show();
+    $(this).siblings().children().find('.options-recomendation-container').hide();
+});
+
+$('.table-body-content-mejoras').on('mouseout', 'tr', 'td', function(){
+    $(this).children().find('.options-recomendation-container').hide();
+});
+
+// *****   DOCUMENTOS DEL PROYECTO   ******
+// * * * * Funciones CRUD y eventos
+// * * (C) Create
+// * * (R) Read
+// * * (U) Update
+// * * (D) Delete
+
+//  Mostrar documentos y recomendaciones de documentos del proyecto
+function HTML_DocumentFormat(frmt, filename, filestatus, idoc){
+    var typefile = '';
+
+    if(frmt == "docx"){
+        typefile = 'word';
+        fileFormat = 'svg';
+    }else if(frmt == "xlsx" || frmt == "xls"){
+        typefile = 'excel';
+        fileFormat = 'svg';
+    }else if(frmt == "pptx"){
+        typefile = 'powerpoint';
+        fileFormat = 'svg';
+    }else if(frmt == "pdf"){
+        typefile = 'pdf';
+        fileFormat = 'svg';
+    }else{
+        typefile = 'blank';
+        fileFormat = 'svg';
+    }
+
+    var styledocs = '';
+    var iconstatus = '';
+
+    if( filestatus == 'Nuevo' ){
+        styledocs = 'aprobed';
+        iconstatus = 'new_releases';
+    }else if( filestatus == 'Aprobado' ){
+        styledocs = 'aprobed';
+        iconstatus = 'assignment_turned_in';
+    }else if( filestatus == 'En revisión' ){
+        styledocs = 'send';
+        iconstatus = 'find_in_page';
+    }else if( filestatus == 'Con recomendaciones' ){
+        styledocs = 'observations';
+        iconstatus = 'assignment';
+    }
+    
+    var DocumentFormat = '<li class="collection-item collection-item-document avatar"><img src="Resource/images/'+typefile+'.'+fileFormat+'" alt="" class="format-svg-avatar">' +
+                            '<div class="title-document-container"><span class="title title-document truncate"><span class="idoc" style="display: none;">'+idoc+'</span>'+filename+'.'+frmt+'</span><span class="document-status document-'+styledocs+'"><i class="material-icons left icon-status-document">'+iconstatus+'</i>'+filestatus+'</span></div>' +
+                            '<div class="action-buttons-docs">'+
+//                                '<a class="btn-floating btn-small btn-document-viewer waves-effect blue lighten-2 tooltipped modal-trigger"                    href="#modal-view-document"     data-position="bottom"  data-tooltip="Ver documento">   <i class="material-icons">remove_red_eye</i></a>'+
+                                '<a class="btn-floating btn-small btn-add-document-recomendation modal-trigger waves-effect green darken-4 tooltipped"  href="#modal-new-asm-document"          data-position="bottom"  data-tooltip="Agregar un ASM">  <i class="material-icons left">comment</i></a>'+
+                                '<a class="btn-floating btn-small btn-modify-document waves-effect orange tooltipped modal-trigger"                     href="#modal-edit-document"             data-position="bottom"  data-tooltip="Editar">          <i class="material-icons">edit</i></a>'+
+                                '<a class="btn-floating btn-small btn-delete-document waves-effect red tooltipped modal-trigger"                        href="#modal-delete-document"           data-position="bottom"  data-tooltip="Eliminar">        <i class="material-icons">delete</i></a>'+
+                            '</div>'+
+                         '</li>';
+
+    return DocumentFormat;
+}
+
+function UpdateView_DocumentosProyecto(DocumentosProyecto){
+    //  DOCUMENTOS Y ASM POR DOCUMENTO
+    if( DocumentosProyecto.Status === "Correct" ){
+        $('.card-title-documents').text('Documentos');
+
+        var doc_html = "";
+
+        for( var doc_i = 0; doc_i < DocumentosProyecto.Length; doc_i++ ){
+            Documento_i = DocumentosProyecto[doc_i];
+            doc_html = doc_html + HTML_DocumentFormat( Documento_i.FormatoDocumento, Documento_i.NombreDocumento, Documento_i.EstadoRevision, Documento_i.ID_DocumentoProyecto );
+        }
+    
+        $('.collection-documents').empty();
+        $('.collection-documents').append( doc_html );
+        $('.collection-documents').children()[0].click();
+    }else if( DocumentosProyecto.Status === "Sin resultados" ){
+        $('.card-title-documents').text('Sin documentos');
+    }else{
+        M.toast({html: 'Error al mostrar los documentos del proyecto. Err. 0001', classes: 'red rounded'});
+    }
+}
+
+function LoadDocumentData(id){
+    var DocumentsObject = JSON.parse( localStorage.getItem('ProjectDocuments') );
+    var DocSelected = {};
+
+    for(var i=0; i<DocumentsObject.Length; i++)
+        if( DocumentsObject[i].ID_DocumentoProyecto == id )
+            DocSelected = DocumentsObject[i];
+
+    return DocSelected;
+}
+
+// Funciones CRUD para los Documentos
+function Create_ProjectDocument(){
+    var FT_Project = JSON.parse( localStorage.getItem("FichaTecnicaProyecto") );
+    var formData = new FormData(), RevisionDoc = "Nuevo";
+    var New_DocInfo = {ID_ProgramaProyecto: ProjectInfo.ID_ProgramaProyecto, NombreDocumento: $('#txtNameFile').val(), FormatoDocumento: $('#txtExtension').val(), URL_Documento: FT_Project.ClaveProyecto+"/", EstadoRevision: RevisionDoc };
+    var FileLoaded = $('#fileDoc')[0].files[0];
+    var TypData = 'UploadNewDocument';
+
+    formData.append( 'file', FileLoaded );
+    
+    $.post('Controller/HomeEPP_CreateController.php', {TypeData: TypData, DataDoc: New_DocInfo}, function(DataRcv){
+        SvrResponse = JSON.parse( DataRcv );
+        
+        if( SvrResponse.Status == "Correct" ){
+            $('.btn-load-doc-server').addClass('disabled');
+
+            $.ajax({
+                url: 'Controller/HomeEPP_UploadFiles.php',
+                type: 'POST',
+                dataType: 'html',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                timeout: 5000,
+                success: function(response){
+                    M.toast({html: 'Archivo subido correctamente', classes: 'green darken-2 rounded'});
+                    
+                    Read_ProjectDocuments();
+
+                    $('#txtNameFile').val('');
+                    $('#txtExtension').val('');
+                    $('#modal-upload-document').modal('close');
+                },error: function(response){
+                    M.toast({html: 'Error al subir el archivo', classes: 'red darken-2 rounded'});
+                },complete: function(response){
+                    localStorage.setItem("ProjectDocuments", JSON.stringify(DocumentosProyecto) );
+                }
+            });
+        }else{
+
+        }
+
+
+//$('#modal-upload-document').modal('close');
+    })
+
+}
+
+function Read_ProjectDocuments(){
+    var TypDat = "DocumentosDelProyecto";
+    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
+
+    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataDocs ){
+        DocumentosProyecto = JSON.parse( DataDocs );
+        localStorage.setItem("ProjectDocuments", JSON.stringify(DocumentosProyecto) );
+
+        UpdateView_DocumentosProyecto(DocumentosProyecto);
+    });
+}
+
+function Update_ProjectDocument(id_doc){
+    var DocSelected = LoadDocumentData(id_doc), TData = "UpdateDocument";
+    var EstadoRevision = $('#select-estatus-document').val();
+    var NuevoEstadoRevision = '';
+
+    if( EstadoRevision == 1 ){
+        NuevoEstadoRevision = 'Nuevo';
+    }else if( EstadoRevision == 2 ){
+        NuevoEstadoRevision = 'Aprobado';
+    }else if( EstadoRevision == 3 ){
+        NuevoEstadoRevision = 'En revisión';
+    }else if( EstadoRevision == 4 ){
+        NuevoEstadoRevision = 'Con recomendaciones';
+    }
+
+    DocSelected.NuevoNombreDocumento = $('#txt-EditNameFile').val();
+    DocSelected.EstadoRevision = NuevoEstadoRevision;
+
+    $.post('Controller/HomeEPP_UpdateController.php', {TypeData: TData, DataDoc: DocSelected}, function(ResponseSvr){
+        console.log( ResponseSvr );
+        SvrResponse = JSON.parse( ResponseSvr );
+
+        if( SvrResponse.Status == "Correct" ){
+            $('#modal-edit-document').modal('close');
+
+            Read_ProjectDocuments();
+            M.toast({html: 'Archivo actualizado correctamente', classes: 'green darken-2 rounded'});
+        }else{
+            M.toast({html: 'Error al actualizar el archivo', classes: 'red darken-2 rounded'});
+        }
+
+    });
+}
+
+function Delete_ProjectDocument(id_doc){
+    var DocSelected = LoadDocumentData(id_doc);
+    TypOp = "DelDoc";
+    
+    $.post("Controller/HomeEPP_DeleteController.php", {TypeData: TypOp, Data: DocSelected}, function(Response){
+        var SvrResponse = JSON.parse( Response );
+
+        if( SvrResponse.Status == "Correct" ){
+            $('#modal-delete-document').modal('close');
+            Read_ProjectDocuments();
+            M.toast({html: 'Se borró el archivo crrectamente', classes: 'green darken-2 rounded'});
+        }else{
+            M.toast({html: 'Error. No se pudo borrar el archivo', classes: 'red darken-2 rounded'});
+        }
+
+    });
+}
+
+$('#fileDoc').on('change', function(){
+    var FileLoaded = $(this)[0].files[0];
+    var DataFile = FileLoaded.name.split('.');
+
+    $('#txtNameFile').val( DataFile[0] );
+    $('#txtExtension').val( DataFile[1] );
+});
+
+$('#fileUpdateDoc').on('change', function(){
+    $('#txt-EditNameFile').val('');
+    $('#txt-EditExtension').val('');
+    $('#txt-EditNameFile').attr('disabled', 'disabled');
+
+    var FileLoaded = $(this)[0].files[0];
+    var DataFile = FileLoaded.name.split('.');
+
+    console.log( DataFile );
+
+    $('#txt-EditNameFile').val( DataFile[0] );
+    $('#txt-EditExtension').val( DataFile[1] );
+});
+
+$('.collection-documents').on('click', 'a.btn-modify-document', function(){
+    var id_doc = $(this).parent().siblings('.title-document-container').find('.idoc').text();
+    $('#iddoc_modify_modal').text( id_doc );
+
+    var DocSelected = LoadDocumentData(id_doc);
+    var estado_revision = '';
+
+    if( DocSelected.EstadoRevision == "Nuevo" )
+        estado_revision = '1';
+    else if( DocSelected.EstadoRevision == "Aprobado" )
+        estado_revision = '2';
+    else if( DocSelected.EstadoRevision == "En revisión" )
+        estado_revision = '3';
+    else if( DocSelected.EstadoRevision == "Con recomendaciones" )
+        estado_revision = '4';
+
+    $('#txt-EditNameFile').val( DocSelected.NombreDocumento );
+    $('#txt-EditExtension').val( DocSelected.FormatoDocumento );
+    $('#select-estatus-document').val(estado_revision);
+});
+
+$('.collection-documents').on('click', 'a.btn-delete-document', function(){
+    var id_doc = $(this).parent().siblings('.title-document-container').find('.idoc').text();
+    $('#iddoc_modal').text( id_doc );
+
+    var DocSelected = LoadDocumentData(id_doc);
+    $('.name-delete-file').html( '<strong>'+DocSelected.NombreDocumento+'.'+DocSelected.FormatoDocumento+'</strong>' );
+});
+
+$('.btn-upload-documents').on('click', function(){
+    $('.btn-load-doc-server').removeClass('disabled');
+});
+
+$('.btn-load-doc-server').on('click', function(){
+    Create_ProjectDocument();
+});
+
+$('.btn-delete-project-document').on('click', function(){
+    var id_doc = $('#iddoc_modal').text();
+
+    Delete_ProjectDocument(id_doc);
+});
+
+$('.btn-modify-document').on('click', function(){
+    var id_doc = $('#iddoc_modify_modal').text();
+
+    Update_ProjectDocument(id_doc);
+});
+
+//  Eventos para mostrar y ocultar las opciones para los documentos
+$('.collection-documents').on('mouseenter', '.collection-item', function(){
+    $(this).children('.action-buttons-docs').css('display', 'block');
+});
+
+$('.collection-documents').on('mouseleave', '.collection-item', function(){
+    $(this).children('.action-buttons-docs').css('display', 'none');
+});
+
+// *****   RECOMENDACIONES POR DOCUMENTOS   ******
+// * * * * Funciones CRUD y eventos
+// * * (C) Create
+// * * (R) Read
+// * * (U) Update
+// * * (D) Delete
+
+function HTML_RecomendationFormat(RecDoc){
+    var FormatRec = "";
+
+    if( RecDoc.Length > 0 ){
+        for(var reci = 0; reci<RecDoc.Length; reci++){
+            var CompleteASM = RecDoc[reci].BanderaRecomendacionCompletada, StyleCollItemRecom = "";
+
+            if( CompleteASM == 1 )
+                StyleCollItemRecom = "collection-item-recomendations-complete";
+            else
+                StyleCollItemRecom = "collection-item-recomendations-incomplete";
+
+            FormatRec = FormatRec + '<li class="collection-item collection-item-recomendations '+StyleCollItemRecom+'">'+
+                                        '<div class="btn-recomendation truncate">'+
+                                            '<i class="id_doc_proyecto">'+RecDoc[reci].ID_DocumentoProyecto+'</i>'+
+                                            '<i class="bandera_recomendacion_completada">'+RecDoc[reci].BanderaRecomendacionCompletada+'</i>'+
+                                            '<i class="id_doc_recomendation">'+RecDoc[reci].ID_RecomendacionDocumento+'</i>'+
+                                            '<i class="identifierRecomendation">'+RecDoc[reci].IdentificadorRecomendacion+': </i>'+
+                                            '<i class="recomendation_preview">'+RecDoc[reci].AspectoSusceptibleDeMejora+'</i>'+
+                                        '</div>'+
+                                        '<div class="action-buttons-docs-recomendations">'+
+                                            '<a class="btn-floating btn-small btn-modify-document-recomendation waves-effect orange modal-trigger" href="#modal-edit-asm-document"><i class="material-icons">edit</i></a>'+
+                                            '<a class="btn-floating btn-small btn-delete-document-recomendation waves-effect red    modal-trigger" href="#modal-confirm-delete-document-recomendation"><i class="material-icons">delete</i></a>'+
+                                        '</div>'+
+                                    '</li>';
+        }
+    }else{
+        FormatRec = '<h6>Sin recomendaciones registradas</h6>';
+    }    
+
+    return FormatRec;
+}
+
+function Create_DocumentRecomendation(DataRecomendation){
+    var TDat = 'NewDocRecomendation';
+
+    $.post('Controller/HomeEPP_CreateController.php', {TypeData: TDat, Data: DataRecomendation}, function(Response){
+        var SvrResponse = JSON.parse( Response );
+
+        if( SvrResponse.Status == "Correct" ){
+            $('#modal-new-asm-document').modal('close');
+            M.toast({html: 'Recomendación creada correctamente', classes: 'green darken-2 rounded'});
+
+            Read_DocumentsRecomendations( DataRecomendation.ID_DocumentoProyecto );
+        }else{
+            M.toast({html: 'Error al crear la recomendación', classes: 'red darken-2 rounded'});
+        }
+    });
+}
+
+function Read_DocumentsRecomendations(ID_Documento){
+    var TypDat = "RecomendacionesPorDocumento";
+
+    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Documento, TypeData: TypDat}, function( DataDocsRec ){
+        DataRecomendDocuments = JSON.parse( DataDocsRec );
+        localStorage.setItem("DataDocumentsRecomendations", JSON.stringify(DataRecomendDocuments) );
+
+        FormatRec = HTML_RecomendationFormat(DataRecomendDocuments);
+        
+        $('.collection-document-recomendations').empty();
+        $('.collection-document-recomendations').html( FormatRec );
+
+        //console.log( "Recomendaciones => ", DataRecomendDocuments );
+    });
+}
+
+function Update_DocumentRecomendation(NewDataRecomendation){
+    var TypDat = "EditDocRec";
+
+    $.post("Controller/HomeEPP_UpdateController.php", {TypeData: TypDat, Data: NewDataRecomendation}, function(SvrResponse){
+        var SvrResponseJSON = JSON.parse( SvrResponse );
+
+        if( SvrResponseJSON.Status == "Correct" ){
+            $('#modal-edit-asm-document').modal('close');
+            M.toast({html: 'Recomendación actualizada correctamente', classes: 'green darken-2 rounded'});
+
+            Read_DocumentsRecomendations( NewDataRecomendation.ID_DocumentoProyecto );
+        }else{
+            M.toast({html: 'Error al actualizar la recomendación seleccionada', classes: 'red darken-2 rounded'});
+        }
+    });
+}
+
+function Delete_DocumentRecomendation(DataRecomendation){
+    $.post("Controller/HomeEPP_DeleteController.php", {ID_DocRec: DataRecomendation.idDocRec, TypeData: "DelDocRec"}, function(SvrResponse){
+        var SvrResponseJSON = JSON.parse( SvrResponse );
+
+        if( SvrResponseJSON.Status == "Correct" ){
+            $('#modal-confirm-delete-document-recomendation').modal('close');
+            M.toast({html: 'Recomendación eliminada correctamente', classes: 'green darken-2 rounded'});
+
+            Read_DocumentsRecomendations( DataRecomendation.ID_DocumentoProyecto );
+        }else{
+            M.toast({html: 'Error al eliminar la recomendación del documento', classes: 'red darken-2 rounded'});
+        }
+    });
+}
+
+
+//  Eventos para la edición de recomendaciones a los documentos
+
+// * * * SHOW RECOMENDATION WHEN CLICK IN DOCUMENT
+
+$('.collection-documents').on('click', '.collection-item', function(){
+    var idoc = $(this).children('.title-document-container').children().find('.idoc').text();
+    Read_DocumentsRecomendations(idoc);
+    
+    $(this).addClass('document-selected');
+    $(this).siblings().removeClass('document-selected');
+
+    $(this).siblings().find('.title-document').css('font-weight', '400');
+    $(this).siblings().find('.icon-status-document').css('color', 'rgba(0, 0, 0, 0.2)');
+    $(this).siblings().find('.document-status').css('font-weight', '400');
+    
+    $(this).find('.title-document').css('font-weight', '600');
+    $(this).find('.icon-status-document').css('color', 'rgba(0, 0, 0, 0.4)');
+    $(this).find('.document-status').css('font-weight', '500');
+});
+
+// * * * CREATE NEW DOCUMENT RECOMENDATION
+$('.collection-documents').on('click', 'a.btn-add-document-recomendation', function(){
+    var id_doc = $(this).parent().siblings('.title-document-container').find('.idoc').text();
+    $('#iddoc_modal-newasm').text( id_doc );
+    $('#txt-NumDocRecomendation').val('');
+    $('#txt-doc-ASM').val('');
+});
+
+$('.btn-create-document-recomendation').on('click', function(){
+    var RecomendationDoc = {
+        ID_DocumentoProyecto: $('#iddoc_modal-newasm').text(),
+        IdentificadorRecomendacion: $('#txt-NumDocRecomendation').val(),
+        AspectoSusceptibleDeMejora: $('#txt-doc-ASM').val(),
+        BanderaRecomendacionCompletada: false
+    }
+
+    Create_DocumentRecomendation( RecomendationDoc );
+});
+
+// * * * DELETE DOCUMENT RECOMENDATION
+
+$('.collection-document-recomendations').on('click', '.btn-delete-document-recomendation', function(){
+    $('.idDocumentProject').text( $(this).parent().siblings().find('.id_doc_proyecto').text() );
+    $('.idRecomendationDocumentProject').text( parseInt($(this).parent().siblings().find('.id_doc_recomendation').text() ) );
+});
+
+$('.btn-confirm-delete-doc-recomendation').on('click', function(){
+    var RecomendationDoc = {
+        ID_DocumentoProyecto: $('.idDocumentProject').text(),
+        idDocRec: $('.idRecomendationDocumentProject').text(),
+    }
+
+    Delete_DocumentRecomendation( RecomendationDoc );
+});
+
+// * * * UDPATE DOCUMENT RECOMENDATION
+
+$('.collection-document-recomendations').on('click', '.btn-modify-document-recomendation', function(){
+    var num_docreco = $(this).parent().siblings().find('.identifierRecomendation').text().split(':');
+    var banderacompletada = $(this).parent().siblings().find('.bandera_recomendacion_completada').text();
+
+    if( banderacompletada == 1 )
+        $('#CBoxRecomendacionAtendida').prop('checked', true);
+    else
+        $('#CBoxRecomendacionAtendida').prop('checked', false);
+    
+    $('#txt-NumDocRecomendation_modify').val( num_docreco[0] );
+    $('#txt-doc-ASM_modify').val(  $(this).parent().siblings().find('.recomendation_preview').text() );
+    M.textareaAutoResize($('#txt-doc-ASM_modify'));
+
+    $('.idDocumentProject_Modify').text( $(this).parent().siblings().find('.id_doc_proyecto').text() );
+    $('.idRecomendationDocumentProject_Modify').text( $(this).parent().siblings().find('.id_doc_recomendation').text() );
+    
+});
+
+$('#CBoxRecomendacionAtendida').on('click', function(){
+    console.log( $(this).prop('checked') );
+});
+
+$('.btn-modify-document-recomendation').on('click', function(){
+    var NewDataRecomendation = {
+        ID_DocumentoProyecto: $('.idDocumentProject_Modify').text(),
+        ID_RecomendacionDocumento: $('.idRecomendationDocumentProject_Modify').text(),
+        AspectoSusceptibleDeMejora: $('#txt-doc-ASM_modify').val(),
+        BanderaRecomendacionCompletada: $('#CBoxRecomendacionAtendida').prop('checked')
+    }
+
+    Update_DocumentRecomendation( NewDataRecomendation );
+});
+
+/*
 //  Botones para los documentos
 $('.card-content-mejoras').on('mouseenter', '.card-recomendation', function(){
     $(this).find('.button-options-recomendation-container').css('display', 'block');
@@ -932,22 +1364,22 @@ $('.card-content-mejoras').on('mouseenter', '.card-recomendation', function(){
 $('.card-content-mejoras').on('mouseleave', '.card-recomendation', function(){
     $(this).find('.button-options-recomendation-container').css('display', 'none');
 });
-
-$('.card-content-mejoras').on('click', '.card-recomendation', function(){
-    
-    //.title-document font-weight: 400;
-});
-
-/* - - - - - -- - - - - - - - - - - - - - CLICK EVENTS FOR DELETES - - - -- - - - - - - - ---- - ---- - -- -- */
-
-$('.btn-delete-recomendacion').on('click', function(){
-});
-
-/* ---------------------------------------------------------------------------------------------------------- */
-/*
-var FichaTecnicaProyecto    = JSON.parse( localStorage.getItem("FichaTecnicaProyecto"   ));
-var FichaTecnicaEvaluacion  = JSON.parse( localStorage.getItem("FichaTecnicaEvaluacion" ));
-var OpinionGeneral          = JSON.parse( localStorage.getItem("OpinionGeneral"         ));
-var Recomendaciones         = JSON.parse( localStorage.getItem("Recomendaciones"        ));
-var DocumentosProyecto      = JSON.parse( localStorage.getItem("DataDocuments"          ));
 */
+
+//  Botones para las recomendaciones de los documentos
+$('.collection').on('mouseenter', '.collection-item-recomendations', function(){
+    $(this).children('.action-buttons-docs-recomendations').css('display', 'block');
+});
+
+$('.collection').on('mouseleave', '.collection-item-recomendations', function(){
+    $(this).children('.action-buttons-docs-recomendations').css('display', 'none');
+});
+
+$('.btn-recomendation-complete').on('click', function(){
+    M.toast({html: 'Recomendación atendida', classes: 'rounded'});
+    $(this).addClass('disabled');
+});
+
+
+
+

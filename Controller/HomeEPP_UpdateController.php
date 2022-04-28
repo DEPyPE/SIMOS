@@ -84,6 +84,38 @@
                 echo json_encode( $ResultErr );
             }
             break;
+        case "UpdateDocument";
+            try{
+                $Data = $_POST["DataDoc"];
+                include('../Model/DocumentosModel.php');
+
+                $UpdateClass = new DocumentosClass();
+                $ResultSet = $UpdateClass->Update_DocumentoById( $Data );
+
+                echo json_encode( $ResultSet );
+            }catch(Exception $e){
+                $ResultErr["Status"] = "Error";
+                $ResultErr["ServerMessage"] = $e->getMessage();
+
+                echo json_encode( $ResultErr );
+            }
+            break;
+        case "EditDocRec";
+            try{
+                $Data = $_POST["Data"];
+                include('../Model/RecomendacionesDocumentosModel.php');
+
+                $UpdateClass = new RecomendacionesDocumentosClass();
+                $ResultSet = $UpdateClass->Update_DocRecomendacionById( $Data );
+
+                echo json_encode( $ResultSet );
+            }catch(Exception $e){
+                $ResultErr["Status"] = "Error";
+                $ResultErr["ServerMessage"] = $e->getMessage();
+
+                echo json_encode( $ResultErr );
+            }
+        break;
     }
     
 
