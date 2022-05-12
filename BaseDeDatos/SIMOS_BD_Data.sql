@@ -45,7 +45,14 @@ INSERT INTO Recomendaciones(ID_ProgramaProyecto, IdentificadorRecomendacion, Asp
 INSERT INTO RecomendacionesComentariosGenerales(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Corrección de ortografía en todo el texto', '2002-04-27', 'Sin atender');
 INSERT INTO RecomendacionesComentariosGenerales(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Mejorar la calidad de los gráficos', '2002-04-27', 'Sin atender');
 INSERT INTO RecomendacionesComentariosGenerales(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Ajustar el título en las subsecciones', '2002-04-27', 'Sin atender');
+INSERT INTO RecomendacionesComentariosGenerales(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Corrección de ortografía en todo el texto', '2002-04-27', 'Sin atender');
+INSERT INTO RecomendacionesComentariosGenerales(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Mejorar la calidad de los gráficos', '2002-04-27', 'Sin atender');
+INSERT INTO RecomendacionesComentariosGenerales(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Ajustar el título en las subsecciones', '2002-04-27', 'Sin atender');
+INSERT INTO RecomendacionesComentariosGenerales(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Corrección de ortografía en todo el texto', '2002-04-27', 'Sin atender');
+INSERT INTO RecomendacionesComentariosGenerales(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Mejorar la calidad de los gráficos', '2002-04-27', 'Sin atender');
 
+INSERT INTO RecomendacionesComentariosEspecificos(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Mejorar la redacción de los comentarios específicos por tema', '2002-04-27', 'Sin atender');
+INSERT INTO RecomendacionesComentariosEspecificos(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Agregar referencias de las fuentes de información consultadas', '2002-04-27', 'Sin atender');
 INSERT INTO RecomendacionesComentariosEspecificos(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Mejorar la redacción de los comentarios específicos por tema', '2002-04-27', 'Sin atender');
 INSERT INTO RecomendacionesComentariosEspecificos(ID_OpinionGeneral, RecomendacionTexto, FechaRecomendacion, EstatusRecomendacion) VALUES(1, 'Agregar referencias de las fuentes de información consultadas', '2002-04-27', 'Sin atender');
 
@@ -55,7 +62,7 @@ SELECT * FROM OpinionGeneral;
 /* UPDATE QUERIES */
 
 
-    
+SELECT * FROM RecomendacionesComentariosGenerales;	
 
 
 

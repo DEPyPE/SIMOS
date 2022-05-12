@@ -658,6 +658,51 @@ nav .brand-logo {
 	cursor: pointer;
 }
 
+.collection-item-reco-rg{
+	
+}
+
+.reco-cg-options{
+	display: none !important;
+	position: absolute;
+	right: 0;
+	display: inline-block;
+	margin: -35px 0px 0px 8px;
+	
+	height: 45px !important;
+	width: 120px;
+	background-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-delete-reco-cg{
+	position: relative;
+}
+
+/*
+position: absolute;
+overflow: hidden;
+display: inline-block;
+vertical-align: middle;
+right: -1px;
+top: 50%;
+transform: translateY(-50%);
+height: 102% !important;
+line-height: 78px;
+display: none;
+
+background: linear-gradient(90deg,rgba(0, 0, 0, 0) 0%, rgba(248, 248, 248, 1) 30%, rgba(248, 248, 248, 1) 100% );
+padding: 0 15px 0 55px;
+border-top: 1px solid rgba(210, 210, 210, 0.8);
+border-bottom: 1px solid rgba(210, 210, 210, 0.8);
+border-right: 1px solid rgba(210, 210, 210, 0.8);
+border-top-right-radius: 15px;
+border-bottom-right-radius: 15px;
+*/
+
+.card-messages-general-comments .card-content{
+	padding: 20px 20px 5px 20px !important;
+}
+
 .collection-item-recomendations-complete{
 	border: 1px solid #1b5e20 !important;
 }

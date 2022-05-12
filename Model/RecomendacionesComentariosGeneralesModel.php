@@ -3,7 +3,7 @@
     
     include("ConnectionDB.php");
 
-    Class RecomendacionesDocumentosClass{
+    Class RecomendacionesComentariosGeneralesClass{
         private $ConnectionDB;
 
         public function __construct(){
@@ -13,7 +13,7 @@
         }
 
         public function Get_RecomendationsByGeneralCommentsID( $ID ){
-            $Query = "SELECT * FROM RecomendacionesComentariosGenerales WHERE RecomendacionesComentariosGenerales.ID_RecomendacionesComentariosGenerales = '".$ID."';";
+            $Query = "SELECT * FROM RecomendacionesComentariosGenerales WHERE RecomendacionesComentariosGenerales.ID_OpinionGeneral = ".$ID.";";
             $ResultDB = $this->ConnectionDB->query($Query);
 
             if( $ResultDB->num_rows > 0 ){
@@ -29,10 +29,10 @@
                 $Data["Length"] = $ResultDB->num_rows;
             }else if( $ResultDB->num_rows == 0 ){
                 $Data["Status"] = "Sin resultados";
-            }else
+            }else{
                 $Data["Status"] = "Error en la consulta";
-
+            }
             return $Data;
         }
-
+    }
 ?>

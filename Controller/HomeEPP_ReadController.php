@@ -63,7 +63,9 @@
             include("../Model/RecomendacionesComentariosGeneralesModel.php");
             $RecOG = new RecomendacionesComentariosGeneralesClass();
 
-            $Data = $RecOG->Get_RecomendationsByGeneralCommentsID( $_POST["ID_GeneralOpinion"] );
+            $Data = $RecOG->Get_RecomendationsByGeneralCommentsID( $ID );
+
+            echo json_encode( $Data );
             break;
     }
 

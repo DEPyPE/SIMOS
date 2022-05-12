@@ -39,8 +39,8 @@
                     <ul class="tabs tabs-transparent">
                         <li class="tab"><a href="#general_information">Información general</a></li>
                         <li class="tab"><a class="active" href="#opinion_general">Opinión general</a></li>
-                        <li class="tab"><a href="#plan_de_mejora">Plan de mejora</a></li>
-                        <li class="tab"><a href="#documents">Documentos y Recomendaciones</a></li>
+                        <li class="tab"><a href="#plan_de_mejora">Plan de mejora y monitoreo</a></li>
+                        <li class="tab"><a href="#documents">Formalización</a></li>
                     </ul>
                 </div>
                 <div class="col l1"></div>
@@ -336,7 +336,7 @@
                 <div class="card card-messages-general-comments">
                   <div class="card-content">
 
-                      <span class="card-title">Mensajes</span>
+                      <span class="card-title">Correcciones</span>
                       <div class="collection collection-messages-general-comments">
                       </div>
 
@@ -375,7 +375,7 @@
                 <div class="card card-messages-specific-comments">
                   <div class="card-content">
 
-                      <span class="card-title">Mensajes</span>
+                      <span class="card-title">Correcciones</span>
                       <div class="collection collection-messages-specific-comments">
                           <a class="collection-item truncate">Revisar la redacción de acuerdo a la temática</a>
                       </div>
@@ -388,8 +388,24 @@
 
               </div>
         </div>
+        
+        <!-- MODAL PARA VER LAS CORRESIONES PARA LOS COMENTARIOS Y OBSERVACIONES GENERALES -->
+        <div id="ModalRecomendacionComentariosGenerales" class="modal modal-view-recomendacion-comentarios-generales modal-fixed-footer">
+          <div class="modal-content">
+            
+              <h4>Comentarios:</h4>
+              
 
-        <!-- MODAL PARA AGREGAR INFORMACIÓN SOBRE LA EVALUACIÓN -->
+          </div>
+
+          <div class="modal-footer">
+            <a href="#!" class="btn-small waves-effect blue darken-2 btn-rec-comm-generales">Aceptar</a>
+            <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar</a>
+          </div>
+        </div>
+
+
+        <!-- MODAL PARA AGREGAR INFORMACIÓN SOBRE LOS COMENTARIOS Y OBSERVACIONES GENERALES -->
         <div id="ModalRecomendacionComentariosGenerales" class="modal modal-view-recomendacion-comentarios-generales modal-fixed-footer">
           <div class="modal-content">
             

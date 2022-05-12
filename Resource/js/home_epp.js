@@ -41,6 +41,7 @@ $(function(){
     Read_OpinionGeneral();
     Read_Recomendaciones();
     Read_ProjectDocuments();
+    Read_GeneralCommentRecomendation();
     
     console.log( 'Ready!' );
 });
@@ -406,7 +407,7 @@ function Update_GeneralComments( GeneralComments ){
         }
 
     });    
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 
 function Update_SpecificComments( SpecificComments ){
     var TypeQry = "UpdateSpecificComments";
@@ -489,17 +490,41 @@ $('.btn-edit-specific-comments').on('click', function(){
 // * * (D) Delete
 
 function UpdateView_GeneralCommentsRecomendation(){
+    var CommentsFormat = '', Commentarios = JSON.parse( localStorage.getItem('RecomendationsGeneralComments') );
+//    console.log( Commentarios );
+
+    if( Commentarios.Status == "Correct" ){
+        for(var i = 0; i < Commentarios.Length; i++){
+            CommentsFormat = CommentsFormat + "<a class='collection-item collection-item-reco-rg modal-trigger' href='#ModalRecomendacionComentariosGenerales'>"+
+                                                    "<div class='reco-cg-title truncate'>"+Commentarios[i].RecomendacionTexto+"</div>" +
+                                                    "<div class='reco-cg-options'>"+
+                                                        "<a class='btn-floating btn-small waves-effect btn-delete-reco-cg yellow'><i class='material-icons'>delete</i></a>"+
+                                                        "<a class='btn-floating btn-small waves-effect btn-modify-reco-cg red   '><i class='material-icons'>edit</i></a>"+
+                                                    "</div>"+
+                                              "</a>";
+        }
+    
+        $('.collection-messages-general-comments').empty();
+        $('.collection-messages-general-comments').html( CommentsFormat );
+    }else
+        console.log( 'No' );
+}
 
 function Create_GeneralCommentRecomendation(){ /* In construction */ }
-function Read_GeneralCommentRecomendation  (){
-    var ID = 1;
-    $.post('Controller/HomeEPP_ReadController.php', {ID_GeneralOpinion: ID, TypeData: "ReadRecomendationGeneralComments"}, function(ResponseServer){
-        var Server = JSON.parse( ResponseServer );
 
-        console.log( Server );
+function Read_GeneralCommentRecomendation  (){
+    var ID_GeneralOpinion = 1;
+
+    $.post('Controller/HomeEPP_ReadController.php', {ID: ID_GeneralOpinion, TypeData: "ReadRecomendationGeneralComments"}, function(ResponseServer){
+        var CommentsOG = JSON.parse( ResponseServer );
+
+        localStorage.setItem( 'RecomendationsGeneralComments', JSON.stringify( CommentsOG ) );
+        UpdateView_GeneralCommentsRecomendation();
     });
 }
+
 function Update_GeneralCommentRecomendation(){ /* In construction */ }
+
 function Delete_GeneralCommentRecomendation(){ /* In construction */ }
 
 
@@ -507,7 +532,6 @@ function Delete_GeneralCommentRecomendation(){ /* In construction */ }
     $('.collection-messages-general-comments')
     <a href="#ModalRecomendacionComentariosGenerales" class="collection-item truncate modal-trigger">Corregir ortografía de esta sección</a>
 */
-}
 
 // *****   PLAN DE MEJORA   ******
 // * * * * Funciones CRUD y eventos
@@ -949,6 +973,7 @@ function UpdateView_DocumentosProyecto(DocumentosProyecto){
         $('.collection-documents').append( doc_html );
         $('.collection-documents').children()[0].click();
     }else if( DocumentosProyecto.Status === "Sin resultados" ){
+        $('.collection-documents').empty();
         $('.card-title-documents').text('Sin documentos');
     }else{
         M.toast({html: 'Error al mostrar los documentos del proyecto. Err. 0001', classes: 'red rounded'});
