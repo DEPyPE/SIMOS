@@ -52,6 +52,10 @@ $(function(){
 // * * (R) Read
 // * * (U) Update
 
+$('.ValidateInformationCheckbox').on('click', function(){
+    console.log( $('.ValidateInformationProjectCheckbox').prop('checked') );
+});
+
 function UpdateView_FTProject(FichaTecnicaProyecto){
     //console.log( "Ficha técnica del proyecto => ",  FichaTecnicaProyecto );
 
@@ -60,9 +64,18 @@ function UpdateView_FTProject(FichaTecnicaProyecto){
         $('.btn-edit-project-information').show();
         $('.btn-save-project-information').hide();
         $('.btn-update-project-information').show();
-
         $('.table-ficha-tecnica-proyecto').show();
         $('.NoFTProjectInformation').hide();
+
+        console.log(FichaTecnicaProyecto.ValidacionInfo);
+
+        if( FichaTecnicaProyecto.ValidacionInfo == 0 ){
+            $('.validation-ft-programa').hide();
+            $('.btn-edit-project-information').show();
+        }else{
+            $('.validation-ft-programa').show();
+            $('.btn-edit-project-information').hide();
+        }
 
         $('.main-title-project').text( 'SIMOS / '+FichaTecnicaProyecto.ClaveProyecto);
         $('.NombreProyecto').text( FichaTecnicaProyecto.NombreProyecto );
@@ -75,6 +88,7 @@ function UpdateView_FTProject(FichaTecnicaProyecto){
     }else if( FichaTecnicaProyecto.Status == "Sin resultados" ){
         $('.table-ficha-tecnica-proyecto').hide();
         $('.NoFTProjectInformation').show();
+        $('.validation-ft-programa').hide();
         $('.main-title-project').text( 'SIMOS / Sin programa o proyecto');
 
         $('.btn-add-project-information').show();
@@ -120,7 +134,7 @@ function Update_ProjectData( ProjectData ){
     var TypeQry = "UpdateProjectInfo";
 
     $.post('Controller/HomeEPP_UpdateController.php', {Data: ProjectData, TypeData: TypeQry}, function(DataRcv){
-        
+        console.log(DataRcv);
         var Data = JSON.parse( DataRcv );
 
         if( Data.Status == "Correct" ){
@@ -148,7 +162,8 @@ function ReadForm_ProjectData(){
         SiglasDependenciaProyecto: $('#txtSiglasDependencia').val(),
         UnidadResponsable: $('#txtUR').val(),
         SiglasUnidadResponsable: $('#txtSiglasUR').val(),
-        NombreResponsable: $('#txtResponsable').val()
+        NombreResponsable: $('#txtResponsable').val(),
+        ValidacionInfo: $('.ValidateInformationProjectCheckbox').prop('checked')
     }
 
     return ProjectData;
@@ -177,7 +192,7 @@ $('.btn-edit-project-information').on('click', function(){
 });
 
 
-// *****   FICHA TÉCNICA DE LA INSTANCIA EVALUADORA   ******
+// *****   FICHA TÉCNICA DE LA EVALUACIÓN   ******
 // * * * * Funciones CRUD y eventos
 // * * (C) Create
 // * * (R) Read
@@ -194,6 +209,16 @@ function UpdateView_FTEvaluation(FichaTecnicaEvaluacion){
         $('.btn-edit-evaluation-information').show();
         $('.btn-insert-evaluation-information').hide();
         $('.btn-update-evaluation-information').show();
+
+        console.log(FichaTecnicaEvaluacion.ValidacionInfo);
+
+        if( FichaTecnicaEvaluacion.ValidacionInfo == 0 ){
+            $('.validation-ft-evaluation').hide();
+            $('.btn-edit-evaluation-information').show();
+        }else{
+            $('.validation-ft-evaluation').show();
+            $('.btn-edit-evaluation-information').hide();
+        }
         
         $('.InstanciaEvaluadora').text( FichaTecnicaEvaluacion.InstanciaEvaluadora );
         $('.NombreDeEvaluacion').text( FichaTecnicaEvaluacion.NombreDeEvaluacion );
@@ -204,6 +229,7 @@ function UpdateView_FTEvaluation(FichaTecnicaEvaluacion){
     }else if( FichaTecnicaEvaluacion.Status == "Sin resultados" ){
         $('.table-evaluation').hide();
         $('.NoFTEvaluationInformation').show();
+        $('.validation-ft-evaluation').hide();
 
         $('.btn-add-evaluation-information').show();
         $('.btn-edit-evaluation-information').hide();
@@ -275,7 +301,8 @@ function ReadForm_EvaluationData(){
         TipoEvaluacion: $("#txtTipoEvaluacion").val(),
         AñoDeEvaluacion: $("#txtYearEvaluation").val(),
         NombreDelInforme: $("#txtNombreInforme").val(),
-        CostoEvaluacion: $("#txtCostoEvaluacion").val()
+        CostoEvaluacion: $("#txtCostoEvaluacion").val(),
+        ValidacionInfo: $('.ValidateInformationEvaluationCheckbox').prop('checked')
     }
 
     return EvaluationData;
@@ -974,6 +1001,7 @@ function UpdateView_DocumentosProyecto(DocumentosProyecto){
         $('.collection-documents').children()[0].click();
     }else if( DocumentosProyecto.Status === "Sin resultados" ){
         $('.collection-documents').empty();
+        $('.collection-document-recomendations').empty();
         $('.card-title-documents').text('Sin documentos');
     }else{
         M.toast({html: 'Error al mostrar los documentos del proyecto. Err. 0001', classes: 'red rounded'});

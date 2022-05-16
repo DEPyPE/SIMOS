@@ -41,7 +41,7 @@
 
         public function Update_EvaluationInfoByIdProject( $Data ){
             try{
-                $Query = "UPDATE FichaTecnicaEvaluacion SET InstanciaEvaluadora = '".$Data["InstanciaEvaluadora"]."', NombreDeEvaluacion = '".$Data["NombreDeEvaluacion"]."', TipoEvaluacion = '".$Data["TipoEvaluacion"]."', AñoDeEvaluacion = '".$Data["AñoDeEvaluacion"]."', NombreDelInforme = '".$Data["NombreDelInforme"]."', CostoEvaluacion = '".$Data["CostoEvaluacion"]."' WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
+                $Query = "UPDATE FichaTecnicaEvaluacion SET InstanciaEvaluadora = '".$Data["InstanciaEvaluadora"]."', NombreDeEvaluacion = '".$Data["NombreDeEvaluacion"]."', TipoEvaluacion = '".$Data["TipoEvaluacion"]."', AñoDeEvaluacion = '".$Data["AñoDeEvaluacion"]."', NombreDelInforme = '".$Data["NombreDelInforme"]."', CostoEvaluacion = '".$Data["CostoEvaluacion"]."', ValidacionInfo = ".$Data["ValidacionInfo"]." WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
                 $ResultSet = $this->ConnectionDB->query($Query);
     
                 if( $ResultSet )

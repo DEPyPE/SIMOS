@@ -45,6 +45,7 @@ CREATE TABLE FichaTecnicaProyecto(
     UnidadResponsable VARCHAR(200),
     SiglasUnidadResponsable VARCHAR(50),
     NombreResponsable VARCHAR(100),
+    ValidacionInfo	BOOLEAN,
 
 	PRIMARY KEY(ID_FichaTecnicaProyecto),
     FOREIGN KEY(ID_ProgramaProyecto) REFERENCES ProgramaProyecto(ID_ProgramaProyecto)
@@ -62,6 +63,7 @@ CREATE TABLE FichaTecnicaEvaluacion(
     NombreDelInforme VARCHAR(500),
     URL_Informe	VARCHAR(500),
     CostoEvaluacion INT,
+    ValidacionInfo	BOOLEAN,
     
     PRIMARY KEY(ID_FichaTecnicaEvaluacion),
     FOREIGN KEY(ID_ProgramaProyecto) REFERENCES ProgramaProyecto(ID_ProgramaProyecto)

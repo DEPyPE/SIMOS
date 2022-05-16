@@ -27,7 +27,7 @@
         }
 
         public function Insert_ProjectInfoByIdProject( $Data ){
-            $Query = "INSERT INTO FichaTecnicaProyecto(ID_ProgramaProyecto, NombreProyecto, ClaveProyecto, DependenciaDelProyecto, SiglasDependenciaProyecto, UnidadResponsable, SiglasUnidadResponsable, NombreResponsable) VALUES(".$Data["ID_Project"].", '".$Data["NombreProyecto"]."', '".$Data["ClaveProyecto"]."', '".$Data["DependenciaDelProyecto"]."', '".$Data["SiglasDependenciaProyecto"]."', '".$Data["UnidadResponsable"]."', '".$Data["SiglasUnidadResponsable"]."', '".$Data["NombreResponsable"]."');";
+            $Query = "INSERT INTO FichaTecnicaProyecto(ID_ProgramaProyecto, NombreProyecto, ClaveProyecto, DependenciaDelProyecto, SiglasDependenciaProyecto, UnidadResponsable, SiglasUnidadResponsable, NombreResponsable, ValidacionInfo) VALUES(".$Data["ID_Project"].", '".$Data["NombreProyecto"]."', '".$Data["ClaveProyecto"]."', '".$Data["DependenciaDelProyecto"]."', '".$Data["SiglasDependenciaProyecto"]."', '".$Data["UnidadResponsable"]."', '".$Data["SiglasUnidadResponsable"]."', '".$Data["NombreResponsable"]."', false);";
             $ResultSet = $this->ConnectionDB->query($Query);
 
             if( $ResultSet )
@@ -39,7 +39,7 @@
         }
 
         public function Update_ProjectInfoByIdProject( $Data ){
-            $Query = "UPDATE FichaTecnicaProyecto SET NombreProyecto = '".$Data["NombreProyecto"]."', ClaveProyecto = '".$Data["ClaveProyecto"]."', DependenciaDelProyecto = '".$Data["DependenciaDelProyecto"]."', SiglasDependenciaProyecto = '".$Data["SiglasDependenciaProyecto"]."', UnidadResponsable = '".$Data["UnidadResponsable"]."', SiglasUnidadResponsable = '".$Data["SiglasUnidadResponsable"]."', NombreResponsable = '".$Data["NombreResponsable"]."' WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
+            $Query = "UPDATE FichaTecnicaProyecto SET NombreProyecto = '".$Data["NombreProyecto"]."', ClaveProyecto = '".$Data["ClaveProyecto"]."', DependenciaDelProyecto = '".$Data["DependenciaDelProyecto"]."', SiglasDependenciaProyecto = '".$Data["SiglasDependenciaProyecto"]."', UnidadResponsable = '".$Data["UnidadResponsable"]."', SiglasUnidadResponsable = '".$Data["SiglasUnidadResponsable"]."', NombreResponsable = '".$Data["NombreResponsable"]."', ValidacionInfo = ".$Data["ValidacionInfo"]." WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
             $ResultSet = $this->ConnectionDB->query($Query);
 
             if( $ResultSet )

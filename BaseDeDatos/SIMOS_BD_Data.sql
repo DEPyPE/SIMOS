@@ -1,22 +1,19 @@
 
 USE SIMOS_DB;
 
-#SELECT * FROM RecomendacionDocumento;
-#DELETE FROM DocumentoProyecto WHERE DocumentoProyecto.ID_DocumentoProyecto = 1;
-
 INSERT INTO Usuario(Nombres, Apellidos, Contraseña, TipoUsuario, Correo, DireccionResponsable, SiglasDR, Departamento, SiglasDepartamento)
 VALUES ('Martha Fernanda', 'Guzman Huerta', 'Marta123', 'Capturista', 'mguzmanhu@guanajuato.gob.mx', 'No disponible', 'No disponible', 'No disponible', 'No disponible');
 
 INSERT INTO ProgramaProyecto(ID_Usuario, PorcentajeAvance, EtapaActualProyecto, EjercicioFiscal)
 	VALUES (1, 0, 'Captura de información', '2019');
 
-INSERT INTO FichaTecnicaProyecto(ID_ProgramaProyecto, NombreProyecto, ClaveProyecto, DependenciaDelProyecto, SiglasDependenciaProyecto, UnidadResponsable, SiglasUnidadResponsable, NombreResponsable)
+INSERT INTO FichaTecnicaProyecto(ID_ProgramaProyecto, NombreProyecto, ClaveProyecto, DependenciaDelProyecto, SiglasDependenciaProyecto, UnidadResponsable, SiglasUnidadResponsable, NombreResponsable, ValidacionInfo)
 VALUES(1, 'Fondo de Aportaciones para la Educación Tecnológica y Adulta, Subfondo Educación de Adultos', 'FAETA', 'Instituto de Alfabetización y Educación Básica del Estado de Guanajuato',
-		'INAEBA', 'Sin información', 'Sin información', 'Ing. Eusebio Vega Pérez');
+		'INAEBA', 'Sin información', 'Sin información', 'Ing. Eusebio Vega Pérez', false);
 
-INSERT INTO FichaTecnicaEvaluacion(ID_ProgramaProyecto, InstanciaEvaluadora, NombreDeEvaluacion, TipoEvaluacion, AñoDeEvaluacion, NombreDelInforme, URL_Informe, CostoEvaluacion)
+INSERT INTO FichaTecnicaEvaluacion(ID_ProgramaProyecto, InstanciaEvaluadora, NombreDeEvaluacion, TipoEvaluacion, AñoDeEvaluacion, NombreDelInforme, URL_Informe, CostoEvaluacion, ValidacionInfo)
 		VALUES(1, 'Servicios Integrales en Educación y Tecnología', 'Evaluación de Desempeño, Ejercicio 2019-2020', 'Evaluación de Desempeño', '2019',
-			   'Evaluación de Desempeño, Ejercicio 2019-2020', 'docs/informe_FAETA.pdf', '0');
+			   'Evaluación de Desempeño, Ejercicio 2019-2020', 'docs/informe_FAETA.pdf', '0', false);
 
 INSERT INTO OpinionGeneral(ID_ProgramaProyecto, ComentariosObservacionesGenerales, ComentariosObservacionesPorTema)
 		VALUES(1, 'El instituto, atendió por primera vez una evaluación de desempeño específica a los recursos del FAETA. Dicho proceso permitió conocer y reafirmar que las acciones, procesos, controles, estructuras, infraestructura y actividades diarias se realizan en apego a la normativa y cumplimiento con los requisitos de operación del Fondo de Aportaciones para la Educación Tecnológica y de Adultos, sin embargo, se identifican áreas de oportunidad que requieren de acciones para fortalecer la operacion del mismo. 

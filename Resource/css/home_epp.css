@@ -51,6 +51,32 @@ nav .brand-logo {
     width: 85% !important;
 }
 
+/* 	ESTILOS PARA LA SECCIÓN DE <<INFORMACIÓN GENERAL>>    */
+.card-title-ficha-tecnica{
+	margin: 10px 0px 30px 0px !important;
+}
+
+.card-content-ft-proyecto, .card-content-evaluation{
+	padding: 25px 30px 30px 30px !important;
+}
+
+td, th {
+    padding: 10px 10px;
+}
+
+.title-column{
+	width: 35% !important;
+	text-align: right;
+}
+
+.validation-ft-programa, .validation-ft-evaluation{
+	color : #2e7d32;
+	font-size: 32px;
+	vertical-align: middle !important;
+}
+
+/* ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- */
+
 .collection a.collection-item{
 	color: black;
 }
@@ -81,10 +107,6 @@ nav .brand-logo {
 
 .step-non-start-color{
 	color: gray;
-}
-
-.title-column{
-	width: 35% !important;
 }
 
 .ComentariosObservacionesGenerales, .ComentariosObservacionesPorTema{
@@ -146,11 +168,14 @@ nav .brand-logo {
 	background-color: rgb(230, 230, 230) !important;
 }
 
+
+
 /* Modals styles */
 #ModalAddModifyTechnicalProjectInfo{
 	top: 5% !important;
 	max-height: 95% !important;
-	height: 83% !important;
+	height: 85% !important;
+	width: 70% !important;
 }
 
 #ModalAddModifyTechnicalEvaluationInfo{
