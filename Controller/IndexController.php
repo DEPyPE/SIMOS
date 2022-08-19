@@ -23,7 +23,7 @@
             $DataOut["Status"] = "Correct";
 
             if( $ResultDB["TipoUsuario"] == "Capturista" ){
-                $DataOut["URL"] = "home_epp.php";
+                $DataOut["URL"] = "home_adm.php";
             }
 
         }else

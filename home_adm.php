@@ -32,7 +32,7 @@
                 <div class="col l10">
                     <ul class="tabs tabs-transparent">
                         <li class="tab"><a class="active" href="#general_information">Información general</a></li>
-                        <li class="tab"><a href="#opinion_general">Opinión general</a></li>
+                        <li class="tab"><a href="#opinion_general">Posicionamiento</a></li>
                         <li class="tab"><a href="#plan_de_mejora">Plan de mejora y monitoreo</a></li>
                         <li class="tab"><a href="#documents">Formalización</a></li>
                     </ul>
@@ -324,7 +324,7 @@
             <div class="row">
 
               <div class="col m1 l1"></div>
-              <div class="col s12 m8 l8">
+              <div class="col s12 m10 l10">
 
                   <div class="card">
 
@@ -341,23 +341,20 @@
                       <!-- <a class="btn-floating btn-small right orange"><i class="material-icons">edit</i></a>-->
                       <textarea disabled id="ComentariosObservacionesGenerales" class="materialize-textarea"></textarea>
                       <h6 class="OG_SinInfo">Sin información registrada</h6>
+
+                      <br><br>
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">expand_more</i>Observaciones por antender</div>
+                          <div class="collapsible-body">
+                              <div class="collection collection-messages-general-comments"> </div>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
 
                   </div>
 
-              </div>
-              <div class="col s12 m2 l2">
-
-                <div class="card card-messages-general-comments">
-                  <div class="card-content">
-
-                      <span class="card-title">Correcciones</span>
-                      <div class="collection collection-messages-general-comments">
-                      </div>
-
-                  </div>
-                </div>
-                
               </div>
               <div class="col m1 l1"></div>
 
@@ -366,39 +363,43 @@
             <div class="row">
 
               <div class="col m1 l1"></div>
-              <div class="col s12 m8 l8">
+              <div class="col s12 m10 l10">
 
                   <div class="card">
                     <div class="card-content card-content-comments">
                         <span class="card-title card-title-comments">
                           <strong>
                             <h4 class="title-specific-comments">
-                                Comentarios y observaciones específicos por tema
-                                <a class="btn-floating btn-small btn-edit-specific-comments waves-effect yellow darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Modificar los comentarios y <br> observaciones específicos por tema" href="#ModalModifyGeneralSpecificComments"><i class="material-icons">edit</i></a>
+                                <strong>Comentarios y observaciones específicos por tema</strong>
                             </h4>
                           </strong>
                         </span>
-                        <!--<a class="btn-floating btn-small right orange"><i class="material-icons">edit</i></a>--> </h5>
-                        <textarea disabled id="ComentariosObservacionesPorTema" class="materialize-textarea"></textarea>
+                        <br>
+
+                        <table class="highlight">
+                          <thead>
+                            <tr>
+                                <th class="table-ApartadoEvaluacion">Apartado de la evaluación</th>
+                                <th class="table-ObservacionEspecifica">Observación específica</th>
+                                <th class="table-ObservacionAtender">Observación por atender</th>
+                                <th></th>
+                            </tr>
+                          </thead>
+
+                          <tbody class="">
+                              <td>Diseño</td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos veniam quaerat voluptate consequuntur magnam recusandae repellat eum voluptatem, nostrum, id fugiat quae? Minus dolor in unde ad voluptates sint nulla. </td>
+                              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae nam obcaecati labore ipsam suscipit aperiam iusto ex, sunt dolore a?</td>
+                              <td><a class="btn-floating btn-small btn-edit-specific-comments waves-effect yellow darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Modificar" href="#ModalModifyGeneralSpecificComments"><i class="material-icons">edit</i></a></td>
+                          </tbody>
+                        </table>
+
                         <h6 class="OG_SinInfo">Sin información registrada</h6>
                     </div>
                   </div>
 
               </div>
-              <div class="col s12 m2 l2">
 
-                <div class="card card-messages-specific-comments">
-                  <div class="card-content">
-
-                      <span class="card-title">Correcciones</span>
-                      <div class="collection collection-messages-specific-comments">
-                          <a class="collection-item truncate">Revisar la redacción de acuerdo a la temática</a>
-                      </div>
-                      
-                  </div>
-                </div>
-                
-              </div>
               <div class="col m1 l1"></div>
 
               </div>
@@ -499,7 +500,6 @@
             <div class="row">
                 <div class="col l1"></div>
                 <div class="col l10">
-
                     <div class="card">
                         <div class="card-content card-content-mejoras">
                         
@@ -509,7 +509,7 @@
                                     <a class="btn-floating btn-small btn-add-plan-mejora waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar recomendación" href="#ModalAddModifyPlanMejora"><i class="material-icons">add</i></a>
                                 </h5>
                                 <h5 class="with-data-recomendaciones">
-                                    Agregar nueva recomendación
+                                    Recomendaciones a atender
                                     <a class="btn-floating btn-small btn-add-plan-mejora waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar recomendación" href="#ModalAddModifyPlanMejora"><i class="material-icons">add</i></a>
                                 </h5>
                             </span>
@@ -535,7 +535,82 @@
 
                         </div>
                     </div>
-      
+                </div>
+                <div class="col l1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col l1"></div>
+                <div class="col l10">
+                    <div class="card">
+                        <div class="card-content card-content-mejoras">
+                        
+                            <span class="card-title">
+                                <h5 class="no-data-recomendaciones">
+                                    Sin información registrada
+                                    <a class="btn-floating btn-small btn-add-plan-mejora waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar recomendación" href="#ModalAddModifyPlanMejora"><i class="material-icons">add</i></a>
+                                </h5>
+                                <h5 class="with-data-recomendaciones">
+                                    Recomendaciones atendidas
+                                    <a class="btn-floating btn-small btn-add-plan-mejora waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar recomendación" href="#ModalAddModifyPlanMejora"><i class="material-icons">add</i></a>
+                                </h5>
+                            </span>
+
+                            <table class="highlight table-plan-de-mejora">
+                              <thead>
+                                <tr>
+                                    <th class="table-ASM-atendidas">Aspectos Susceptibles de Mejora/Recomendaciones</th>
+                                    <th class="table-documento-evidencia">Evidencia</th>
+                                    <th class="table-observaciones">Observaciones</th>
+                                </tr>
+                              </thead>
+
+                              <tbody class="">
+                                  <td class="ASM-Atendidas">Contribución y destino: Considerar la elaboración de un compendio normativo y acciones de Capacitación/Difusión por parte de la SFIA al instituto y en lo particular al personal que interviene en los procesos de distribución de las aportaciones.</td>
+                                  <td class="center-align"> documento_de_evidencia.pdf </td>
+                                  <td>Observaciones del documento de evidencia</td>
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col l1"></div>
+            </div>
+
+            <div class="row">
+                <div class="col l1"></div>
+                <div class="col l10">      
+                    <div class="card">
+                        <div class="card-content card-content-mejoras">
+                        
+                            <span class="card-title">
+                                <h5 class="no-data-recomendaciones">
+                                    Sin información registrada
+                                    <a class="btn-floating btn-small btn-add-plan-mejora waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar recomendación" href="#ModalAddModifyPlanMejora"><i class="material-icons">add</i></a>
+                                </h5>
+                                <h5 class="with-data-recomendaciones">
+                                    Recomendaciones rechazadas
+                                    <a class="btn-floating btn-small btn-add-plan-mejora waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar recomendación" href="#ModalAddModifyPlanMejora"><i class="material-icons">add</i></a>
+                                </h5>
+                            </span>
+
+                            <table class="highlight table-plan-de-mejora">
+                              <thead>
+                                <tr>
+                                    <th class="table-ASM-atendidas">Aspectos Susceptibles de Mejora/Recomendaciones</th>
+                                    <th class="table-documento-evidencia">Observaciones</th>
+                                </tr>
+                              </thead>
+
+                              <tbody class="">
+                                  <td class="ASM-Atendidas">Contribución y destino: Considerar la elaboración de un compendio normativo y acciones de Capacitación/Difusión por parte de la SFIA al instituto y en lo particular al personal que interviene en los procesos de distribución de las aportaciones.</td>
+                                  <td> La recomendación fue rechazada debido a que ya se atendió la recomendación en años pasados </td>
+                              </tbody>
+                            </table>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="col l1"></div>
             </div>
@@ -721,8 +796,33 @@
                         </div>
 
                         <div class="col l7 m7 s12">
-                            <a class="waves-effect blue darken-2 btn btn-small btn-upload-documents btn-rounded right modal-trigger" href="#modal-upload-document"><i class="material-icons left">cloud_upload</i>Subir nuevo documento</a>
-                            <ul class="collection collection-document-recomendations"></ul>
+                            <!--<a class="waves-effect blue darken-2 btn btn-small btn-upload-documents btn-rounded right modal-trigger" href="#modal-upload-document"><i class="material-icons left">cloud_upload</i>Subir nuevo documento</a>-->
+                            <a class="waves-effect blue darken-2 btn btn-small btn-generate-documents btn-rounded right"><i class="material-icons left">cached</i>Generar documentos</a>
+                            <a class="waves-effect  red darken-2 btn btn-small btn-del-documents    btn-rounded right"><i class="material-icons left">delete</i>Borrar documentos</a>
+                            <div class="collection-document-evidence">
+                              <br><br><br>
+                                <div class="row">
+                                    <div class="col l7">
+                                      <h5>Subir documento firmado:</h5>
+                                    </div>
+                                    <div class="col l5">
+
+                                      <form action="#">
+                                        <div class="file-field input-field">
+                                          <div class="btn">
+                                            <span>File</span>
+                                            <input type="file">
+                                          </div>
+                                          <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text">
+                                          </div>
+                                        </div>
+                                      </form>
+
+                                      <a class="waves-effect green darken-2 btn btn-small btn-upload-doc-formalice btn-rounded right"><i class="material-icons left">upload</i>Subir documento</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                       </div>
 
@@ -834,28 +934,14 @@
             </div>
 
             <!-- modal-new-recomendation-document -->
-            <div id="modal-new-asm-document" class="modal modal-fixed-footer">
+            <div id="modal-show-document" class="modal modal-fixed-footer">
               <div class="modal-content">
-
-                <h5 class="">Nueva recomendación al documento</h5><br><br>
-
-                <div class="row">
-                    <div class="col input-field l2 m2 s2">
-                        <input placeholder="#" id="txt-NumDocRecomendation" type="text" class="validate center-align">
-                        <label class="lblNumDocRec" for="txt-NewNumDocRecomendation">No.</label>
-                        <label id="iddoc_modal-newasm"></label>
-                    </div>
-                    
-                    <div class="input-field col l10 m10 s10">
-                      <textarea id="txt-doc-ASM" class="materialize-textarea" placeholder="Aspecto Susceptible de Mejora"></textarea>
-                      <label class="lblDocASM" for="txt-NewDocASM">Aspecto Susceptible de Mejora</label>
-                    </div>
-                </div>
-
+                  <div class="show-pdf-document">
+                    <embed class="pdf-generated" src="Resource\files\Informacion_y_Opinion_General.pdf" type="application/pdf" />
+                  </div>
               </div>
               <div class="modal-footer">
-                <a class="waves-effect blue darken-2 btn btn-create-document-recomendation btn-rounded">Guardar recomendación</a>
-                <a class="modal-close waves-effect grey btn btn-rounded">Cancelar</a>
+                <a class="modal-close waves-effect grey btn btn-rounded">Cerrar</a>
               </div>
             </div>
 

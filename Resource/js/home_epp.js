@@ -28,6 +28,9 @@ $(function(){
     $('.tooltipped').tooltip();
     $('.datepicker').datepicker();
     $('select').formSelect();
+
+    console.log( "User data => ", UserData );
+    console.log( "Project data => ", ProjectInfo );
   
 /*
     //$('#modal-upload-document').modal('open');
@@ -125,6 +128,7 @@ function Read_ProjectData(){
     $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataTechProject ){
         FichaTecnicaProyecto = JSON.parse( DataTechProject );
         localStorage.setItem("FichaTecnicaProyecto", JSON.stringify(FichaTecnicaProyecto) );
+        console.log( "FT Project => ", FichaTecnicaProyecto );
 
         UpdateView_FTProject(FichaTecnicaProyecto);
     });
@@ -266,6 +270,7 @@ function Read_FTEvaluation(){
     $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataTechEvaluator ){
         FichaTecnicaEvaluacion = JSON.parse( DataTechEvaluator );
         localStorage.setItem("FichaTecnicaEvaluacion", JSON.stringify(FichaTecnicaEvaluacion) );
+        console.log( "FT Evaluation => ", FichaTecnicaEvaluacion );
 
         UpdateView_FTEvaluation(FichaTecnicaEvaluacion);
     });
@@ -339,13 +344,13 @@ $('.btn-edit-evaluation-information').on('click', function(){
 function UpdateView_OpinionGeneral(OpinionGeneral){
     if( OpinionGeneral.Status == "Correct" ){
         $('#ComentariosObservacionesGenerales').show();
-        $('#ComentariosObservacionesPorTema').show();
+        $('.ComentariosObservacionesPorTema').show();
 
         $('#ComentariosObservacionesGenerales').val( OpinionGeneral.ComentariosObservacionesGenerales );
         M.textareaAutoResize($('#ComentariosObservacionesGenerales'));
 
-        $('#ComentariosObservacionesPorTema').val( OpinionGeneral.ComentariosObservacionesPorTema );
-        M.textareaAutoResize($('#ComentariosObservacionesPorTema'));
+        $('.ComentariosObservacionesPorTema').val( OpinionGeneral.ComentariosObservacionesPorTema );
+        M.textareaAutoResize($('.ComentariosObservacionesPorTema'));
         
         $('.OG_SinInfo').css('display', 'none');
         
@@ -357,7 +362,7 @@ function UpdateView_OpinionGeneral(OpinionGeneral){
         $('.OG_SinInfo').css('display', 'block');
 
         $('#ComentariosObservacionesGenerales').hide();
-        $('#ComentariosObservacionesPorTema').hide();
+        $('.ComentariosObservacionesPorTema').hide();
 
         $('.btn-add-opinion-general').show();
         $('.btn-edit-general-comments').hide();
@@ -407,6 +412,7 @@ function Read_OpinionGeneral(){
 //        OpinionGeneral.ComentariosObservacionesPorTema = OpinionGeneral.ComentariosObservacionesPorTema.replace(/\n/g, '<br>');
 
         localStorage.setItem("OpinionGeneral", JSON.stringify(OpinionGeneral) );
+        console.log( "Opinion General => ", OpinionGeneral );
 
         //console.log( "Opinión general => ", DataOG );
         UpdateView_OpinionGeneral(OpinionGeneral);
@@ -467,7 +473,7 @@ $('.btn-modify-general-comments').on('click', function(){
     var GeneralComments = {
         ID_Project: ProjectInfo.ID_ProgramaProyecto,
         ComentariosObservacionesGenerales: $('#txtComentarios').val(),
-        ComentariosObservacionesPorTema:   $('#ComentariosObservacionesPorTema').val()
+        ComentariosObservacionesPorTema:   $('.ComentariosObservacionesPorTema').val()
     }
     
     Update_GeneralComments(GeneralComments);
@@ -521,7 +527,7 @@ function UpdateView_GeneralCommentsRecomendation(){
 //    console.log( Commentarios );
 
     if( Commentarios.Status == "Correct" ){
-        for(var i = 0; i < Commentarios.Length; i++){
+        for(var i = 0; i < 4; i++){
             CommentsFormat = CommentsFormat + "<a class='collection-item collection-item-reco-rg modal-trigger' href='#ModalRecomendacionComentariosGenerales'>"+
                                                     "<div class='reco-cg-title truncate'>"+Commentarios[i].RecomendacionTexto+"</div>" +
                                                     "<div class='reco-cg-options'>"+
@@ -693,6 +699,7 @@ function Read_Recomendaciones(){
     $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataRecomendaciones ){
         Recomendaciones = JSON.parse( DataRecomendaciones );
         localStorage.setItem("Recomendaciones", JSON.stringify(Recomendaciones) );
+        console.log( "Recomendaciones => ", Recomendaciones );
 
         UpdateView_Recomendaciones(Recomendaciones);
     });
@@ -960,63 +967,49 @@ function HTML_DocumentFormat(frmt, filename, filestatus, idoc){
     if( filestatus == 'Nuevo' ){
         styledocs = 'aprobed';
         iconstatus = 'new_releases';
-    }else if( filestatus == 'Aprobado' ){
+    }else if( filestatus == 'Formalizado' ){
         styledocs = 'aprobed';
         iconstatus = 'assignment_turned_in';
     }else if( filestatus == 'En revisión' ){
         styledocs = 'send';
         iconstatus = 'find_in_page';
-    }else if( filestatus == 'Con recomendaciones' ){
-        styledocs = 'observations';
-        iconstatus = 'assignment';
     }
     
     var DocumentFormat = '<li class="collection-item collection-item-document avatar"><img src="Resource/images/'+typefile+'.'+fileFormat+'" alt="" class="format-svg-avatar">' +
                             '<div class="title-document-container"><span class="title title-document truncate"><span class="idoc" style="display: none;">'+idoc+'</span>'+filename+'.'+frmt+'</span><span class="document-status document-'+styledocs+'"><i class="material-icons left icon-status-document">'+iconstatus+'</i>'+filestatus+'</span></div>' +
                             '<div class="action-buttons-docs">'+
-//                                '<a class="btn-floating btn-small btn-document-viewer waves-effect blue lighten-2 tooltipped modal-trigger"                    href="#modal-view-document"     data-position="bottom"  data-tooltip="Ver documento">   <i class="material-icons">remove_red_eye</i></a>'+
-                                '<a class="btn-floating btn-small btn-add-document-recomendation modal-trigger waves-effect green darken-4 tooltipped"  href="#modal-new-asm-document"          data-position="bottom"  data-tooltip="Agregar un ASM">  <i class="material-icons left">comment</i></a>'+
-                                '<a class="btn-floating btn-small btn-modify-document waves-effect orange tooltipped modal-trigger"                     href="#modal-edit-document"             data-position="bottom"  data-tooltip="Editar">          <i class="material-icons">edit</i></a>'+
-                                '<a class="btn-floating btn-small btn-delete-document waves-effect red tooltipped modal-trigger"                        href="#modal-delete-document"           data-position="bottom"  data-tooltip="Eliminar">        <i class="material-icons">delete</i></a>'+
+                                '<a class="btn-floating btn-small btn-view-document modal-trigger waves-effect blue darken-4" href="#modal-show-document"> <i class="material-icons left">remove_red_eye</i></a>'+
                             '</div>'+
                          '</li>';
 
     return DocumentFormat;
 }
 
-function UpdateView_DocumentosProyecto(DocumentosProyecto){
+function UpdateView_DocumentosProyecto(){
+    var DataDoc = JSON.parse( localStorage.getItem('ProjectDocuments') );
+    console.log( DataDoc[0].Status   );
+
     //  DOCUMENTOS Y ASM POR DOCUMENTO
-    if( DocumentosProyecto.Status === "Correct" ){
-        $('.card-title-documents').text('Documentos');
+    if( DataDoc[0].Status === "Correct" ){
+        $('.card-title-documents').text('Para formalización');
 
         var doc_html = "";
 
-        for( var doc_i = 0; doc_i < DocumentosProyecto.Length; doc_i++ ){
-            Documento_i = DocumentosProyecto[doc_i];
+        for( var doc_i = 1; doc_i < DataDoc.length; doc_i++ ){
+            Documento_i = DataDoc[doc_i];
             doc_html = doc_html + HTML_DocumentFormat( Documento_i.FormatoDocumento, Documento_i.NombreDocumento, Documento_i.EstadoRevision, Documento_i.ID_DocumentoProyecto );
         }
     
         $('.collection-documents').empty();
         $('.collection-documents').append( doc_html );
         $('.collection-documents').children()[0].click();
-    }else if( DocumentosProyecto.Status === "Sin resultados" ){
+    }else if( DataDoc[0].Status === "Sin resultados" ){
         $('.collection-documents').empty();
         $('.collection-document-recomendations').empty();
         $('.card-title-documents').text('Sin documentos');
     }else{
         M.toast({html: 'Error al mostrar los documentos del proyecto. Err. 0001', classes: 'red rounded'});
     }
-}
-
-function LoadDocumentData(id){
-    var DocumentsObject = JSON.parse( localStorage.getItem('ProjectDocuments') );
-    var DocSelected = {};
-
-    for(var i=0; i<DocumentsObject.Length; i++)
-        if( DocumentsObject[i].ID_DocumentoProyecto == id )
-            DocSelected = DocumentsObject[i];
-
-    return DocSelected;
 }
 
 // Funciones CRUD para los Documentos
@@ -1069,138 +1062,64 @@ function Create_ProjectDocument(){
 }
 
 function Read_ProjectDocuments(){
-    var TypDat = "DocumentosDelProyecto";
-    var ID_Project = ProjectInfo.ID_ProgramaProyecto;
+    console.log( JSON.parse( localStorage.getItem( 'ProjectDocuments' ) ) );
+    var DocumentosProyecto = JSON.parse( localStorage.getItem( 'ProjectDocuments' ) );
 
-    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Project, TypeData: TypDat}, function( DataDocs ){
-        DocumentosProyecto = JSON.parse( DataDocs );
-        localStorage.setItem("ProjectDocuments", JSON.stringify(DocumentosProyecto) );
-
-        UpdateView_DocumentosProyecto(DocumentosProyecto);
-    });
-}
-
-function Update_ProjectDocument(id_doc){
-    var DocSelected = LoadDocumentData(id_doc), TData = "UpdateDocument";
-    var EstadoRevision = $('#select-estatus-document').val();
-    var NuevoEstadoRevision = '';
-
-    if( EstadoRevision == 1 ){
-        NuevoEstadoRevision = 'Nuevo';
-    }else if( EstadoRevision == 2 ){
-        NuevoEstadoRevision = 'Aprobado';
-    }else if( EstadoRevision == 3 ){
-        NuevoEstadoRevision = 'En revisión';
-    }else if( EstadoRevision == 4 ){
-        NuevoEstadoRevision = 'Con recomendaciones';
+    if( DocumentosProyecto[0].Status == 'Sin resultados' ){
+        $('.btn-generate-documents').removeClass('disabled');
+        $('.btn-generate-documents').show();
+    }else if( DocumentosProyecto[0].Status == 'Correct' ){
+        $('.btn-generate-documents').hide();
     }
 
-    DocSelected.NuevoNombreDocumento = $('#txt-EditNameFile').val();
-    DocSelected.EstadoRevision = NuevoEstadoRevision;
 
-    $.post('Controller/HomeEPP_UpdateController.php', {TypeData: TData, DataDoc: DocSelected}, function(ResponseSvr){
-        console.log( ResponseSvr );
-        SvrResponse = JSON.parse( ResponseSvr );
-
-        if( SvrResponse.Status == "Correct" ){
-            $('#modal-edit-document').modal('close');
-
-            Read_ProjectDocuments();
-            M.toast({html: 'Archivo actualizado correctamente', classes: 'green darken-2 rounded'});
-        }else{
-            M.toast({html: 'Error al actualizar el archivo', classes: 'red darken-2 rounded'});
-        }
-
-    });
+    UpdateView_DocumentosProyecto(DocumentosProyecto);
 }
 
-function Delete_ProjectDocument(id_doc){
-    var DocSelected = LoadDocumentData(id_doc);
-    TypOp = "DelDoc";
+$('.btn-del-documents').on('click', function(){
+    var EmptyDoc = [
+        {
+            Status: 'Sin resultados'
+        }
+    ]
+
+    $('.btn-generate-documents').removeClass('disabled');
+    localStorage.setItem('ProjectDocuments', JSON.stringify(EmptyDoc) );
+    UpdateView_DocumentosProyecto();
+
+    $('.btn-del-documents').hide();
+    $('.collection-document-evidence').hide();
+    $('.btn-generate-documents').show();
+});
+
+$('.btn-generate-documents').on('click', function(){
     
-    $.post("Controller/HomeEPP_DeleteController.php", {TypeData: TypOp, Data: DocSelected}, function(Response){
-        var SvrResponse = JSON.parse( Response );
+    var DataDocs = [
+        {
+            Status: 'Correct',
+            Length: 2
+        },{
+            FormatoDocumento: 'pdf',
+            NombreDocumento: 'Informacion_y_Opinion_General.pdf',
+            EstadoRevision: 'En revisión',
+            ID_DocumentoProyecto: '1'
+        },{
+            FormatoDocumento: 'pdf',
+            NombreDocumento: 'Informacion_y_plan_de_mejora.pdf',
+            EstadoRevision: 'En revisión',
+            ID_DocumentoProyecto: '1'
+        },
+    ];
 
-        if( SvrResponse.Status == "Correct" ){
-            $('#modal-delete-document').modal('close');
-            Read_ProjectDocuments();
-            M.toast({html: 'Se borró el archivo crrectamente', classes: 'green darken-2 rounded'});
-        }else{
-            M.toast({html: 'Error. No se pudo borrar el archivo', classes: 'red darken-2 rounded'});
-        }
+    localStorage.setItem( 'ProjectDocuments', JSON.stringify( DataDocs ) );
+    UpdateView_DocumentosProyecto( DataDocs );
 
-    });
-}
-
-$('#fileDoc').on('change', function(){
-    var FileLoaded = $(this)[0].files[0];
-    var DataFile = FileLoaded.name.split('.');
-
-    $('#txtNameFile').val( DataFile[0] );
-    $('#txtExtension').val( DataFile[1] );
-});
-
-$('#fileUpdateDoc').on('change', function(){
-    $('#txt-EditNameFile').val('');
-    $('#txt-EditExtension').val('');
-    $('#txt-EditNameFile').attr('disabled', 'disabled');
-
-    var FileLoaded = $(this)[0].files[0];
-    var DataFile = FileLoaded.name.split('.');
-
-    console.log( DataFile );
-
-    $('#txt-EditNameFile').val( DataFile[0] );
-    $('#txt-EditExtension').val( DataFile[1] );
-});
-
-$('.collection-documents').on('click', 'a.btn-modify-document', function(){
-    var id_doc = $(this).parent().siblings('.title-document-container').find('.idoc').text();
-    $('#iddoc_modify_modal').text( id_doc );
-
-    var DocSelected = LoadDocumentData(id_doc);
-    var estado_revision = '';
-
-    if( DocSelected.EstadoRevision == "Nuevo" )
-        estado_revision = '1';
-    else if( DocSelected.EstadoRevision == "Aprobado" )
-        estado_revision = '2';
-    else if( DocSelected.EstadoRevision == "En revisión" )
-        estado_revision = '3';
-    else if( DocSelected.EstadoRevision == "Con recomendaciones" )
-        estado_revision = '4';
-
-    $('#txt-EditNameFile').val( DocSelected.NombreDocumento );
-    $('#txt-EditExtension').val( DocSelected.FormatoDocumento );
-    $('#select-estatus-document').val(estado_revision);
-});
-
-$('.collection-documents').on('click', 'a.btn-delete-document', function(){
-    var id_doc = $(this).parent().siblings('.title-document-container').find('.idoc').text();
-    $('#iddoc_modal').text( id_doc );
-
-    var DocSelected = LoadDocumentData(id_doc);
-    $('.name-delete-file').html( '<strong>'+DocSelected.NombreDocumento+'.'+DocSelected.FormatoDocumento+'</strong>' );
-});
-
-$('.btn-upload-documents').on('click', function(){
-    $('.btn-load-doc-server').removeClass('disabled');
-});
-
-$('.btn-load-doc-server').on('click', function(){
-    Create_ProjectDocument();
-});
-
-$('.btn-delete-project-document').on('click', function(){
-    var id_doc = $('#iddoc_modal').text();
-
-    Delete_ProjectDocument(id_doc);
-});
-
-$('.btn-modify-document').on('click', function(){
-    var id_doc = $('#iddoc_modify_modal').text();
-
-    Update_ProjectDocument(id_doc);
+    $('.btn-del-documents').show();
+    $('.collection-document-evidence').show();
+    $('.btn-generate-documents').addClass('disabled');
+    $('.btn-generate-documents').hide();
+    
+    console.log( DataDocs );
 });
 
 //  Eventos para mostrar y ocultar las opciones para los documentos
@@ -1270,51 +1189,13 @@ function Create_DocumentRecomendation(DataRecomendation){
 }
 
 function Read_DocumentsRecomendations(ID_Documento){
-    var TypDat = "RecomendacionesPorDocumento";
+/*
+    DataRecomendDocuments = {};
+    FormatRec = HTML_RecomendationFormat(DataRecomendDocuments);
 
-    $.post("Controller/HomeEPP_ReadController.php", {ID: ID_Documento, TypeData: TypDat}, function( DataDocsRec ){
-        DataRecomendDocuments = JSON.parse( DataDocsRec );
-        localStorage.setItem("DataDocumentsRecomendations", JSON.stringify(DataRecomendDocuments) );
-
-        FormatRec = HTML_RecomendationFormat(DataRecomendDocuments);
-        
-        $('.collection-document-recomendations').empty();
-        $('.collection-document-recomendations').html( FormatRec );
-
-        //console.log( "Recomendaciones => ", DataRecomendDocuments );
-    });
-}
-
-function Update_DocumentRecomendation(NewDataRecomendation){
-    var TypDat = "EditDocRec";
-
-    $.post("Controller/HomeEPP_UpdateController.php", {TypeData: TypDat, Data: NewDataRecomendation}, function(SvrResponse){
-        var SvrResponseJSON = JSON.parse( SvrResponse );
-
-        if( SvrResponseJSON.Status == "Correct" ){
-            $('#modal-edit-asm-document').modal('close');
-            M.toast({html: 'Recomendación actualizada correctamente', classes: 'green darken-2 rounded'});
-
-            Read_DocumentsRecomendations( NewDataRecomendation.ID_DocumentoProyecto );
-        }else{
-            M.toast({html: 'Error al actualizar la recomendación seleccionada', classes: 'red darken-2 rounded'});
-        }
-    });
-}
-
-function Delete_DocumentRecomendation(DataRecomendation){
-    $.post("Controller/HomeEPP_DeleteController.php", {ID_DocRec: DataRecomendation.idDocRec, TypeData: "DelDocRec"}, function(SvrResponse){
-        var SvrResponseJSON = JSON.parse( SvrResponse );
-
-        if( SvrResponseJSON.Status == "Correct" ){
-            $('#modal-confirm-delete-document-recomendation').modal('close');
-            M.toast({html: 'Recomendación eliminada correctamente', classes: 'green darken-2 rounded'});
-
-            Read_DocumentsRecomendations( DataRecomendation.ID_DocumentoProyecto );
-        }else{
-            M.toast({html: 'Error al eliminar la recomendación del documento', classes: 'red darken-2 rounded'});
-        }
-    });
+    $('.collection-document-recomendations').empty();
+    $('.collection-document-recomendations').html( FormatRec );
+*/
 }
 
 

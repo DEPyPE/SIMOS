@@ -1,0 +1,116 @@
+
+{
+    //  DATA USER
+    {
+        "ID_Usuario": "1",
+        "Nombres": "Martha Fernanda",
+        "Apellidos": "Guzman Huerta",
+        "Contraseña": "Marta123",
+        "TipoUsuario": "Capturista",
+        "Correo": "mguzmanhu@guanajuato.gob.mx",
+        "DireccionResponsable": "No disponible",
+        "SiglasDR": "No disponible",
+        "Departamento": "No disponible",
+        "SiglasDepartamento": "No disponible",
+        "Status": "Correct",
+        "URL": "home_adm.php"
+    },
+
+    // DATA PROJECT
+    {
+        "ID_ProgramaProyecto": "1",
+        "ID_Usuario": "1",
+        "PorcentajeAvance": "0",
+        "EtapaActualProyecto": "Captura de información",
+        "EjercicioFiscal": "2019",
+        "Status": "Correct"
+    },
+
+    // DATA FT Project
+    {
+        "ID_FichaTecnicaProyecto": "1",
+        "ID_ProgramaProyecto": "1",
+        "NombreProyecto": "Fondo de Aportaciones para la Educación Tecnológica y Adulta, Subfondo Educación de Adultos",
+        "ClaveProyecto": "FAETA",
+        "DependenciaDelProyecto": "Instituto de Alfabetización y Educación Básica del Estado de Guanajuato",
+        "SiglasDependenciaProyecto": "INAEBA",
+        "UnidadResponsable": "Sin información",
+        "SiglasUnidadResponsable": "Sin información",
+        "NombreResponsable": "Ing. Eusebio Vega Pérez",
+        "ValidacionInfo": "0",
+        "Status": "Correct"
+    },
+
+    // DATA FT Evaluation
+    {
+        "ID_FichaTecnicaEvaluacion": "1",
+        "ID_ProgramaProyecto": "1",
+        "InstanciaEvaluadora": "Servicios Integrales en Educación y Tecnología",
+        "NombreDeEvaluacion": "Evaluación de Desempeño, Ejercicio 2019-2020",
+        "TipoEvaluacion": "Evaluación de Desempeño",
+        "AñoDeEvaluacion": "2019",
+        "NombreDelInforme": "Evaluación de Desempeño, Ejercicio 2019-2020",
+        "URL_Informe": "docs/informe_FAETA.pdf",
+        "CostoEvaluacion": "0",
+        "ValidacionInfo": "0",
+        "Status": "Correct"
+    },
+
+    // DATA RECOMENDACIONES
+    {
+        "0": {
+            "ID_Recomendacion": "1",
+            "ID_ProgramaProyecto": "1",
+            "IdentificadorRecomendacion": "1",
+            "AspectoSusceptibleDeMejora": "Contribución y destino: Considerar en el diagnóstico los elementos que se atienden mediante las diferentes fuentes de financiamiento, para tener claridad que el rezago educativo se ha disminuido con diferentes estrategias y recursos",
+            "TipoActoresInvolucradosEnSolucion": "Institucional",
+            "NivelDePrioridad": "Medio",
+            "AccionDeMejora": "Revisión y actualización el diagnóstico del programa",
+            "AreaResponsable": "Dirección de Planeación y Enlace Regional Coordinación de Planeación y Programación",
+            "FechaCompromisoDeCumplimiento": "2021-11-30",
+            "ResultadosEsperados": "Diagnóstico actualizado",
+            "EvidenciasSolicitadas": "Documentos de pdf",
+            "BanderaRecomendacionCompletada": "En proceso"
+        },
+        "1": {
+            "ID_Recomendacion": "2",
+            "ID_ProgramaProyecto": "1",
+            "IdentificadorRecomendacion": "2",
+            "AspectoSusceptibleDeMejora": "Contribución y destino: Considerar la elaboración de un compendio normativo y acciones de Capacitación/Difusión por parte de la SFIA al instituto y en lo particular al personal que interviene en los procesos de distribución de las aportaciones.",
+            "TipoActoresInvolucradosEnSolucion": "Interinstitucional",
+            "NivelDePrioridad": "Medio",
+            "AccionDeMejora": "Elaboración de un repositorio de la normativa correspondiente al fondo y su difusión al personal del INAEBA que interviene en los procesos de recepción, y ejercicio del mismo.",
+            "AreaResponsable": "Dirección de Administración y Coordinación de Recursos Financieros",
+            "FechaCompromisoDeCumplimiento": "2021-10-01",
+            "ResultadosEsperados": "Estructura normativa de consulta y personal informado en relación al fondo",
+            "EvidenciasSolicitadas": "Repositorio Digital Lista de participantes/difusión",
+            "BanderaRecomendacionCompletada": "Corregido"
+        },
+        "2": {
+            "ID_Recomendacion": "3",
+            "ID_ProgramaProyecto": "1",
+            "IdentificadorRecomendacion": "3",
+            "AspectoSusceptibleDeMejora": "km",
+            "TipoActoresInvolucradosEnSolucion": "k",
+            "NivelDePrioridad": "Medio",
+            "AccionDeMejora": "km",
+            "AreaResponsable": "km",
+            "FechaCompromisoDeCumplimiento": "2021-10-01",
+            "ResultadosEsperados": "km",
+            "EvidenciasSolicitadas": "km",
+            "BanderaRecomendacionCompletada": "Sin atender"
+        },
+        "Status": "Correct",
+        "Length": 3
+    },
+
+    // DATA OPINION GENERAL
+    {
+        "ID_OpinionGeneral": "1",
+        "ID_ProgramaProyecto": "1",
+        "ComentariosObservacionesGenerales": "El instituto, atendió por primera vez una evaluación de desempeño específica a los recursos del FAETA. Dicho proceso permitió conocer y reafirmar que las acciones, procesos, controles, estructuras, infraestructura y actividades diarias se realizan en apego a la normativa y cumplimiento con los requisitos de operación del Fondo de Aportaciones para la Educación Tecnológica y de Adultos, sin embargo, se identifican áreas de oportunidad que requieren de acciones para fortalecer la operacion del mismo. \n        El INAEBA, cuenta con la aportación de recursos federal y estatal, lo que permite la operación de los servicios del instituto con la combinación de recurso, no obstante, se tienen registros contables-presupuestales y controles administrativos de manera particular por cada fuente de funcionamiento a nivel general de gasto.\n        Los apartados siguientes, son llenados con base en las posibilidades del INAEBA, derivado a que exiten recomendaciones en los que se involucra la participación de la SFIA o INEA.",
+        "ComentariosObservacionesPorTema": "Se emiten comentario por sección \"Tabla 9. Fortalezas, Retos y Recomendaciones del Subfondo Educación para Adultos\" del documento de evaluación\n\t\tContribución y destino:\n\t\tConsiderar la elaboración de un copmrendio normativo y acciones de Capacitación/difusión por parte de la SFIA al instituo y en lo particular al personal que interviene en los procesos de distribución de las Aportaciones. En la acción de mejora No°2, se plasm lo correspondiente al instituto.\n\t\tProcedimientos documentados de planeación de los recursos para la prestación de los servicios de educación tecnológica y de adultos:\n\t\tDocumentar y/o actualizar y hacer énfasis en las cartas poceso, donde se registren las etapas, responsables, flujograma, instructivos, formatos de planeación, haciendo referecia a la correspondiente de FAETA.- El instituto cuenta con un Sistema de Gestión de la Calidad basado en la norma ISO 9001-2015, con la cual se certificó los diversos procesos de operación del Inaeba, dichos procesos consideran la operación de recursos estatal y federal, según aplique.",
+        "Status": "Correct"
+    }
+
+}

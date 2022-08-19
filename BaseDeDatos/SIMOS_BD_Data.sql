@@ -3,6 +3,8 @@ USE SIMOS_DB;
 
 INSERT INTO Usuario(Nombres, Apellidos, Contraseña, TipoUsuario, Correo, DireccionResponsable, SiglasDR, Departamento, SiglasDepartamento)
 VALUES ('Martha Fernanda', 'Guzman Huerta', 'Marta123', 'Capturista', 'mguzmanhu@guanajuato.gob.mx', 'No disponible', 'No disponible', 'No disponible', 'No disponible');
+INSERT INTO Usuario(Nombres, Apellidos, Contraseña, TipoUsuario, Correo, DireccionResponsable, SiglasDR, Departamento, SiglasDepartamento)
+VALUES ('Isabel', 'Magadan Vega', 'isa123', 'Validador', 'magadan_vega@guanajuato.gob.mx', 'No disponible', 'No disponible', 'No disponible', 'No disponible');
 
 INSERT INTO ProgramaProyecto(ID_Usuario, PorcentajeAvance, EtapaActualProyecto, EjercicioFiscal)
 	VALUES (1, 0, 'Captura de información', '2019');
