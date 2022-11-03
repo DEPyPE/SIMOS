@@ -1,31 +1,44 @@
 
-USE SIMOS_DB;
+USE SIMOS_DB;	
 
-INSERT INTO Usuario(Nombres, Apellidos, Contraseña, TipoUsuario, Correo, DireccionResponsable, SiglasDR, Departamento, SiglasDepartamento)
-VALUES ('Martha Fernanda', 'Guzman Huerta', 'Marta123', 'Capturista', 'mguzmanhu@guanajuato.gob.mx', 'No disponible', 'No disponible', 'No disponible', 'No disponible');
-INSERT INTO Usuario(Nombres, Apellidos, Contraseña, TipoUsuario, Correo, DireccionResponsable, SiglasDR, Departamento, SiglasDepartamento)
-VALUES ('Isabel', 'Magadan Vega', 'isa123', 'Validador', 'magadan_vega@guanajuato.gob.mx', 'No disponible', 'No disponible', 'No disponible', 'No disponible');
+INSERT INTO Usuario ( Correo, Contraseña, Perfil, Nombre, Apellidos )
+VALUES ('mguzmanhu@guanajuato.gob.mx', 'marta123', 'Capturista', 'Martha Fernanda', 'Guzman Huerta');
 
-INSERT INTO ProgramaProyecto(ID_Usuario, PorcentajeAvance, EtapaActualProyecto, EjercicioFiscal)
-	VALUES (1, 0, 'Captura de información', '2019');
+# Tabla Usuario
+INSERT INTO Usuario ( Correo, Contraseña, Perfil, Nombre, Apellidos )
+VALUES ('magadan_vega@guanajuato.gob.mx', 'isa123', 'Validador', 'Rosa Isabel', 'Magadan Vega');
+    
+# Tabla ProgramaProyecto
+INSERT INTO ProgramaProyecto(ID_Usuario, Nombre, Clave, NombreResponsable, DependenciaResponsable, SiglasDR, UnidadResponsable, SiglasUR, EjercicioFiscal, PorcentajeAvance, Etapa, SubEtapa, EstadoValidacion)
+VALUES(1, 'Fondo de Aportaciones para la Educación Tecnológica y Adulta, Subfondo Educación de Adultos', 'FAETA', 'Ing. Eusebio Vega Pérez', 'Instituo de ALfabetización y Educación Básica del Estado de Guanajuato', 'INAEBA', 'No disponible', 'No disponible', '2019', '20', 'Información general', 'Información del programa o proyecto capturada', 'Información validada');
 
-INSERT INTO FichaTecnicaProyecto(ID_ProgramaProyecto, NombreProyecto, ClaveProyecto, DependenciaDelProyecto, SiglasDependenciaProyecto, UnidadResponsable, SiglasUnidadResponsable, NombreResponsable, ValidacionInfo)
-VALUES(1, 'Fondo de Aportaciones para la Educación Tecnológica y Adulta, Subfondo Educación de Adultos', 'FAETA', 'Instituto de Alfabetización y Educación Básica del Estado de Guanajuato',
-		'INAEBA', 'Sin información', 'Sin información', 'Ing. Eusebio Vega Pérez', false);
+# Tabla Evaluacion
+INSERT INTO Evaluacion(ID_ProgramaProyecto, InstanciaEvaluadora, NombreDeLaEvaluacion, TipoDeEvaluacion, AñoDeEvaluacion, NombreDelInforme, URL_Informe, CostoEvaluacion, EstadoValidacion)
+VALUES(1, 'Servicios Integrales en Educación y Tecnología', 'Evaluación de Desempeño, Ejercicio 2019-2020', 'Evaluación de Desempeño', 2019, 'Evaluación de Desempeño, Ejercicio 2019-2020',
+		'', '100000', 'Información validada');
 
-INSERT INTO FichaTecnicaEvaluacion(ID_ProgramaProyecto, InstanciaEvaluadora, NombreDeEvaluacion, TipoEvaluacion, AñoDeEvaluacion, NombreDelInforme, URL_Informe, CostoEvaluacion, ValidacionInfo)
-		VALUES(1, 'Servicios Integrales en Educación y Tecnología', 'Evaluación de Desempeño, Ejercicio 2019-2020', 'Evaluación de Desempeño', '2019',
-			   'Evaluación de Desempeño, Ejercicio 2019-2020', 'docs/informe_FAETA.pdf', '0', false);
-
-INSERT INTO OpinionGeneral(ID_ProgramaProyecto, ComentariosObservacionesGenerales, ComentariosObservacionesPorTema)
+# Tabla OpinionGeneral
+INSERT INTO OpinionGeneral(ID_ProgramaProyecto, ComentariosGenerales, EstadoValidacion, ConObservacion, Descripcion, IconoEstado, Estado)
 		VALUES(1, 'El instituto, atendió por primera vez una evaluación de desempeño específica a los recursos del FAETA. Dicho proceso permitió conocer y reafirmar que las acciones, procesos, controles, estructuras, infraestructura y actividades diarias se realizan en apego a la normativa y cumplimiento con los requisitos de operación del Fondo de Aportaciones para la Educación Tecnológica y de Adultos, sin embargo, se identifican áreas de oportunidad que requieren de acciones para fortalecer la operacion del mismo. 
         El INAEBA, cuenta con la aportación de recursos federal y estatal, lo que permite la operación de los servicios del instituto con la combinación de recurso, no obstante, se tienen registros contables-presupuestales y controles administrativos de manera particular por cada fuente de funcionamiento a nivel general de gasto.
         Los apartados siguientes, son llenados con base en las posibilidades del INAEBA, derivado a que exiten recomendaciones en los que se involucra la participación de la SFIA o INEA.',
-        'Se emiten comentario por sección "Tabla 9. Fortalezas, Retos y Recomendaciones del Subfondo Educación para Adultos" del documento de evaluación
-		Contribución y destino:
-		Considerar la elaboración de un copmrendio normativo y acciones de Capacitación/difusión por parte de la SFIA al instituo y en lo particular al personal que interviene en los procesos de distribución de las Aportaciones. En la acción de mejora No°2, se plasm lo correspondiente al instituto.
-		Procedimientos documentados de planeación de los recursos para la prestación de los servicios de educación tecnológica y de adultos:
-		Documentar y/o actualizar y hacer énfasis en las cartas poceso, donde se registren las etapas, responsables, flujograma, instructivos, formatos de planeación, haciendo referecia a la correspondiente de FAETA.- El instituto cuenta con un Sistema de Gestión de la Calidad basado en la norma ISO 9001-2015, con la cual se certificó los diversos procesos de operación del Inaeba, dichos procesos consideran la operación de recursos estatal y federal, según aplique.');
+        'Información capturada', true, 'Observación realizada a la opinión general', 'archive', 'Sin atender');
+    
+SELECT *FROM OpinionGeneral;
+SELECT *FROM ProgramaProyecto;
+
+/*
+# Tabla Observación
+INSERT INTO Observacion(ConObservacion, Descripcion, IconoEstado, Estado)
+VALUES(false, 'Observación general', 'none', 'Sin observación');
+
+SELECT * FROM ProgramaProyecto;
+SELECT Nombre, Clave, EjercicioFiscal, PorcentajeAvance, Etapa, SubEtapa FROM ProgramaProyecto WHERE ProgramaProyecto.EjercicioFiscal = '2019';
+SELECT DISTINCT(EjercicioFiscal) FROM ProgramaProyecto ORDER BY EjercicioFiscal ASC;
+UPDATE ProgramaProyecto SET Nombre='', Clave='', DependenciaResponsable='', SiglasDR='', UnidadResponsable='', SiglasUR='', NombreResponsable='' WHERE ID_Usuario = 1;
+*/
+
+/*
 
 INSERT INTO Recomendaciones(ID_ProgramaProyecto, IdentificadorRecomendacion, AspectoSusceptibleDeMejora, TipoActoresInvolucradosEnSolucion, NivelDePrioridad, AccionDeMejora, AreaResponsable,
 							FechaCompromisoDeCumplimiento, ResultadosEsperados, EvidenciasSolicitadas, BanderaRecomendacionCompletada)
@@ -58,11 +71,9 @@ INSERT INTO RecomendacionesComentariosEspecificos(ID_OpinionGeneral, Recomendaci
 SELECT * FROM OpinionGeneral;
 
 #SELECT IdentificadorRecomendacion FROM Recomendaciones;
-/* UPDATE QUERIES */
-
-
 SELECT * FROM RecomendacionesComentariosGenerales;	
 
+*/
 
 
 /*

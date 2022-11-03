@@ -18,7 +18,7 @@
             if( $ResultDB->num_rows == 1 ){
                 $Data = $ResultDB->fetch_assoc();
                 $Data["Status"] = "Correct";
-            }else if( $ResultDB->num_rows > 0 ){
+            }else if( $ResultDB->num_rows > 1 ){
                 $Data["Status"] = "More users";
             }else if( $ResultDB->num_rows == 0 ){
                 $Data["Status"] = "No registered";
@@ -27,19 +27,6 @@
 
             return $Data;
         }
-
-/*
-        public function Get_UserByEmail( $Email ){
-            $Query = "SELECT * FROM Usuario WHERE Usuario.Correo = '".$Email."';";
-            $ResultDB = $this->ConnectionDB->query($Query);
-            $Data = $ResultDB->fetch_assoc();
-
-            echo json_encode( $Data );
-        }
-
-*/
-
-
     }
 
 ?>

@@ -1,0 +1,249 @@
+
+/* ESTILOS GENERALES */
+
+body{
+	margin: 0;
+	padding: 0;
+/*	background-color: rgba(224, 247, 250, 0.3) !important; */
+	background-color: #e7e7e7 !important;
+}
+
+.col-option{
+	height: 10% !important;
+}
+
+/* MENU DE OPCIONES */
+
+.seg-logo{
+    margin-right: 10px;
+    width: 129px;
+    border-radius: 50px;
+}
+
+nav .brand-logo {
+    width: 40% !important;
+}
+
+/* COLOR CARD AND CONTAINERS */
+.background-elements{
+	background-color: rgba(224, 242, 241, 1) !important;
+}
+
+/* MENU PRINCIPAL */
+.icon-exit-session{
+    transform: rotate(180deg);
+}
+
+.row-menu-and-title{
+	margin-bottom: 0 !important;
+}
+
+.notification-alert{
+	color: white;
+	margin-left: 5px;
+	padding: 0px 10px 0px 10px;
+	border-radius: 15px;
+	background-color: rgba(230, 230, 230, 0.4) !important;
+	font-weight: normal;
+}
+
+/* DATOS DEL USUARIO VALIDADOR */
+.card-program{
+	border-radius: 20px !important;
+}
+
+.title-column{
+	width: 35% !important;
+	text-align: right;
+}
+
+/* SECCIÓN PARA ESCOGER EL EJERCICIO FISCAL */
+
+.title-ejercicio-fiscal{
+	margin: 10px 0 2px 25px !important;
+}
+
+.card-title-ejercicio-fiscal{
+	margin-top: 6px;
+	font-size: 22px !important;
+}
+
+.select-ejercicio-fiscal{
+	font-size: 17px !important;
+	border-radius: 8px !important;
+	border: 1px solid darkgray;
+	padding: 0 10px !important;
+}
+
+.container-ejercicio-fiscal{
+	margin-bottom: 20px;
+}
+
+.error-ejercicio-fiscal{
+	position: absolute;
+	margin-top: 15px !important;
+	font-style: italic;
+	color: rgb(255, 0, 0);
+}
+
+/* SECCIÓN DE PROYECTOS REGISTRADOS */
+
+.collection-projects-registered{
+	box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%) !important;
+}
+
+.collection > .collection-item:hover{
+	background-color: rgb(240, 240, 240) !important;
+	cursor: pointer;
+}
+
+.collection > .collection-item{
+	color: black !important;
+	text-decoration: none !important;
+}
+
+.collection-active{
+	background-color: rgb(240, 240, 240) !important;
+}
+
+.collection-projects-registered{
+	margin-top: 0px !important;
+}
+
+.collection-projects-title{
+	margin-top: 0px !important;
+	margin-bottom: 5px !important;
+}
+
+/* HELPERS */
+.mb-0{
+	margin-bottom: 0 !important;
+}
+
+/* SELECTOR DEL EJECRICIO FISCAL */
+.card-ejercicio-fiscal{
+	border-radius: 15px !important;
+	margin-bottom: 0px !important;
+}
+
+.card-content-ejercicio-fiscal{
+	padding: 20px 20px 20px 25px !important;
+}
+
+/* CARDS PARA PROYECTOS REGISTRADOS  */
+.card-registered-project{
+	border-radius: 15px !important;
+	width: 100% !important;
+	height: 310px !important;
+}
+
+.card-title-project{
+	font-size: 45px !important;
+	margin: 15px 0 35px 0 !important;
+}
+
+.title-step{
+	color: rgba(60, 60, 60, 1) !important;
+	font-weight: 700 !important;
+}
+
+.id-project{
+	display: none !important;
+}
+
+/* BARRAS DE PROGRESO POR PROYECTO */
+
+.progress-bar-container{
+	width: 100%;
+}
+
+.row-porcentage{
+	margin-bottom: 5px !important;
+}
+
+.percentage-progress-text{
+	margin-right: 20px !important;
+	margin-top: 8px  !important;
+	width: 100% !important;
+	font-weight: bold;
+}
+
+.progress-per-project-container{
+	margin-top: 10px !important;
+	width: 98% !important;
+	height: 18px !important;
+	border-radius: 8px;
+}
+
+.project-stage-progress{
+	background-color: rgba(220, 220, 220, 0.3) !important;
+	color: rgba(130, 130, 130, 1);
+	padding: 8px 15px 8px 15px;
+	clear: left;
+	font-size: 12px !important;
+	font-weight: 500 !important;
+	border-radius: 15px;
+	margin-bottom: 10px !important;
+}
+
+.btn-open-project{
+	position: absolute;
+	margin-top: 20px;
+	border-radius: 15px;
+	text-transform: none !important;
+	width: 80% !important;
+	left: 50%;
+	bottom: 20px !important;
+	transform: translateX(-50%);
+}
+
+/* -- -- -- -- -- -- -- -- -- -- -- --- --- --- -- --- --- */
+
+/* MOSTRAR INFORMACIÓN DE CADA PROYECTO REGISTRADO */
+
+.collapsible-posicionamiento .collapsible-header:hover{
+	background-color: rgb(235, 235, 235);
+}
+
+.collapsible-body{
+	background-color: white;
+	padding: 10px 20px 15px 20px !important;
+}
+
+.id_recomendation, .recomendation{
+	font-style: normal !important;
+}
+
+#recomendations-elements{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+.document-show{
+	margin-top: 10px;
+	width: 100%;
+	height: 460px;
+}
+
+#documents, #evidence{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+.btn-delete-document{
+	margin-top: -5px !important;
+	margin-left: 5px !important;
+}
+
+.btn-edit-document{
+	margin-top: -5px !important;
+}
+
+.evidence-document{
+	color: black !important;
+}
+
+.btn-validate-document{
+	margin-top: 5px !important;
+}
+

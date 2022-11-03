@@ -1,5 +1,6 @@
 
 <?php
+
 //  Obtenemos los datos del usuario por el método POST
     $User = $_POST["NameUser"];
     $Password = $_POST["Password"];
@@ -22,8 +23,10 @@
             $DataOut = $ResultDB;
             $DataOut["Status"] = "Correct";
 
-            if( $ResultDB["TipoUsuario"] == "Capturista" ){
-                $DataOut["URL"] = "home_adm.php";
+            if( $ResultDB["Perfil"] == "Capturista" ){
+                $DataOut["URL"] = "home_capturista.html";
+            }else if( $ResultDB["Perfil"] == "Validador" ){
+                $DataOut["URL"] = "home_validador.html";
             }
 
         }else
