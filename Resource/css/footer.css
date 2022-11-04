@@ -1,0 +1,60 @@
+
+/* FOOTER CONTENT */
+
+.page-footer{
+    background-color: #E4ECFA;
+    color: black;
+    margin: 0 0 0 0 !important;
+    padding: 50px 150px 50px 150px !important;
+    box-shadow: none !important;
+}
+
+.img-seg-logo-footer{
+    width: 100% !important;
+}
+
+.seg-logo-footer{
+    height: 100px;
+    border-radius: 50px;
+}
+
+.img-igualdad-laboral{
+    width: 60% !important;
+}
+
+.row-images{
+    padding-top: 10px !important;
+}
+
+.mr-2{
+    margin-right: 10px !important;
+}
+
+.mb-0{
+    margin-bottom: 0 !important;
+}
+
+.collection-transparencia, .collection-social-networks{
+    border: none !important;
+}
+
+.collection-transparencia .collection-item, .collection-social-networks .collection-item{
+    background-color: transparent !important;
+    border-bottom: 1px solid lightgray !important;
+}
+
+.collection-transparencia .collection-item:hover,
+.collection-social-networks .collection-item:hover{
+    background-color: rgba(180, 180, 180, 0.2) !important;
+}
+
+.collection-transparencia a,
+.collection-social-networks a {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+.icon-social-networks{
+    font-size: 22px !important;
+}
+

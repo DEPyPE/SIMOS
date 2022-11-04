@@ -5,7 +5,12 @@ body{
 	margin: 0;
 	padding: 0;
 /*	background-color: rgba(224, 247, 250, 0.3) !important; */
+	background-color: white !important;
+}
+
+.col-section-simos{
 	background-color: #e7e7e7 !important;
+	margin-bottom: 0 !important;
 }
 
 .col-option{
@@ -18,10 +23,6 @@ body{
     margin-right: 10px;
     width: 129px;
     border-radius: 50px;
-}
-
-nav .brand-logo {
-    width: 40% !important;
 }
 
 /* COLOR CARD AND CONTAINERS */
