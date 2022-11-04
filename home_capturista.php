@@ -21,10 +21,10 @@
         require_once("menu_tabs.html");
     ?>
       
-      <div class="row row-simos">
+      <div class="row">
         <div class="col l1"></div>
 
-        <div class="col l10 section-simos">
+        <div class="col l10">
 
             <!--    SECCIÓN PARA LA INFORMACIÓN GENERAL DEL PROGRAMA SOCIAL -->
             <div id="general_information">
