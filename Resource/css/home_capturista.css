@@ -2,6 +2,15 @@
 body{
 	margin: 0;
 	padding: 0;
+	background-color: white !important;
+}
+
+.row-simos{
+	margin: 0 !important;
+}
+
+.section-simos{
+	padding: 40px 0 40px 0 !important;
 	background-color: #e7e7e7 !important;
 }
 
