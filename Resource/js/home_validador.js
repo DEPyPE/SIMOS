@@ -117,7 +117,7 @@ $('.projects-container').on('click', '.btn-open-project', function(){
     var elem_id = $(this).siblings('.id-project'); 
     var id_project = elem_id[0].innerText;
     var Projects = JSON.parse( localStorage.getItem('ProgramsProjectsByYear') );
-    var VistaProyectosURL = "vista_por_proyecto.html";
+    var VistaProyectosURL = "vista_por_proyecto.php";
     var SelectedProject;
 
     for(var i = 0; i < Projects.Length; i++){

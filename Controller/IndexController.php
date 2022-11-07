@@ -24,9 +24,9 @@
             $DataOut["Status"] = "Correct";
 
             if( $ResultDB["Perfil"] == "Capturista" ){
-                $DataOut["URL"] = "home_capturista.html";
+                $DataOut["URL"] = "home_capturista.php";
             }else if( $ResultDB["Perfil"] == "Validador" ){
-                $DataOut["URL"] = "home_validador.html";
+                $DataOut["URL"] = "home_validador.php";
             }
 
         }else

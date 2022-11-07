@@ -8,6 +8,7 @@
 }
 
 .nav-links{
+    height: 50px !important;
     padding: 0 9% 0 10px  !important;
     background-color: #E4ECFA !important;
     /* height: 80px !important; */
@@ -25,13 +26,10 @@
 }
 
 .main-nav-logo{
-    height: 92px !important;
+    height: 110px !important;
     padding: 5px 0px 5px 8% !important;
-    padding-top: 7px !important;
+    padding-top: 18px !important;
     box-shadow: none !important;
-}
-
-.main-nav-logo{
     background-color: white !important;
 }
 
@@ -55,6 +53,11 @@
     width: 100% !important;
 }
 
+.nav-links-text li a, .nav-links-text li a i{
+    height: 50px !important;
+    line-height: 50px !important;
+}
+
 .nav-links-text .text-links:hover{
     background-color: transparent !important;
     color: #fd7e14 !important;
@@ -65,8 +68,13 @@
     color: #fd7e14 !important;    
 }
 
+.nav-links-icons li a, .nav-links-icons li a i {
+    height: 50px !important;
+    line-height: 50px !important;
+}
+
 .nav-links-icons li a{
-    padding: 0px 9px !important;
+    padding: 0px 8px !important;
 }
 
 /* MENU DE TABS */

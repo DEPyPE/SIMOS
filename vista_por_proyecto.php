@@ -8,11 +8,14 @@
     <link href='https://fonts.googleapis.com/css?family=Baloo 2' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="Resource/Materialize/materialize.min.css"> 
-	<link rel="stylesheet" type="text/css" href="Resource/css/vista_por_proyecto.css">
+
+    <link rel="stylesheet" type="text/css" href="Resource/css/vista_por_proyecto.css">
+    <link rel="stylesheet" type="text/css" href="Resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="Resource/css/footer.css">
 </head>
 <body>
 
-    <!-- MENU PRINCIPAL -->
+    <!-- MENU PRINCIPAL
     <nav class="nav-extended light-blue darken-4">
         <div class="nav-wrapper">
             <div class="row row-menu-and-title">
@@ -34,16 +37,22 @@
                 <div class="col l1"></div>
                 <div class="col l10">
                     <ul class="tabs tabs-transparent">
-                        <li class="tab"><a href="#general_information">Información general <!--<i class="material-icons left">check</i>--></a></li>
-                        <li class="tab"><a class="active" href="#posicionamiento">Posicionamiento<!-- <i class="material-icons left">check</i> --></a></li>
-                        <li class="tab"><a href="#plan_de_mejora">Plan de mejora y monitoreo<!-- <i class="material-icons left">autorenew</i> --></a></li>
-                        <li class="tab"><a href="#formalizacion">Formalización<!-- <i class="material-icons left">autorenew</i> --></a></li>
+                        <li class="tab"><a href="#general_information">Información general </a></li>
+                        <li class="tab"><a class="active" href="#posicionamiento">Posicionamiento</a></li>
+                        <li class="tab"><a href="#plan_de_mejora">Plan de mejora y monitoreo</a></li>
+                        <li class="tab"><a href="#formalizacion">Formalización</a></li>
                     </ul>
                 </div>
                 <div class="col l1"></div>
             </div>
         </div>
     </nav>
+    -->
+
+    <?php
+      require_once("header.html");
+      require_once("menu_tabs.html");
+    ?>
       
 <!--    SECCIÓN PARA LA INFORMACIÓN GENERAL DEL PROGRAMA SOCIAL -->
         <div id="general_information">
@@ -332,6 +341,10 @@
 
         <div id="plan_de_mejora"></div>
         <div id="formalizacion"></div>
+
+        <?php
+            require_once("footer.html");
+        ?>
 
         <!-- Moment JS library 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
