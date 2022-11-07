@@ -1,8 +1,9 @@
 
 body{
-    background-color: #e7e7e7 !important;
+    background-color: rgba(240, 240, 240, 0.9) !important;
     margin: 0 !important;
     padding: 0 !important;
+    font-family: 'Baloo 2', cursive;
 }
 
 .row-slider-and-login{
@@ -56,13 +57,14 @@ body{
     margin: 0 !important;
     
     width: 100% !important;
-    height: 400px !important;
+    height: 350px !important;
 }
 
 /* SLIDES */
 
 .card-slider{
     margin-top: 0 !important;
+    height: 350px !important;
 
     float: left;
     width: 70% !important;
@@ -82,11 +84,32 @@ body{
     border-bottom-left-radius: 10px !important;
 }
 
+.slider .indicators {
+    top: 72% !important;
+    z-index: 10 !important;
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(4px) !important;
+    height: 26px;
+    width: 200px;
+    padding: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 25px;
+}
+
 .slides-content{
+    height: 350px !important;
     border-radius: 0 !important;
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%) !important;
     border-top-left-radius: 10px !important;
     border-bottom-left-radius: 10px !important;
+}
+
+.slides-content .caption{
+    padding: 15px 25px !important;
+    background-color: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(4px) !important;
+    border-radius: 15px !important;
 }
 
 .background-slide{
@@ -111,6 +134,10 @@ body{
     height: 100% !important;
 }
 
+.card-login .card-content{
+    padding: 65px 20px 50px 20px;
+}
+
 .btn-login, .btn-register{
     width: 100% !important;
 }
@@ -123,3 +150,11 @@ body{
     margin: 0 !important;
 }
 
+.txtbox-input-user{
+    margin-bottom: 30px !important;
+}
+
+.btn-login-simos{
+    width: 100% !important;
+    border-radius: 25px !important;
+}

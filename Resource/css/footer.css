@@ -5,21 +5,26 @@
     background-color: #E4ECFA;
     color: black;
     margin: 0 0 0 0 !important;
-    padding: 50px 150px 50px 150px !important;
+    padding: 10px !important;
     box-shadow: none !important;
+    height: 150px !important;
 }
 
 .img-seg-logo-footer{
     width: 100% !important;
 }
 
-.seg-logo-footer{
-    height: 100px;
-    border-radius: 50px;
+.ubicacionessedes:first-child{
+    padding-top: 30px !important;
+}
+
+.ubicacionessedes:last-child{
+    padding-top: 30px !important;
 }
 
 .img-igualdad-laboral{
-    width: 60% !important;
+    left: 70% !important;
+    width: 10% !important;
 }
 
 .row-images{

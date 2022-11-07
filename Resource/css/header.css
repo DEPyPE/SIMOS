@@ -27,10 +27,26 @@
 
 .main-nav-logo{
     height: 110px !important;
-    padding: 5px 0px 5px 8% !important;
-    padding-top: 18px !important;
+    padding: 10px 5px 10px 8% !important;
     box-shadow: none !important;
     background-color: white !important;
+}
+
+.main-nav-logo .row .brand-logo{
+    padding-top: 10px !important;
+}
+
+.img-seg-logo{
+    width: 100% !important;
+}
+
+.main-title-simos{
+    margin: 12px 0 !important;
+    color: black !important;
+    font-size: 30px !important;
+    font-weight: 900 !important;
+    width: 100% !important;
+    line-height: 35px !important;
 }
 
 .main-nav-options{
@@ -47,10 +63,6 @@
 
 .logo-sitemap{
     font-size: 14px !important;
-}
-
-.img-seg-logo{
-    width: 100% !important;
 }
 
 .nav-links-text li a, .nav-links-text li a i{
