@@ -1,4 +1,21 @@
 
+var UserData = JSON.parse( localStorage.getItem('UserData') );
+
+//  Agregamos la información del usuario al sub menú y el nombre de la sección
+$('.name-user').text( UserData.Nombre + " " + UserData.Apellidos  );
+$('.email-user').text( UserData.Correo );
+$('.profile-user').text( UserData.Perfil );
+
+//  Ocultamos los accesos directos a las notificaciones
+$('.notifications-shortcut').hide();
+
+//  Seleccionamos la sección de Información general y ocultamos las otras secciones
+$('.name-section').text( "Información general" );
+$('#general_information').fadeIn();
+$('#posicionamiento').hide();
+$('#plan_de_mejora').hide();
+$('#formalizacion').hide();
+
 $(function(){
     $('.collapsible').collapsible();
     $('.sidenav').sidenav();
@@ -12,8 +29,6 @@ $(function(){
     
 
     Read_ProgramProjectInformation();
-    Read_EvaluationInformation();
-    Read_GeneralOpinion();
 });
 
 // *****   INFORMACIÓN GENERAL DEL PROYECTO   ******
@@ -50,6 +65,9 @@ function Read_ProgramProjectInformation(){
         localStorage.setItem( "ProgramProjectInfo", JSON.stringify(Info) );
     }).done(function(){
         Show_ProgramProjectInformation();
+
+        Read_EvaluationInformation();
+        Read_GeneralOpinion();
     }).fail(function(){
         $('.preloader-ft-program').fadeOut();
         $('.table-ficha-tecnica-proyecto').hide();
@@ -487,15 +505,3 @@ function Read_ObservacionById(data){
         console.log(response);
     });
 }
-
-// + --- + ---- + ---- + ---- + --- + ---- + ---- + ----- + ---- + ------ +
-
-// * * Eventos de la sesión 
-$('.close-session').on('click', function(){
-    localStorage.clear();
-    M.toast({html: 'Hasta luego', classes: 'blue rounded'});
-
-    setTimeout( function(){
-        window.location = 'index.html';
-    }, 500 );
-});

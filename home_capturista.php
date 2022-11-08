@@ -11,14 +11,17 @@
     <link rel="stylesheet" type="text/css" href="Resource/Materialize/materialize.min.css"> 
 	  
     <link rel="stylesheet" type="text/css" href="Resource/css/home_capturista.css">
-    <link rel="stylesheet" type="text/css" href="Resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="Resource/css/header_links.css">
+    <link rel="stylesheet" type="text/css" href="Resource/css/header_menu.css">
+    <link rel="stylesheet" type="text/css" href="Resource/css/navbar_information.css">
     <link rel="stylesheet" type="text/css" href="Resource/css/footer.css">
 </head>
 <body>
 
     <?php
-        require_once("header.html");
-        require_once("menu_tabs.html");
+        require_once("header_links.html");
+        require_once("header_menu.html");
+        require_once("navbar_information.html");
     ?>
       
       <div class="row">
@@ -30,9 +33,7 @@
             <div id="general_information">
 
                 <div class="row">
-                    <div class="col l1"></div>
-                    
-                    <div class="col l5">
+                    <div class="col l6">
                         <div class="card card-program">
                             <div class="card-content card-content-ft-proyecto">
                                 
@@ -102,7 +103,7 @@
                         </div>
                     </div>
 
-                    <div class="col l5">
+                    <div class="col l6">
                         <div class="card card-evaluation">
                             <div class="card-content card-content-evaluation">
 
@@ -167,8 +168,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col l1"></div>
                 </div>
 
             </div>
@@ -532,6 +531,9 @@
 
     <!-- Materialize CSS Framework -->
     <script src="Resource/Materialize/materialize.min.js"></script>
+
+    <!-- Header menu script -->
+    <script src="Resource/js/header_menu.js"></script>
 
     <!-- Scripts of JS -->
     <script src="Resource/js/home_capturista.js"></script>

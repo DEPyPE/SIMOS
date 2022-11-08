@@ -6,22 +6,28 @@
     <title>Inicio</title>
 
     <link href='https://fonts.googleapis.com/css?family=Baloo 2' rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/proxima-nova-2" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="Resource/Materialize/materialize.min.css"> 
 
+    <!-- Hojas de estilo -->
 	  <link rel="stylesheet" type="text/css" href="Resource/css/index.css">
     <link rel="stylesheet" type="text/css" href="Resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="Resource/css/header_links.css">
     <link rel="stylesheet" type="text/css" href="Resource/css/footer.css">
 </head>
 <body>
 
     <!-- INSTANCIAMOS EL HEADER -->
-    <?php  require_once("header.html") ?>
+    <?php
+        require_once("header_links.html");
+        require_once("header.html");
+    ?>
 
     <div class="row row-slider-and-login">
         <div class="col l2"></div>
-        <div class="col l8">
+        <div class="col l8 m12 s12">
 
           <div class="cards-login-container">
             <div class="card card-slider">

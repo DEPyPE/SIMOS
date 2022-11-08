@@ -7,24 +7,6 @@
     border-radius: 50px;
 }
 
-.nav-links{
-    height: 50px !important;
-    padding: 0 9% 0 10px  !important;
-    background-color: #E4ECFA !important;
-    /* height: 80px !important; */
-}
-
-.text-links{
-    color: #000F9F !important;
-    font-size: 12px !important;
-    text-decoration: none !important;
-    font-family: 'Proxima-Nova-Reg' !important;
-}
-
-.icon-links{
-    color: #0066FF !important;
-}
-
 .main-nav-logo{
     height: 110px !important;
     padding: 10px 5px 10px 8% !important;
@@ -37,16 +19,45 @@
 }
 
 .img-seg-logo{
-    width: 100% !important;
+    height: 100%;
+    width: 316px;
 }
 
 .main-title-simos{
-    margin: 12px 0 !important;
+    margin: 22px 0 !important;
     color: black !important;
-    font-size: 30px !important;
-    font-weight: 900 !important;
     width: 100% !important;
-    line-height: 35px !important;
+    line-height: 25px !important;
+
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    font-family: 'Proxima Nova', sans-serif;
+}
+
+.siglas-simos{
+    margin: 12px 20px 12px 0 !important;
+
+    font-weight: 600;
+    font-size: 56px;
+    font-style: normal;
+    line-height: 25px !important;
+}
+
+.strong-text{
+    font-size: 21px;
+    font-weight: 700 !important;
+    font-style: normal;
+    display: inline;
+    line-height: 25px !important;
+}
+
+.light-text{
+    color: rgb(70, 70, 70);
+    font-size: 20px;
+    font-weight: 700 !important;
+    font-style: normal;
+    display: inline;
+    line-height: 25px !important;
 }
 
 .main-nav-options{
@@ -63,66 +74,4 @@
 
 .logo-sitemap{
     font-size: 14px !important;
-}
-
-.nav-links-text li a, .nav-links-text li a i{
-    height: 50px !important;
-    line-height: 50px !important;
-}
-
-.nav-links-text .text-links:hover{
-    background-color: transparent !important;
-    color: #fd7e14 !important;
-}
-
-.nav-links-icons .icon-links:hover{
-    background-color: transparent !important;
-    color: #fd7e14 !important;    
-}
-
-.nav-links-icons li a, .nav-links-icons li a i {
-    height: 50px !important;
-    line-height: 50px !important;
-}
-
-.nav-links-icons li a{
-    padding: 0px 8px !important;
-}
-
-/* MENU DE TABS */
-
-.row-tabs{
-    padding: 0 !important;
-    margin: 0 0 30px 0 !important;
-}
-
-.tabs-sections{
-    margin-top: 0 !important;
-}
-
-.tabs-sections li a{
-    color: white !important;
-}
-
-.tabs .tab a.active {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    color: white !important;
-}
-
-.tabs .indicator {
-    background-color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.tab-close-session{
-    padding: 10px 12px !important;
-    margin: 0 !important;
-}
-
-.tab-close-session li a{
-    color: white !important;
-}
-
-.tab-close-session:hover{
-    background-color: rgba(0, 0, 0, 0.1);
-    cursor: pointer !important;
 }

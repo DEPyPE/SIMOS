@@ -1,5 +1,17 @@
 
 var UserData = JSON.parse( localStorage.getItem('UserData') );
+Read_ProgramProjectInformation();
+
+//  Ocultamos el acceso directo a los proyecos registrados y las notificaciones
+$('.home-projects-shortcut').hide();
+$('.notifications-shortcut').hide();
+
+//  Seleccionamos la sección de Información general y ocultamos las otras secciones
+$('.name-section').text( "Información general" );
+$('#general_information').fadeIn();
+$('#posicionamiento').hide();
+$('#plan_de_mejora').hide();
+$('#formalizacion').hide();
 
 $(function(){
     $('.collapsible').collapsible();
@@ -12,9 +24,6 @@ $(function(){
     $('.datepicker').datepicker();
     $('select').formSelect();
 
-    Read_ProgramProjectInformation();
-    Read_EvaluationInformation();
-    Read_GeneralOpinion();
 });
 
 // *****   INFORMACIÓN GENERAL DEL PROYECTO   ******
@@ -56,6 +65,9 @@ function Read_ProgramProjectInformation(){
         localStorage.setItem( "ProgramProjectInfo", JSON.stringify(Info) );
     }).done(function(){
         Show_ProgramProjectInformation();
+
+        Read_EvaluationInformation();
+        Read_GeneralOpinion();
     }).fail(function(){
         $('.preloader-ft-program').fadeOut();
         $('.table-ficha-tecnica-proyecto').hide();

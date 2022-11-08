@@ -1,6 +1,18 @@
 
 var UserData = JSON.parse( localStorage.getItem('UserData') );
 
+//  Agregamos la información del usuario al sub menú y el nombre de la sección
+$('.name-user').text( UserData.Nombre + " " + UserData.Apellidos  );
+$('.email-user').text( UserData.Correo );
+$('.profile-user').text( UserData.Perfil );
+$('.name-section').text('Proyectos registrados');
+
+//  Ocultamos los accesos directos al menu de secciones, a las notificaciones y el
+//  acceso directo al menu de proyectos
+$('.home-projects-shortcut').hide();
+$('.dropdown-trigger-menu').hide();
+$('.notifications-shortcut').hide();
+
 function Get_AllYearsOfProjects(){
     $('.select-ejercicio-fiscal').prop('disabled', 'disabled');
 
@@ -103,11 +115,8 @@ $(function () {
     $('.dropdown-trigger').dropdown();
     $('.tabs').tabs();
     $('.modal').modal();
-    $(".dropdown-trigger").dropdown();
     $('.slider').slider();
-
-    // Asignamos nombre y perfil
-    $('.user-info-header').text( '/ '+UserData.Nombre+' ('+ UserData.Perfil + ')' );
+    $('.tooltipped').tooltip();
 
     Show_DataUser();
     Get_AllYearsOfProjects();

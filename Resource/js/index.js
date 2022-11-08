@@ -12,7 +12,7 @@ $(function(){
     console.log( 'Init SIMOS' );
 });
 
-$('.btn-login').on('click', function(){
+$('.btn-login-simos').on('click', function(){
     var user = $('#txt_user').val();
     var pass = $('#txt_password').val();
 
