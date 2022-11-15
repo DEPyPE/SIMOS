@@ -5,6 +5,10 @@ var UserData = JSON.parse( localStorage.getItem('UserData') );
 $('.name-user').text( UserData.Nombre + " " + UserData.Apellidos  );
 $('.email-user').text( UserData.Correo );
 $('.profile-user').text( UserData.Perfil );
+$('.profile-user').css({
+    'font-size': '28px',
+    'margin-top': '40px'
+});
 
 //  Ocultamos los accesos directos a las notificaciones
 $('.notifications-shortcut').hide();
@@ -349,16 +353,19 @@ function Show_GeneralOpinion(){
     if( GO.Status == "Correct" ){
 
         if( GO.EstadoValidacion == "Información capturada" ){
-            // Ocultamos botones
+            //  Ocultamos botones
             $('.indicator-general-opinion-validate').hide();
             $('.btn-modal2validate-general-opinion').hide();
 
-            //Ocultamos el contenedor del texto para la opinión general
+            //  Ocultamos el contenedor del texto para la opinión general
             Set_GeneralOpinion_Textbox();
             $('#txtMainOpinionGeneral').show();
 
-            // Mostramos el mensaje de que no existe una Opinión General
+            // Ocultamos el mensaje de que no existe una Opinión General
             $('.OG_SinInfo').hide();
+
+            //  Mostramos el contenedor para la observación
+            $('.OpinionGeneralObservaciones-Container').show();
         }else if( GO.EstadoValidacion == "Enviada para validación" ){
             // Ocultamos botones
             $('.indicator-general-opinion-validate').hide();
@@ -368,19 +375,27 @@ function Show_GeneralOpinion(){
             Set_GeneralOpinion_Textbox();
             $('#txtMainOpinionGeneral').show();
 
-            // Mostramos el mensaje de que no existe una Opinión General
+            // Ocultamos el mensaje de que no existe una Opinión General
             $('.OG_SinInfo').hide();
+
+            //  Mostramos el contenedor para la observación
+            $('.OpinionGeneralObservaciones-Container').show();
         }else if( GO.EstadoValidacion == "Información validada" ){
-            // Ocultamos botones
+
+            console.log( '<<<< Opinión general validada >>>>' );
+            //  Ocultamos botones
             $('.indicator-general-opinion-validate').show();
             $('.btn-modal2validate-general-opinion').hide();
 
-            //Ocultamos el contenedor del texto para la opinión general
+            //  Ocultamos el contenedor del texto para la opinión general
             Set_GeneralOpinion_Textbox();
             $('#txtMainOpinionGeneral').show();
 
-            // Mostramos el mensaje de que no existe una Opinión General
+            //  Mostramos el mensaje de que no existe una Opinión General
             $('.OG_SinInfo').hide();
+
+            //  Ocultamos el contenedor para la observación
+            $('.OpinionGeneralObservaciones-Container').hide();
         }
 
         console.log( GO );
@@ -403,7 +418,7 @@ function Show_GeneralOpinion(){
                 $('.NoValidatorObservation-title').text( GO.Estado );
                 $('.TxtLastObservation').hide();
     
-                $('.OpinionGeneralObservaciones-Container').show();
+                $('.OpinionGeneralObservaciones-Container').hide();
                 $('.OpinionGeneral-ObservacionesBody').hide();
                 $('.OpinionGeneral-NoObservacionesBody').show();
             }

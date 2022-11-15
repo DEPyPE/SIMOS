@@ -48,9 +48,9 @@
 }
 
 #dropdown-user-information{
-    width: 270px !important;
-    left: 74.3% !important;
-    height: 200px !important;
+    width: 300px !important;
+    left: 71.3% !important;
+    height: 220px !important;
     overflow-y: hidden !important;
 }
 
@@ -65,7 +65,7 @@
 
 #dropdown-user-information li:first-child{
     padding: 10px 20px !important;
-    height: 150px !important;
+    height: 170px !important;
     cursor: default !important;
 }
 
@@ -79,19 +79,29 @@
 }
 
 .name-user{
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 600;
+    line-height: 20px !important;
 }
 
 .email-user{
     font-size: 13px;
+    margin-top: -10px !important;
 }
 
-.profile-user{
-    font-size: 24px;
+.project-program-user{
+    font-size: 28px;
     margin-top: 35px;
     text-align: center;
 }
+
+.profile-user{
+    font-size: 18px;
+    margin-top: -8px;
+    text-align: center;
+}
+
+
 
 
 

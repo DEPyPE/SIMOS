@@ -10,7 +10,7 @@ VALUES ('magadan_vega@guanajuato.gob.mx', 'isa123', 'Validador', 'Rosa Isabel', 
     
 # Tabla ProgramaProyecto
 INSERT INTO ProgramaProyecto(ID_Usuario, Nombre, Clave, NombreResponsable, DependenciaResponsable, SiglasDR, UnidadResponsable, SiglasUR, EjercicioFiscal, PorcentajeAvance, Etapa, SubEtapa, EstadoValidacion)
-VALUES(1, 'Fondo de Aportaciones para la Educación Tecnológica y Adulta, Subfondo Educación de Adultos', 'FAETA', 'Ing. Eusebio Vega Pérez', 'Instituo de ALfabetización y Educación Básica del Estado de Guanajuato', 'INAEBA', 'No disponible', 'No disponible', '2019', '20', 'Información general', 'Información del programa o proyecto capturada', 'Información validada');
+VALUES(1, '', '', '', '', '', '', '', '2019', '0', 'Información general', 'Sin información', 'Sin información');
 
 # Tabla Evaluacion
 INSERT INTO Evaluacion(ID_ProgramaProyecto, InstanciaEvaluadora, NombreDeLaEvaluacion, TipoDeEvaluacion, AñoDeEvaluacion, NombreDelInforme, URL_Informe, CostoEvaluacion, EstadoValidacion)

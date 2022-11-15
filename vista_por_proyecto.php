@@ -58,7 +58,7 @@
     ?>
       
 <!--    SECCIÓN PARA LA INFORMACIÓN GENERAL DEL PROGRAMA SOCIAL -->
-        <div id="general_information">
+        <div id="informacion_general">
             <div class="row">
                 <div class="col l1"></div>
                 
@@ -235,7 +235,7 @@
                   <strong class="title-general-comments">
                       Opinión general
                       
-                      <i class="material-icons right indicator-general-opinion-validate tooltipped" data-position="bottom" data-tooltip="Opinión general validada">check</i>
+                      <i class="material-icons right teal darken-2 indicator-general-opinion-validate tooltipped" data-position="bottom" data-tooltip="Opinión general validada">check</i>
                       <a class="btn-floating btn-small btn-modal2validate-general-opinion waves-effect yellow darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Validar opinión general" href="#ModalValidateGeneralOpinion"><i class="material-icons">assignment_late</i></a>
                   </strong>
                 </span>
@@ -342,28 +342,27 @@
               </div>
             </div>
 
-        <div id="plan_de_mejora"></div>
-        <div id="formalizacion"></div>
 
-        <?php
-            require_once("footer.html");
-        ?>
+  <?php
+      require_once("footer.html");
+  ?>
 
-        <!-- Moment JS library 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>-->
-        
-        <!-- JQuery library -->
-        <script src="Resource/jQuery/jquery-3.2.1.min.js"></script>
+  <!-- Moment JS library 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>-->
+  
+  <!-- JQuery library -->
+  <script src="Resource/jQuery/jquery-3.2.1.min.js"></script>
 
-        <!-- Materialize CSS Framework -->
-        <script src="Resource/Materialize/materialize.min.js"></script>
+  <!-- Materialize CSS Framework -->
+  <script src="Resource/Materialize/materialize.min.js"></script>
 
-        <!-- Navbar information script -->
-        <script src="Resource/js/header_menu.js"></script>
+  <!-- Navbar information script -->
+  <script src="Resource/js/header_menu.js"></script>
 
-        <!-- Scripts of JS -->
-        <script src="Resource/js/vista_por_proyecto.js"></script>
+  <!-- Scripts of JS -->
+  <script src="Resource/js/vista_por_proyecto.js"></script>
+
 </body>
 </html>
 

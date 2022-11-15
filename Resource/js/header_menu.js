@@ -1,10 +1,6 @@
 
 var UserData = JSON.parse( localStorage.getItem('UserData') );
 
-$('.name-user').text( UserData.Nombre + " " + UserData.Apellidos  );
-$('.email-user').text( UserData.Correo );
-$('.profile-user').text( UserData.Perfil );
-
 $(function(){
     $('.dropdown-trigger').dropdown();
 });
@@ -12,30 +8,33 @@ $(function(){
 $('#dropdown-menu-sections li').on('click', 'a', function(){
     var section = $(this)[0].innerHTML;
 
-    $('.name-section').text( section );
-
-    if( section == "Información general" ){
-        $('#general_information').fadeIn();
-        $('#posicionamiento').hide();
-        $('#plan_de_mejora').hide();
-        $('#formalizacion').hide();
-    }else if( section == "Posicionamiento" ){
-        $('#general_information').hide();
-        $('#posicionamiento').fadeIn();
-        $('#plan_de_mejora').hide();
-        $('#formalizacion').hide();
-    }else if( section == "Plan de mejora y monitoreo" ){
-        $('#general_information').hide();
-        $('#posicionamiento').hide();
-        $('#plan_de_mejora').fadeIn();
-        $('#formalizacion').hide();
-    }else if( section == "Formalización" ){
-        $('#general_information').hide();
-        $('#posicionamiento').hide();
-        $('#plan_de_mejora').hide();
-        $('#formalizacion').fadeIn();
+    if( section == "Información general" || section == "Posicionamiento" ){
+        $('.name-section').text( section );
+    }else{
+        $('.name-section').html( section + " (En construcción)" );
     }
-
+    
+    if( section == "Información general" ){
+        $('#informacion_general').fadeIn(400);
+        $('#posicionamiento').fadeOut(200);
+        $('#plan_de_mejora').fadeOut(200);
+        $('#formalizacion').fadeOut(200);
+    }else if( section == "Posicionamiento" ){
+        $('#informacion_general').fadeOut(200);
+        $('#posicionamiento').fadeIn(400);
+        $('#plan_de_mejora').fadeOut(200);
+        $('#formalizacion').fadeOut(200);
+    }else if( section == "Plan de mejora y monitoreo" ){
+        $('#informacion_general').fadeOut(200);
+        $('#posicionamiento').fadeOut(200);
+        $('#plan_de_mejora').fadeIn(400);
+        $('#formalizacion').fadeOut(200);
+    }else if( section == "Formalización" ){
+        $('#informacion_general').fadeOut(200);
+        $('#posicionamiento').fadeOut(200);
+        $('#plan_de_mejora').fadeOut(200);
+        $('#formalizacion').fadeIn(400);
+    }
 });
 
 // + --- + ---- + ---- + ---- + --- + ---- + ---- + ----- + ---- + ------ +

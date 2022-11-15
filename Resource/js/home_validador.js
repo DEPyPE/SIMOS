@@ -5,6 +5,12 @@ var UserData = JSON.parse( localStorage.getItem('UserData') );
 $('.name-user').text( UserData.Nombre + " " + UserData.Apellidos  );
 $('.email-user').text( UserData.Correo );
 $('.profile-user').text( UserData.Perfil );
+
+$('.profile-user').css({
+    'font-size': '28px',
+    'margin-top': '40px'
+});
+
 $('.name-section').text('Proyectos registrados');
 
 //  Ocultamos los accesos directos al menu de secciones, a las notificaciones y el

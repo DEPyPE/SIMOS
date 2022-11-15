@@ -13,6 +13,11 @@ $('#posicionamiento').hide();
 $('#plan_de_mejora').hide();
 $('#formalizacion').hide();
 
+//  Agregamos la información del usuario al sub menú
+$('.name-user').text( UserData.Nombre + " " + UserData.Apellidos  );
+$('.email-user').text( UserData.Correo );
+$('.profile-user').text( "(" + UserData.Perfil + ")" );
+
 $(function(){
     $('.collapsible').collapsible();
     $('.sidenav').sidenav();
@@ -90,7 +95,8 @@ function Show_ProgramProjectInformation(){
     var ProgramProjectInfo = JSON.parse( localStorage.getItem('ProgramProjectInfo') );
 
     //  Mostramos el nombre del usuario y su perfil
-    $('.user-info-header').text( "/ "+ProgramProjectInfo.Clave+" ("+UserData.Perfil+")" );
+    $('.project-program-user').text( ProgramProjectInfo.Clave );
+    
     
     if( ProgramProjectInfo.Status == "Correct" ){
 

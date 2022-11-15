@@ -2,16 +2,16 @@
 <?php
 
     Class DatabaseConnectionClass{
-        private $User;
         private $Host;
+        private $User;
         private $Pass;
         private $DatabaseName;
 
         public function __construct(){
-            $this->User = "root";
-            $this->Host = "localhost";
-            $this->Pass = "UtnCboV1";
-            $this->DatabaseName = "SIMOS_DB";  
+            $this->Host = "localhost" ;
+            $this->User = "root" ;
+            $this->Pass = "UtnCboV1" ;
+            $this->DatabaseName = "SIMOS_DB" ;
         }
 
         public function OpenConnection(){
@@ -23,7 +23,5 @@
 
             return $Connection;
         }
-
     }
-
 ?>
