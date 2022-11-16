@@ -77,28 +77,39 @@ CREATE TABLE OpinionGeneral(
     FOREIGN KEY( ID_ProgramaProyecto ) 	REFERENCES ProgramaProyecto( ID_ProgramaProyecto )
 )ENGINE = InnoDB;
 
-/*
-
-#	7. TABLA PARA ALMACENAR DATOS SOBRE LOS TEMAS Y SU CONTENIDO
+#	5 TABLA PARA ALMACENAR DATOS SOBRE LOS TEMAS Y SU CONTENIDO
 CREATE TABLE Tema(
 	ID_Tema INT AUTO_INCREMENT NOT NULL,
-    ID_Observacion INT NOT NULL,
+    ID_ProgramaProyecto	INT NOT NULL,
     
-    TituloDelTema		VARCHAR(200),
-    ContenidoDelTema	VARCHAR(1000),
+    #	Contenido del Tema
+    TituloDelTema		VARCHAR(1000),
+    ContenidoDelTema	VARCHAR(5000),
     
-    PRIMARY KEY( ID_Tema 		),
-    FOREIGN KEY( ID_Observacion ) REFERENCES Observacion( ID_Observacion )
+    #	Contenido de la observación
+	Observacion		VARCHAR(500),
+	ConObservacion	BOOLEAN,
+	Descripcion		VARCHAR(200),
+	IconoEstado		VARCHAR(100),
+	Estado			VARCHAR(100),
+    
+    PRIMARY KEY( ID_Tema ),
+    FOREIGN KEY( ID_ProgramaProyecto ) 	REFERENCES ProgramaProyecto( ID_ProgramaProyecto )
 )ENGINE = InnoDB;
 
-#	7.1 TABLA PARA ALMACENAR DATOS SOBRE LOS COMENTARIOS Y OBSERVACIONES ESPECIFICAS DEL POSICIONAMIENTO
+/*
+#	5 TABLA PARA ALMACENAR DATOS SOBRE LOS COMENTARIOS Y OBSERVACIONES ESPECIFICAS DEL POSICIONAMIENTO
 CREATE TABLE ComentarioYObservacionesEspecificosPorTema(
 	ID_ComentarioYObservacionesEspecificosPorTema INT AUTO_INCREMENT NOT NULL,
-    ID_Tema INT NOT NULL,
+    ID_ProgramaProyecto	INT NOT NULL,
     
-    Título 	VARCHAR(200),
+    Título 	VARCHAR(500),
     
     PRIMARY KEY( ID_ComentarioYObservacionesEspecificosPorTema ),
-    FOREIGN KEY( ID_Tema ) REFERENCES Tema(ID_Tema )
-)
+    FOREIGN KEY( ID_ProgramaProyecto ) 	REFERENCES ProgramaProyecto( ID_ProgramaProyecto )
+) ENGINE = InnoDB;
 */
+
+
+
+

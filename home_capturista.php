@@ -350,33 +350,29 @@
 
                         <textarea disabled id="txtOpinionGeneral-ValidatorObservation" class="materialize-textarea"></textarea>
                       </div>
-
-                      <!--
-                      <div class="no-observation-body OpinionGeneral-NoObservacionesBody">
-                            <h5 class="NoValidatorObservation-title">
-                              Sin observaciones
-                            </h5>
-                      </div>-->
                     </div>
 
-                </div>
+                  </div>
+
                 </div>
               </div>
 
-            <!--
               <div class="container">
                 <div class="card">
                   <div class="card-content card-content-comments">
                       <span class="card-title card-title-comments">
                         <strong>
                           <h4 class="title-specific-comments">
-                              <strong>Comentarios y observaciones específicos por tema</strong>
+                              Comentarios y observaciones <br> específicos por tema
+
+                              <a class="btn-floating btn-small btn-add-tema  waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar nuevo tema" href="#ModalAddModifyDataTheme"><i class="material-icons">add</i></a>
                           </h4>
                         </strong>
                       </span>
                       <br>
 
-                      <div class="row">
+                      <!--
+                      <div class="row ComentarioYObservaciones-title-container">
                         <div class="col l11 m11 s10">
                           <textarea disabled id="ComentariosObservacionesEspecificosPorTema_Titulo" class="materialize-textarea"></textarea>
                         </div>
@@ -384,7 +380,7 @@
                           <a class="btn-floating btn-small btn-edit-specific-comments-title waves-effect yellow darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Modificar el titulo de la sección" href="#ModalModifyGeneralSpecificComments_Titulo"><i class="material-icons">edit</i></a>
                         </div>
                       </div>
-                      
+                      -->
 
                       <table class="highlight table-observaciones-especificas">
                         <thead>
@@ -399,11 +395,11 @@
                         </tbody>
                       </table>
 
-                      <h6 class="OG_SinInfo">Sin información registrada</h6>
+                      <h6 class="Temas_SinInfo">Sin información registrada</h6>
                   </div>
                 </div>
               </div>
-            -->
+
             </div>
 
                 <!-- MODAL PARA AGREGAR/MODIFICAR LA INFORMACIÓN SOBRE "OPINIÓN GENERAL"-->
@@ -445,11 +441,9 @@
                   </div>
                 </div>
 
-                <!-- MODAL PARA MODIFICAR LA INFORMACIÓN DEL TITULO DE LOS COMENTARIOS ESPECIFICOS POR TEMA -->
+                <!-- MODAL PARA MODIFICAR LA INFORMACIÓN DEL TITULO DE LOS COMENTARIOS ESPECIFICOS POR TEMA
                 <div id="ModalModifyGeneralSpecificComments_Titulo" class="modal modal-add-opinion-general modal-fixed-footer">
                   <div class="modal-content">
-                    
-                      <!--<h5 class="title-modal-add-project-info">Información de la opinión general </h5>-->
                       
                       <div class="row m-b0">                
                           <div class="col l12 m12 s12">
@@ -468,9 +462,10 @@
                     <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar</a>
                   </div>
                 </div>
+                -->
 
                 <!-- MODAL PARA MODIFICAR UN TEMA EN ESPECÍFICO Y SU INFORMACIÓN -->
-                <div id="ModalModifyDataTheme" class="modal modal-add-opinion-general modal-fixed-footer">
+                <div id="ModalAddModifyDataTheme" class="modal modal-add-opinion-general modal-fixed-footer">
                   <div class="modal-content">
                       
                       <div class="row m-b0">              
@@ -486,17 +481,19 @@
                               </div>
 
                               <div class="row">
-                                  <div class="col l9">
-                                      <h5 class="title-ObservacionValidador">Observación del validador </h5>
+                                  <div class="col l12">
 
-                                      <h6 class="NoValidatorComment"><br>Sin observaciones del validador</h6>
-                                      <div class="input-field InputFieldValidatorComment">
-                                          <textarea disabled id="txtModalObservacionValidador" class="materialize-textarea"></textarea>
+                                    <div class="ValidatorObservationContainer TemasObservaciones-Container">
+                                      <div class="observation-body Temas-ObservacionesBody">
+                                        <h5>
+                                          <span class="ValidatorObservation-title">Observación realizada:</span>
+                                          <a class="btn-floating btn-small btnTema-AtendedObservation waves-effect orange darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Marcar como atendida" href="#ModalOGAtendedObservation"><i class="material-icons">launch</i></a>
+                                        </h5>
+
+                                        <textarea disabled id="txtTemas-ValidatorObservation" class="materialize-textarea"></textarea>
                                       </div>
+                                    </div>
 
-                                      <i class="estatus-observacion-enviada-container"> Estatus: <i class="status-observacion-enviada"></i> </i><br>
-                                      <!--<a class="waves-effect waves-light btn btn-send-for-validation blue darken-3 ">Enviar para validación <i class="material-icons right">send</i></a>-->
-                                      <br>
                                   </div>
                               </div>
 
@@ -507,8 +504,9 @@
                   </div>
 
                   <div class="modal-footer">
-                    <a href="#!" class="btn-small waves-effect yellow darken-2 btn-modify-tema-especifico">Actualizar y enviar para validación</a>
-                    <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar</a>
+                    <a href="#!" class="btn-small waves-effect green darken-2 btn-send-to-validate-tema left">Enviar para validación <i class="material-icons left">send</i> </a>
+                    <a href="#!" class="btn-small waves-effect blue darken-2 btn-modify-tema-especifico">Guardar <i class="material-icons left">save</i> </a>
+                    <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar <i class="material-icons left">close</i> </a>
                   </div>
                 </div>
 

@@ -14,9 +14,9 @@ $('.profile-user').css({
 $('.notifications-shortcut').hide();
 
 //  Seleccionamos la sección de Información general y ocultamos las otras secciones
-$('.name-section').text( "Información general" );
-$('#general_information').fadeIn();
-$('#posicionamiento').hide();
+$('.name-section').text( "Posicionamiento" );
+$('#informacion_general').hide();
+$('#posicionamiento').fadeIn();
 $('#plan_de_mejora').hide();
 $('#formalizacion').hide();
 
@@ -72,6 +72,7 @@ function Read_ProgramProjectInformation(){
 
         Read_EvaluationInformation();
         Read_GeneralOpinion();
+        Read_Temas();
     }).fail(function(){
         $('.preloader-ft-program').fadeOut();
         $('.table-ficha-tecnica-proyecto').hide();
@@ -398,7 +399,6 @@ function Show_GeneralOpinion(){
             $('.OpinionGeneralObservaciones-Container').hide();
         }
 
-        console.log( GO );
         if( GO.ConObservacion == "1" ){
             $('.OpinionGeneralObservaciones-Container').show();
             $('#txtOpinionGeneral-ValidatorObservation').val( GO.Descripcion );
@@ -520,3 +520,124 @@ function Read_ObservacionById(data){
         console.log(response);
     });
 }
+
+// *****   COMENTARIOS Y OBSERVACIONES ESPECÍFICOS POR TEMA   ******
+// * * * * Funciones CRUD y eventos:
+// * * (C) Create
+// * * (R) Read
+// * * (U) Update
+
+// * * * (C) Create
+
+$('.btn-add-tema').on('click', function(){
+    $('.TemasObservaciones-Container').hide();
+    $('.btn-send-to-validate-tema').hide();
+});
+
+
+// * * * (R) Read
+
+function Show_Temas(){
+    var Temas = JSON.parse( localStorage.getItem('Temas') );
+    console.log( "Data => ", Temas );
+
+    //  Mostramos la tabla
+    $('.table-observaciones-especificas').show();
+
+    //  Ocultamos el mensaje
+    $('.Temas_SinInfo').hide();
+    
+    if( Temas.Status == "Correct" ){
+
+        var TableContent = '';
+        for(var i = 0; i < Temas.Length; i++){
+
+            TableContent = TableContent +   "<tr>" +
+                                                "<td>"+ Temas[i].TituloDelTema +"<strong class='id_tema'>"+Temas[i].ID_Tema+"</strong> </td>" +
+                                                "<td>"+ Temas[i].ContenidoDelTema +"</td>" +
+                                                "<td class='center-align'> <i class='material-icons'>"+ Temas[i].IconoEstado +"</i></td>" +
+                                            "</tr>";
+        }
+
+        $('.Table_TemasComentariosPorTema').html( TableContent );
+        
+        /*
+        if( GO.ConObservacion == "1" ){
+            $('.OpinionGeneralObservaciones-Container').show();
+            $('#txtOpinionGeneral-ValidatorObservation').val( GO.Descripcion );
+
+            $('.OpinionGeneral-ObservacionesBody').show();
+            $('.OpinionGeneral-NoObservacionesBody').hide();
+        }else{
+            $('.OpinionGeneralObservaciones-Container').hide();
+            $('.OpinionGeneral-ObservacionesBody').hide();
+            $('.OpinionGeneral-NoObservacionesBody').show();
+        }
+        */
+    }else if( Temas.Status == "Empty" ){
+        //  Ocultamos la tabla
+        $('.table-observaciones-especificas').hide();
+
+        //  Mostramos el mensaje
+        $('.Temas_SinInfo').show();
+    }else if( ComentarioYObservaciones.Status == "Error" ){
+        //  Ocultamos la tabla
+        $('.table-observaciones-especificas').hide();
+
+        //  Mostramos el mensaje
+        $('.Temas_SinInfo').show();
+    }
+}
+
+function Read_Temas(){
+    var ProgramProject = JSON.parse( localStorage.getItem( "ProgramProjectInfo" ) );
+
+    $.post("Controller/ReadController.php", {TypeData: "ComentarioYObservaciones", ID: ProgramProject.ID_ProgramaProyecto}, function( Response ){
+        var Temas = JSON.parse( Response );
+
+        localStorage.setItem('Temas', JSON.stringify(Temas) );
+    }).done(function(){
+        Show_Temas();
+    });
+}
+
+$('.Table_TemasComentariosPorTema').on('click', 'tr', function(){
+    var Temas = JSON.parse( localStorage.getItem('Temas') );
+    var id_tema = $(this).children().find('.id_tema')[0].innerText;
+    var DataTema;
+
+    for(var i = 0; i < Temas.Length; i++ ){
+        if( Temas[i].ID_Tema == id_tema ){
+            DataTema = Temas[i];
+            break;
+        }
+    }
+
+    $('#txtModalTituloTema').val( DataTema.TituloDelTema );
+    M.textareaAutoResize($('#txtModalTituloTema'));
+
+    $('#txtModalContenidoTema').val( DataTema.ContenidoDelTema );
+    M.textareaAutoResize($('#txtModalContenidoTema'));
+    
+    // BOTON PARA VALIDAR
+    $('.btn-send-to-validate-tema').show();
+
+    console.log( DataTema.ConObservacion );
+    
+    if( DataTema.ConObservacion == 1 ){
+        //  Mostramos el contenedor de las observaciones
+        $('.TemasObservaciones-Container').show();
+        $('#txtTemas-ValidatorObservation').val( DataTema.Observacion );
+        M.textareaAutoResize($('#txtTemas-ValidatorObservation'));
+
+    }else{
+        //  Mostramos el contenedor de las observaciones
+        $('.TemasObservaciones-Container').hide();
+    }
+
+    $('#ModalAddModifyDataTheme').modal('open');
+});
+
+
+
+// * * * (U) Update

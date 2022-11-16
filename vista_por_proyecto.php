@@ -263,6 +263,36 @@
             </div>
             </div>
           </div>
+
+          <div class="container">
+            <div class="card">
+              <div class="card-content card-content-comments">
+                  <span class="card-title card-title-comments">
+                    <strong>
+                      <h4 class="title-specific-comments">
+                          Comentarios y observaciones <br> específicos por tema
+                      </h4>
+                    </strong>
+                  </span>
+                  <br>
+
+                  <table class="highlight table-observaciones-especificas">
+                    <thead>
+                      <tr>
+                          <th class="table-ApartadoEvaluacion">Apartado de la evaluación</th>
+                          <th class="table-ObservacionEspecifica">Observación específica</th>
+                          <th class="table-ObservacionAtender">Observaciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody class="Table_TemasComentariosPorTema">
+                    </tbody>
+                  </table>
+
+                  <h6 class="Temas_SinInfo">Sin información registrada</h6>
+              </div>
+            </div>
+          </div>
     
         <!--
           <div class="container">
@@ -339,6 +369,50 @@
                 <a href="#!" class="btn-small waves-effect blue   darken-2 btn-OG-Add-Observation    btn-rounded"><i class="material-icons left">save</i>Guardar</a>
                 <a href="#!" class="btn-small waves-effect yellow darken-2 btn-OG-Modify-Observation btn-rounded"><i class="material-icons left">save</i>Guardar</a>
                 <a href="#!" class="modal-close modal-close-rounded-form btn-small waves-effect grey lighten-1 btn-rounded"><i class="material-icons left">close</i>Cerrar</a>
+              </div>
+            </div>
+
+            <!-- MODAL PARA MODIFICAR UN TEMA EN ESPECÍFICO Y SU INFORMACIÓN -->
+            <div id="ModalAddModifyDataTheme" class="modal modal-add-opinion-general modal-fixed-footer">
+              <div class="modal-content">
+                  
+                  <div class="row m-b0">              
+                      <div class="col l12 m12 s12">
+                          <h5 class="modal-titleTheme">Título del tema</h5>
+                          <div class="input-field">
+                            <textarea id="txtModalTituloTema" class="materialize-textarea"></textarea>
+                          </div>
+                          
+                          <h5 class="modal-contentTheme">Contenido del tema</h5>
+                          <div class="input-field">
+                              <textarea id="txtModalContenidoTema" class="materialize-textarea"></textarea>
+                          </div>
+
+                          <div class="row">
+                              <div class="col l12">
+
+                                <div class="ValidatorObservationContainer TemasObservaciones-Container">
+                                  <div class="observation-body Temas-ObservacionesBody">
+                                    <h5>
+                                      <span class="ValidatorObservation-title">Observación realizada:</span>
+                                    </h5>
+
+                                    <textarea disabled id="txtTemas-ValidatorObservation" class="materialize-textarea"></textarea>
+                                  </div>
+                                </div>
+
+                              </div>
+                          </div>
+
+                          <p class="id_observacion_modal"></p>
+                      </div>
+                  </div>
+
+              </div>
+
+              <div class="modal-footer">
+                <a href="#!" class="btn-small waves-effect blue darken-2 btn-modify-tema-especifico">Guardar <i class="material-icons left">save</i> </a>
+                <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar <i class="material-icons left">close</i> </a>
               </div>
             </div>
 

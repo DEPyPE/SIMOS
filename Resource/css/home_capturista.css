@@ -349,7 +349,7 @@ td, th {
 }
 
 /* Opinión General */
-.OG_SinInfo{
+.OG_SinInfo, .Temas_SinInfo{
 	font-size: 22px !important;
 }
 
@@ -479,11 +479,11 @@ td, th {
 	text-align: center;
 }
 
-.hide-id-tema{
+.id_tema{
 	display: none !important;
 }
 
-.Table_TemasComentariosPorTema .rowtable{
+.Table_TemasComentariosPorTema tr:hover{
 	cursor: pointer !important;
 }
 
@@ -912,10 +912,10 @@ td, th {
 	height: 35% !important;
 }
 
-#ModalModifyDataTheme{
+#ModalAddModifyDataTheme{
 	top: 5% !important;
 	max-height: 90%;
-	height: 80%;
+	height: 86%;
 	max-width: 95%;
 	width: 80%;
 }

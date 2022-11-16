@@ -70,6 +70,15 @@
                 echo json_encode($ObservationResult);
                 
             break;
+        case "ComentarioYObservaciones":
+                require_once("../Model/TemasModel.php");
+
+                $ID = $_POST["ID"];
+                $TemasClass = new TemasClass();
+                $TemasResult = $TemasClass->Read_TemasByIdPP($ID);
+
+                echo json_encode( $TemasResult );
+            break;
     }
 
 ?>
