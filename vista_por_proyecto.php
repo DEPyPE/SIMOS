@@ -271,6 +271,8 @@
                     <strong>
                       <h4 class="title-specific-comments">
                           Comentarios y observaciones <br> específicos por tema
+                          
+                          <i class="material-icons right validation-temas-section tooltipped" data-position="bottom" data-tooltip="Información validada">check</i>
                       </h4>
                     </strong>
                   </span>
@@ -411,7 +413,6 @@
               </div>
 
               <div class="modal-footer">
-                <a href="#!" class="btn-small waves-effect blue darken-2 btn-modify-tema-especifico">Guardar <i class="material-icons left">save</i> </a>
                 <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar <i class="material-icons left">close</i> </a>
               </div>
             </div>

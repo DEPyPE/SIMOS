@@ -14,9 +14,9 @@ $('.profile-user').css({
 $('.notifications-shortcut').hide();
 
 //  Seleccionamos la sección de Información general y ocultamos las otras secciones
-$('.name-section').text( "Posicionamiento" );
-$('#informacion_general').hide();
-$('#posicionamiento').fadeIn();
+$('.name-section').text( "Información general" );
+$('#informacion_general').fadeIn();
+$('#posicionamiento').hide();
 $('#plan_de_mejora').hide();
 $('#formalizacion').hide();
 
@@ -392,7 +392,7 @@ function Show_GeneralOpinion(){
             Set_GeneralOpinion_Textbox();
             $('#txtMainOpinionGeneral').show();
 
-            //  Mostramos el mensaje de que no existe una Opinión General
+            //  Ocultamos el mensaje de que no existe una Opinión General
             $('.OG_SinInfo').hide();
 
             //  Ocultamos el contenedor para la observación
@@ -529,6 +529,10 @@ function Read_ObservacionById(data){
 
 // * * * (C) Create
 
+function Create_Tema(){
+
+}
+
 $('.btn-add-tema').on('click', function(){
     $('.TemasObservaciones-Container').hide();
     $('.btn-send-to-validate-tema').hide();
@@ -550,6 +554,8 @@ function Show_Temas(){
     if( Temas.Status == "Correct" ){
 
         var TableContent = '';
+        var counterObservation = 0;
+
         for(var i = 0; i < Temas.Length; i++){
 
             TableContent = TableContent +   "<tr>" +
@@ -557,7 +563,19 @@ function Show_Temas(){
                                                 "<td>"+ Temas[i].ContenidoDelTema +"</td>" +
                                                 "<td class='center-align'> <i class='material-icons'>"+ Temas[i].IconoEstado +"</i></td>" +
                                             "</tr>";
+
+            if( Temas[i].Estado == "Observación validada" ){
+                counterObservation = counterObservation + 1;
+            }
         }
+
+        console.log( counterObservation + " <=> " + Temas.Length );
+
+        if( counterObservation == Temas.Length ){
+            $('.validation-temas-section ').show();
+            $('.btn-add-tema').hide();
+        }else
+            $('.validation-temas-section ').hide();
 
         $('.Table_TemasComentariosPorTema').html( TableContent );
         

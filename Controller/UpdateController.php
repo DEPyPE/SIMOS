@@ -145,9 +145,29 @@
                 $ResultErr["ServerMessage"] = $e->getMessage();
 
                 echo json_encode( $ResultErr );
-            }            
+            }
         break;
+        case "ValidateObservationTemas":
+            include('../Model/TemasModel.php');
+            $ID = $_POST["ID_Tema"];
+
+            $TemasClass = new TemasClass();
+            $ResultSet = $TemasClass->Update_ValidateObservation( $ID );
+            
+            echo json_encode( $ResultSet );
+        break;
+        case "UpdateTema":
+            include('../Model/TemasModel.php');
+            $Data = $_POST["Data"];
+
+            $TemasClass = new TemasClass();
+            $ResultSet = $TemasClass->Update_TemaById( $Data );
+            
+            echo json_encode( $ResultSet );
+        break;
+
     }
+
 
     //, Etapa = 'Información general', SubEtapa = 'Ficha técnica de la evaluación validada'
     

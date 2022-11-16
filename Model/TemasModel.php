@@ -34,6 +34,45 @@
             return $Data;
         }
 
+        public function Update_ValidateObservation($ID){
+            $Query = "UPDATE Tema SET Observacion = '', ConObservacion = false, Estado = 'Observación validada', IconoEstado = 'assignment_turned_in' WHERE Tema.ID_Tema = ".$ID.";";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet )
+                $Data["Status"] = "Correct";
+            else{
+                $Data["Status"] = "Error";
+            }
+
+            return $Data;
+        }
+
+        public function Create_Tema($Data){
+            $Query = "INSERT INTO Tema(ID_ProgramaProyecto, TituloDelTema, ContenidoDelTema, Observacion, ConObservacion, IconoEstado, Estado) VALUES(".$Data["ID"].", '".$Data["Titulo"]."', '".$Data["Contenido"]."', '', false, '', 'Sin observación');";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet )
+                $Data["Status"] = "Correct";
+            else{
+                $Data["Status"] = "Error";
+            }
+
+            return $Data;
+        }
+
+        public function Update_TemaById($Data){
+            $Query = "UPDATE Tema SET TituloDelTema = '".$Data["TituloDelTema"]."', ContenidoDelTema = '".$Data["ContenidoDelTema"]."' WHERE Tema.ID_Tema = ".$Data["ID_Tema"].";";
+            $ResultSet = $this->ConnectionDB->query($Query);
+
+            if( $ResultSet )
+                $Data["Status"] = "Correct";
+            else{
+                $Data["Status"] = "Error";
+            }
+
+            return $Data;
+        }
+
     }
 
 ?>

@@ -7,9 +7,9 @@ $('.home-projects-shortcut').hide();
 $('.notifications-shortcut').hide();
 
 //  Seleccionamos la sección de Información general y ocultamos las otras secciones
-$('.name-section').text( "Posicionamiento" );
-$('#informacion_general').hide();
-$('#posicionamiento').fadeIn();
+$('.name-section').text( "Información general" );
+$('#informacion_general').fadeIn();
+$('#posicionamiento').hide();
 $('#plan_de_mejora').hide();
 $('#formalizacion').hide();
 
@@ -785,8 +785,34 @@ function Update_ValidateGeneralOpinion(estado_validacion){
 $('.btn-add-tema').on('click', function(){
     $('.TemasObservaciones-Container').hide();
     $('.btn-send-to-validate-tema').hide();
+    $('.btn-modify-tema-especifico').hide();
 });
 
+function Crear_Tema(){
+    var ProgramProject = JSON.parse( localStorage.getItem( "ProgramProjectInfo" ) );
+    var datos = {
+        ID: ProgramProject.ID_ProgramaProyecto,
+        Titulo: $('#txtModalTituloTema').val(),
+        Contenido: $('#txtModalContenidoTema').val()
+    }
+
+    $.post("Controller/CreateController.php", {TypeData: "CrearTema", Data: datos}, function( Response ){
+        var Temas = JSON.parse( Response );
+
+        if( Temas.Status == "Correct" ){
+            M.toast({html: 'Tema agregado correctamente', classes: 'green darken-2 rounded'});
+            $('#ModalAddModifyDataTheme').modal('close');
+        }else{
+            M.toast({html: 'Error al crear el tema', classes: 'red lighten-1 rounded'});
+        }
+    }).done(function(){
+        Read_Temas();
+    });
+}
+
+$('.btn-add-tema-especifico').on('click', function(){
+    Crear_Tema();
+});
 
 // * * * (R) Read
 
@@ -803,14 +829,27 @@ function Show_Temas(){
     if( Temas.Status == "Correct" ){
 
         var TableContent = '';
+        var counterObservation = 0;
         for(var i = 0; i < Temas.Length; i++){
-
             TableContent = TableContent +   "<tr>" +
                                                 "<td>"+ Temas[i].TituloDelTema +"<strong class='id_tema'>"+Temas[i].ID_Tema+"</strong> </td>" +
                                                 "<td>"+ Temas[i].ContenidoDelTema +"</td>" +
                                                 "<td class='center-align'> <i class='material-icons'>"+ Temas[i].IconoEstado +"</i></td>" +
                                             "</tr>";
+
+            if( Temas[i].Estado == "Observación validada" ){
+                counterObservation = counterObservation + 1;
+            }
         }
+
+        console.log( counterObservation + " <=> " + Temas.Length );
+
+        if( counterObservation == Temas.Length ){
+            $('.validation-temas-section ').show();
+            $('.btn-add-tema').hide();
+        }else
+            $('.validation-temas-section ').hide();
+
 
         $('.Table_TemasComentariosPorTema').html( TableContent );
         
@@ -866,24 +905,28 @@ $('.Table_TemasComentariosPorTema').on('click', 'tr', function(){
         }
     }
 
+    $('.btn-add-tema-especifico').hide();
+    $('.id_tema_modal').text(id_tema);
+    $('.id_tema_modify').text(id_tema);
     $('#txtModalTituloTema').val( DataTema.TituloDelTema );
     M.textareaAutoResize($('#txtModalTituloTema'));
 
     $('#txtModalContenidoTema').val( DataTema.ContenidoDelTema );
     M.textareaAutoResize($('#txtModalContenidoTema'));
     
-    // BOTON PARA VALIDAR
-    $('.btn-send-to-validate-tema').show();
-
-    console.log( DataTema.ConObservacion );
-    
     if( DataTema.ConObservacion == 1 ){
+        // BOTON PARA VALIDAR
+        $('.btn-send-to-validate-tema').show();
+
         //  Mostramos el contenedor de las observaciones
         $('.TemasObservaciones-Container').show();
         $('#txtTemas-ValidatorObservation').val( DataTema.Observacion );
         M.textareaAutoResize($('#txtTemas-ValidatorObservation'));
 
     }else{
+        // BOTON PARA VALIDAR
+        $('.btn-send-to-validate-tema').hide();
+
         //  Mostramos el contenedor de las observaciones
         $('.TemasObservaciones-Container').hide();
     }
@@ -891,8 +934,48 @@ $('.Table_TemasComentariosPorTema').on('click', 'tr', function(){
     $('#ModalAddModifyDataTheme').modal('open');
 });
 
-
-
 // * * * (U) Update
 
+$('.btn-validate-observation-temas').on('click', function(){
+    var id_tema_modal = $('.id_tema_modal').text();
 
+    $.post("Controller/UpdateController.php", {TypeData: "ValidateObservationTemas", ID_Tema: id_tema_modal}, function( Response ){
+        var Temas = JSON.parse( Response );
+
+        if( Temas.Status == "Correct" ){
+            M.toast({html: 'Observación atendida', classes: 'green darken-2 rounded'});
+            $('#ModalTemasAtendedObservation').modal('close');
+            $('#ModalAddModifyDataTheme').modal('close');
+
+            Read_Temas();
+        }else{
+            M.toast({html: 'Error al enviar para validación', classes: 'red lighten-1 rounded'});
+        }
+    }).done(function(){
+        Show_Temas();
+    });
+});
+
+$('.btn-modify-tema-especifico').on('click', function(){
+    var id_tema = $('.id_tema_modify').text();
+    var datos = {
+        ID_Tema: id_tema,
+        TituloDelTema:  $('#txtModalTituloTema').val(),
+        ContenidoDelTema: $('#txtModalContenidoTema').val()
+    }
+
+    $.post("Controller/UpdateController.php", {TypeData: "UpdateTema", Data: datos}, function( Response ){
+        var Temas = JSON.parse( Response );
+
+        if( Temas.Status == "Correct" ){
+            M.toast({html: 'Información actualizada correctamente', classes: 'green darken-2 rounded'});
+            $('#ModalAddModifyDataTheme').modal('close');
+
+            Read_Temas();
+        }else{
+            M.toast({html: 'Error al enviar para validación', classes: 'red lighten-1 rounded'});
+        }
+    }).done(function(){
+        Read_Temas();
+    });    
+})

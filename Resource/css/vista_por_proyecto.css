@@ -133,7 +133,8 @@ td, th {
 	text-align: justify !important;
 }
 
-.validated-ft-programa, .validation-ft-evaluation, .indicator-general-opinion-validate{
+.validated-ft-programa, .validation-ft-evaluation, .indicator-general-opinion-validate,
+.validation-temas-section{
 	width: 32px !important;
 	height: 32px !important;
 

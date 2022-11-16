@@ -89,7 +89,6 @@ CREATE TABLE Tema(
     #	Contenido de la observación
 	Observacion		VARCHAR(500),
 	ConObservacion	BOOLEAN,
-	Descripcion		VARCHAR(200),
 	IconoEstado		VARCHAR(100),
 	Estado			VARCHAR(100),
     

@@ -119,7 +119,8 @@ td, th {
 	text-align: right;
 }
 
-.validation-ft-program, .validation-ft-evaluation, .validation-general-opinion{
+.validation-ft-program, .validation-ft-evaluation, .validation-general-opinion,
+.validation-temas-section{
 	width: 32px !important;
 	height: 32px !important;
 
@@ -479,7 +480,7 @@ td, th {
 	text-align: center;
 }
 
-.id_tema{
+.id_tema, .id_tema_modal, .id_tema_modify{
 	display: none !important;
 }
 
@@ -920,12 +921,12 @@ td, th {
 	width: 80%;
 }
 
-#ModalOGAtendedObservation{
+#ModalOGAtendedObservation, #ModalTemasAtendedObservation{
 	width: 50% !important;
 	height: 30% !important;
 }
 
-.btn-validate-observation-OG{
+.btn-validate-observation-OG, .btn-validate-observation-temas{
 	border-radius: 15px !important;
 }
 

@@ -365,6 +365,7 @@
                           <h4 class="title-specific-comments">
                               Comentarios y observaciones <br> específicos por tema
 
+                              <i class="material-icons right validation-temas-section tooltipped" data-position="bottom" data-tooltip="Información validada">check</i>
                               <a class="btn-floating btn-small btn-add-tema  waves-effect blue darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Agregar nuevo tema" href="#ModalAddModifyDataTheme"><i class="material-icons">add</i></a>
                           </h4>
                         </strong>
@@ -468,7 +469,7 @@
                 <div id="ModalAddModifyDataTheme" class="modal modal-add-opinion-general modal-fixed-footer">
                   <div class="modal-content">
                       
-                      <div class="row m-b0">              
+                        <div class="row m-b0">              
                           <div class="col l12 m12 s12">
                               <h5 class="modal-titleTheme">Título del tema</h5>
                               <div class="input-field">
@@ -478,6 +479,7 @@
                               <h5 class="modal-contentTheme">Contenido del tema</h5>
                               <div class="input-field">
                                   <textarea id="txtModalContenidoTema" class="materialize-textarea"></textarea>
+                                  <div class="id_tema_modify"></div>
                               </div>
 
                               <div class="row">
@@ -487,7 +489,7 @@
                                       <div class="observation-body Temas-ObservacionesBody">
                                         <h5>
                                           <span class="ValidatorObservation-title">Observación realizada:</span>
-                                          <a class="btn-floating btn-small btnTema-AtendedObservation waves-effect orange darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Marcar como atendida" href="#ModalOGAtendedObservation"><i class="material-icons">launch</i></a>
+                                          <a class="btn-floating btn-small btnTema-AtendedObservation waves-effect orange darken-2 tooltipped modal-trigger right" data-position="bottom" data-tooltip="Marcar como atendida" href="#ModalTemasAtendedObservation"><i class="material-icons">launch</i></a>
                                         </h5>
 
                                         <textarea disabled id="txtTemas-ValidatorObservation" class="materialize-textarea"></textarea>
@@ -497,16 +499,30 @@
                                   </div>
                               </div>
 
-                              <p class="id_observacion_modal"></p>
+                
                           </div>
                       </div>
 
                   </div>
 
                   <div class="modal-footer">
-                    <a href="#!" class="btn-small waves-effect green darken-2 btn-send-to-validate-tema left">Enviar para validación <i class="material-icons left">send</i> </a>
+                    <!--<a href="#!" class="btn-small waves-effect green darken-2 btn-send-to-validate-tema left">Enviar para validación <i class="material-icons left">send</i> </a>-->
                     <a href="#!" class="btn-small waves-effect blue darken-2 btn-modify-tema-especifico">Guardar <i class="material-icons left">save</i> </a>
+                    <a href="#!" class="btn-small waves-effect blue darken-2 btn-add-tema-especifico">Guardar <i class="material-icons left">save</i> </a>
                     <a href="#!" class="modal-close btn-small waves-effect grey lighten-1">Cancelar <i class="material-icons left">close</i> </a>
+                  </div>
+                </div>
+
+                <!-- MODAL PARA AGREGAR/MODIFICAR LA INFORMACIÓN SOBRE "OPINIÓN GENERAL"-->
+                <div id="ModalTemasAtendedObservation" class="modal modal-add-opinion-general modal-fixed-footer">
+                  <div class="modal-content">
+                      <h3 class="title-modal-add-project-info">Marcar observación como atendida</h3>
+                      <p class="id_tema_modal"></p>
+                  </div>
+
+                  <div class="modal-footer">
+                    <a href="#!" class="btn-small waves-effect green darken-2 btn-validate-observation-temas"><i class="material-icons left">send</i>Atender observación</a>
+                    <a href="#!" class="modal-close modal-close-rounded-form btn-small waves-effect grey lighten-1"><i class="material-icons left">close</i>Cerrar</a>
                   </div>
                 </div>
 

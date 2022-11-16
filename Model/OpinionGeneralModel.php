@@ -84,48 +84,6 @@
             return $DataOut;
         }
 
-        // SIN PROBAR
-
-        public function Update_GeneralCommentsByIdProject( $Data ){
-            try{
-                $Query = "UPDATE OpinionGeneral SET ComentariosObservacionesGenerales = '".$Data["ComentariosObservacionesGenerales"]."' WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
-                $ResultSet = $this->ConnectionDB->query($Query);
-    
-                if( $ResultSet )
-                    $DataOut["Status"] = "Correct";
-                else
-                    $DataOut["Status"] = "Error";
-    
-                return $DataOut;
-            }catch(Exception $e){
-                $ResultErr["Status"] = "Error";
-                $ResultErr["ServerMessages"] = $e->getMessage();
-
-                return json_encode( $ResultErr );
-            }
-        }
-
-        public function Update_SpecificCommentsByIdProject( $Data ){
-            try{
-                $Query = "UPDATE OpinionGeneral SET ComentariosObservacionesPorTema = '".$Data["ComentariosObservacionesPorTema"]."' WHERE ID_ProgramaProyecto = ".$Data["ID_Project"].";";
-                $ResultSet = $this->ConnectionDB->query($Query);
-    
-                if( $ResultSet )
-                    $DataOut["Status"] = "Correct";
-                else
-                    $DataOut["Status"] = "Error";
-    
-                return $DataOut;
-            }catch(Exception $e){
-                $ResultErr["Status"] = "Error";
-                $ResultErr["ServerMessages"] = $e->getMessage();
-
-                return json_encode( $ResultErr );
-            }
-        }
-
-
-
     }
 
 ?>

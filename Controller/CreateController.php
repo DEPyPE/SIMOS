@@ -32,6 +32,15 @@
     
                 echo json_encode( $Resultset );
                 break;
+            case "CrearTema":
+                require_once("../Model/TemasModel.php");
+
+                $Data = $_POST["Data"];
+                $TemasClass = new TemasClass();
+                $TemasResult = $TemasClass->Create_Tema($Data);
+
+                echo json_encode( $TemasResult );
+                break;
         }
     }else{
         echo "Variable <<TypeData>> no definida";
